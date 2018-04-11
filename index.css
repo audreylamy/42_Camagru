@@ -1,0 +1,173 @@
+html 
+{
+	height: 100%;
+}
+
+body 
+{
+	height:100%;
+	margin: 0;
+	padding: 0;
+	background-image: radial-gradient(circle at top left, #6534ff, #fccdd3);
+}
+
+#first_part
+{
+	width: 100%;
+	height: 100%;
+}
+
+header
+{
+	display: flex;
+	width: 100%;
+	height: 160px;
+	justify-content: space-between;
+}
+
+h1
+{
+	color: #fccdd3;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 8px;
+	font-size: 2.5vw;
+	margin-left: 100px;
+}
+
+#connexion
+{
+	display: inline-block;
+	text-align: center;
+}
+
+#button_connexion
+{
+	margin:65px;
+	padding: 10px;
+	color: white;
+	font-family: 'Bungee Hairline', cursive;
+	background: #bbc4ef;
+}
+
+#bloc_principal
+{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 80%;
+}
+
+/*GALLERY*/
+
+#gallery_photo
+{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	height: 100%;
+}
+
+#gallery
+{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 70%;
+	height: 70%;
+	margin-left: 100px;
+	border: solid 1px #fccdd3;
+}
+
+#new_photo
+{
+	width: 15%;
+	height: 10%;
+	margin-left: 30px;
+}
+
+/*CONNEXION*/
+
+#se_connecter
+{
+	width: 20%;
+	height: 70%;
+	margin-right: 2.4%;
+	visibility: hidden;
+}
+
+#bloc_connexion
+{
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: 70%;
+	background-color: #bbc4ef;
+}
+
+#nouveau
+{
+	margin-right: 5%;
+	background-color: #bbc4ef;
+}
+
+#ancien
+{
+	margin-left: 5%;
+	background-color: #bbc4ef;
+}
+
+h3
+{
+	color: white;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 2px;
+	font-size: 0.8vw;
+}
+
+.input{
+	width: 6vw;
+}
+
+.label
+{
+	font-size: 0.5vw;
+	font-family: 'Abel', sans-serif;
+	letter-spacing: 2px;
+}
+
+.valider
+{
+	margin-top: 15px;
+	background-color: white;
+	border: none;
+	font-family: 'Abel', sans-serif;
+	letter-spacing: 2px;
+	font-size: 0.5vw;
+}
+
+#forgot_password
+{
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
+	text-decoration: none;
+}
+
+/*FOOTER*/
+
+footer
+{
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	background-color: white;
+	opacity: 0.6;
+}
+
+#text_footer
+{
+	margin-right: 10px;
+	color: black;
+	font-family: 'Abel', sans-serif;
+}
+
+
