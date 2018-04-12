@@ -3,8 +3,6 @@
 class Membre
 {
 	private $db;
-	private $requete_login = "SELECT `login` FROM clients";
-	private $requete_email = "SELECT `email` FROM clients";
 	
 	function __construct($conn)
 	{
@@ -49,9 +47,9 @@ class Membre
 
 	public function verif_bdd_login()
 	{
-		$requete_login = $this->db->prepare("SELECT `username` FROM `users`"); 
-		$requete_login->execute();
-		while ($data = $requete_login->fetch(PDO::FETCH_BOTH))
+		$this->db->query( 'USE db_camagru' );
+		$requete_login = $this->db->query("SELECT `username` FROM `users`"); 
+		while ($data = $requete_login->fetch(PDO::FETCH_ASSOC))
 		{
 			if ($data['username'] === $this->login)
 			{
@@ -63,10 +61,11 @@ class Membre
 	
 	public function verif_bdd_email()
 	{
-		$requete_email = $this->db->prepare("SELECT `email` FROM `users`");
-		$requete_email->execute();
-		while ($data = $requete_email->fetch(PDO::FETCH_BOTH))
+		$this->db->query( 'USE db_camagru' );
+		$requete_email = $this->db->query("SELECT `email` FROM `users`");
+		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
 		{
+			echo "hello";
 			if ($data['email'] === $this->email)
 			{
 				return TRUE;

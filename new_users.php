@@ -20,16 +20,15 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 	$membre->getPassword($password);
 	$membre->getConfirmPassword($confirm_password);
 
-	// echo "HERE";
-	// if (($membre->verif_bdd_login()) === FALSE && ($membre->verif_bdd_email()) === FALSE)
-	// {
-	// 	echo "new_user";
+	if (($membre->verif_bdd_login()) === FALSE && ($membre->verif_bdd_email()) === FALSE)
+	{
+		echo "new_user";
 		$membre->ajouterMembre();
-	// }
-	// else
-	// {
-	// 	echo "This users already exist";
-	// }
+	}
+	else
+	{
+		echo "This users already exist";
+	}
 }
 else
 {
