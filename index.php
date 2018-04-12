@@ -39,18 +39,18 @@ session_start();
 								<form method="post" action="new_users.php">
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="prenom">First-name :</label>
+										<label class="label" for="first_name">Login :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="prenom" value="<?php $_POST['first_name']; ?>" id="prenom" autofocus required/>
-										</div>
+										<input class="input" type="text" name="first_name" value="<?php $_POST['first_name']; ?>" required/>
+										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="nom">Last-name:</label>
+										<label class="label" for="last_name">Last-name :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="nom" value="<?php $_POST['last_name']; ?>" id="nom" required/>	
+										<input class="input" type="text" name="last_name" value="<?php $_POST['last_name']; ?>" required/>	
 										</div>
 									</div>
 									<div class="row">
@@ -58,7 +58,7 @@ session_start();
 										<label class="label" for="email">Email :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="email" name="email" value="<?php $_POST['email']; ?>" id="email" required/>
+										<input class="input" type="email" name="email" value="<?php $_POST['email']; ?>" required/>
 										</div>
 									</div>
 									<div class="row">
@@ -66,7 +66,7 @@ session_start();
 										<label class="label" for="login">Login :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="login" value="<?php $_POST['login']; ?>" id="login" required/>
+										<input class="input" type="text" name="login" value="<?php $_POST['login']; ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -74,15 +74,15 @@ session_start();
 										<label class="label" for="password">Password :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="password" name="password" value="<?php $_POST['password']; ?>" id="password" required/>
+										<input class="input" type="password" name="password" value="<?php $_POST['password']; ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="password2">Confirm password :</label>
+										<label class="label" for="confirm_password">Confirm password :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="password" name="password2" value="<?php $_POST['confirm_password']; ?>" id="password2" required/>
+										<input class="input" type="password" name="confirm_password" value="<?php $_POST['confirm_password']; ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
