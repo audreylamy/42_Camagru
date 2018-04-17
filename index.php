@@ -17,7 +17,12 @@ session_start();
 					<h1>CAMAGRU</h1>
 				</div>
 				<div id="connexion">
-					<p id="button_connexion">CONNECT</p>
+				<?php
+				if ($_SESSION['auth'] === TRUE)
+					echo "<p id='button_deconnexion'><a href='logout.php'>LOG OUT</a></p>";
+				else
+					echo "<p id='button_connexion'>CONNECT</p>";
+				?>
 				</div>
 			</header>
 			<div id="bloc_principal">
@@ -39,10 +44,10 @@ session_start();
 								<form method="post" action="new_users.php">
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="first_name">Login :</label>
+										<label class="label" for="first_name">first-name :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="first_name" value="<?php $_POST['first_name']; ?>" required/>
+										<input class="input" type="text" name="first_name" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -50,7 +55,7 @@ session_start();
 										<label class="label" for="last_name">Last-name :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="last_name" value="<?php $_POST['last_name']; ?>" required/>	
+										<input class="input" type="text" name="last_name" value="<?php htmlspecialchars($_POST['last_name']); ?>" required/>	
 										</div>
 									</div>
 									<div class="row">
@@ -58,7 +63,7 @@ session_start();
 										<label class="label" for="email">Email :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="email" name="email" value="<?php $_POST['email']; ?>" required/>
+										<input class="input" type="email" name="email" value="<?php htmlspecialchars($_POST['email']); ?>" required/>
 										</div>
 									</div>
 									<div class="row">
@@ -66,7 +71,7 @@ session_start();
 										<label class="label" for="login">Login :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="login" value="<?php $_POST['login']; ?>" required/>
+										<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -74,7 +79,7 @@ session_start();
 										<label class="label" for="password">Password :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="password" name="password" value="<?php $_POST['password']; ?>" required/>
+										<input class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -82,7 +87,7 @@ session_start();
 										<label class="label" for="confirm_password">Confirm password :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="password" name="confirm_password" value="<?php $_POST['confirm_password']; ?>" required/>
+										<input class="input" type="password" name="confirm_password" value="<?php htmlspecialchars($_POST['confirm_password']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -93,6 +98,23 @@ session_start();
 										</div> 
 									</div>
 								</form>
+								<?php
+								if ($_SESSION['connect'] === FALSE)
+								{
+									echo "<div id='bloc_message'>login or email already exists</div>";
+									echo "<style> #se_connecter { visibility: visible; }</style>";
+								}
+								else if ($_SESSION['verif_password'] === FALSE)
+								{
+									echo "<div id='bloc_message'>Password is not correct</div>";
+									echo "<style> #se_connecter { visibility: visible; }</style>";
+								}
+								else if ($_SESSION['connect'] === TRUE && $_SESSION['verif_password'] === TRUE)
+								{
+									echo "<div id='bloc_message'>You can log in</div>";
+									echo "<style> #se_connecter { visibility: visible; }</style>";
+								}
+								?>
 							</div>
 						<div id="ancien">
 								<h3>Log in</h3>
@@ -102,7 +124,7 @@ session_start();
 												<label class="label" for="login">Username :</label>
 												</div>
 												<div class="col-75">
-												<input class="input" type="text" name="login" value="" id="login" required/>
+												<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" id="login" required/>
 												</div> 
 										</div>
 										<div class="row">
@@ -110,7 +132,7 @@ session_start();
 												<label class="label" for="password">Password :</label>
 												</div>
 												<div class="col-75">
-												<input class="input" type="password" name="password" value="" id="password" required/>
+												<input class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" id="password" required/>
 												</div> 
 										</div>
 											<div class="row">
@@ -122,6 +144,17 @@ session_start();
 											<a id="forgot_password" href="#">Forgot password ?</a>
 										</div>
 									</form>
+									<?php
+									if ($_SESSION['auth'] === FALSE)
+									{
+										echo "<div id='bloc_message'>Wrong login or password</div>";
+										echo "<style> #se_connecter { visibility: visible; }</style>";
+									}
+									else if ($_SESSION['auth'] === TRUE)
+									{
+										echo "<style> #se_connecter { visibility: hidden; }</style>";
+									}
+									?>
 							</div>
 						</div>
 					</div>
@@ -134,21 +167,30 @@ session_start();
 		</footer>
 	</body>
 	<script language="javascript">
-		var element = document.getElementById('button_connexion');
-		element.addEventListener('click', function()
+		var element_connect = document.getElementById('button_connexion');
+		var bloc_connexion = document.getElementById('se_connecter');
+		element_connect.addEventListener('click', function()
 		{
-			var bloc_connexion = document.getElementById('se_connecter');
-			bloc_connexion.style.visibility = "visible";
+			if (bloc_connexion.style.visibility == "visible")
+			{
+				bloc_connexion.style.visibility = "hidden";
+			}
+			else
+			{
+				bloc_connexion.style.visibility = "visible";
+			}
 		});
+
+	</script>
+	<script>
+		var element = document.getElementById('button_connexion');
 		element.addEventListener('mouseover', function()
 		{
 			element.style.background = "#62bcfa";
-			element.style.margin = "70px";
 		});
 		element.addEventListener('mouseout', function()
 		{
 			element.style.background = "#bbc4ef";
-			element.style.margin = "65px";
 		});
 	</script>
 </html>

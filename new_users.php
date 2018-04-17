@@ -5,12 +5,13 @@ include('config/database.php');
 
 if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'] != NULL && $_POST['login'] != NULL && $_POST['password'] != NULL && $_POST['confirm_password'] != NULL)
 {
-	$first_name = $_POST['first_name'];
-	$last_name = $_POST['last_name'];
-	$email = $_POST['email'];
-	$login = $_POST['login'];
-	$password = $_POST['password'];
-	$confirm_password = $_POST['confirm_password'];
+	$first_name = htmlspecialchars($_POST['first_name']);
+	$last_name = htmlspecialchars($_POST['last_name']);
+	$email = htmlspecialchars($_POST['email']);
+	$login = htmlspecialchars($_POST['login']);
+	$password = hash('whirlpool',htmlspecialchars($_POST['password']));
+	$confirm_password = hash('whirlpool',htmlspecialchars($_POST['confirm_password']));
+	$token = bin2hex(random_bytes(16));
 
 	$membre = new Membre($conn);
 	$membre->getFirstName($first_name);
@@ -19,15 +20,48 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 	$membre->getLogin($login);
 	$membre->getPassword($password);
 	$membre->getConfirmPassword($confirm_password);
+	$membre->getConfirmToken($token);
 
 	if (($membre->verif_bdd_login()) === FALSE && ($membre->verif_bdd_email()) === FALSE)
 	{
-		echo "new_user";
-		$membre->ajouterMembre();
+		if (($membre->verif_password()) === TRUE)
+		{
+			echo "new_user";
+			$membre->ajouterMembre();
+			header('Location: index.php');
+			$_SESSION['connect'] = TRUE;
+			$_SESSION['verif_password'] = TRUE;
+
+			$to = $email;
+			$subject = 'Confirmer votre inscription';
+			$message = 'Bienvenue sur Camagru,
+			
+		  Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+		  ou copier/coller dans votre navigateur internet.
+			
+		   http://localhost:8080/index.php'.urlencode($login).'&token='.urlencode($token).'
+			
+			
+		   ---------------
+		   Ceci est un mail automatique, Merci de ne pas y répondre.';
+
+		   $headers  = 'MIME-Version: 1.0' . "\r\n";
+		   $headers .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n";
+		   $headers .='Content-Transfer-Encoding: 8bit';
+			mail($to, $subject, $message, $headers);
+		}
+		else
+		{
+			echo "password isn't correct";
+			header('Location: index.php');
+			$_SESSION['verif_password'] = FALSE;
+		}
 	}
 	else
 	{
 		echo "This users already exist";
+		header('Location: index.php');
+		$_SESSION['connect'] = FALSE;
 	}
 }
 else

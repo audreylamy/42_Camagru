@@ -45,6 +45,12 @@ class Membre
 		return $this->confirm_password;
 	}
 
+	public function getConfirmToken($token)
+	{
+		$this->token = $token;
+		return $this->token;
+	}
+
 	public function verif_bdd_login()
 	{
 		$this->db->query( 'USE db_camagru' );
@@ -65,7 +71,6 @@ class Membre
 		$requete_email = $this->db->query("SELECT `email` FROM `users`");
 		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
 		{
-			echo "hello";
 			if ($data['email'] === $this->email)
 			{
 				return TRUE;
@@ -74,19 +79,44 @@ class Membre
 		return FALSE;
 	}
 
+	public function authentification()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete_auth = $this->db->query("SELECT `username`, `password` FROM `users`");
+		echo"here1";
+		while ($data = $requete_auth->fetch(PDO::FETCH_ASSOC))
+		{
+			if ($data['password'] === $this->password && $data['username'] === $this->login)
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
+
+	public function verif_password()
+	{
+		if ($this->password == $this->confirm_password)
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 	public function ajouterMembre()
 	{
 		if(!empty($this->first_name) && !empty($this->last_name) && !empty($this->email) && !empty($this->login) 
-		&& !empty($this->password) && !empty($this->confirm_password))
+		&& !empty($this->password) && !empty($this->confirm_password) && !empty($this->token))
 		{     
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->prepare("INSERT INTO `users` (`username`, `first_name`, `last_name`, `password`, `email`) 
-			VALUES(:login, :first_name, :last_name, :password, :email)");
+			$requete = $this->db->prepare("INSERT INTO `users` (`username`, `first_name`, `last_name`, `password`, `email`, `token`) 
+			VALUES(:login, :first_name, :last_name, :password, :email, :token)");
 			$requete->bindparam(':login', $this->login);
 			$requete->bindparam(':first_name', $this->first_name);
 			$requete->bindparam(':last_name', $this->last_name);
 			$requete->bindparam(':password', $this->password);
 			$requete->bindparam(':email', $this->email);
+			$requete->bindparam(':token', $this->token);
 			$requete->execute();
 		}
 		else

@@ -49,6 +49,19 @@ h1
 	background: #bbc4ef;
 }
 
+#button_deconnexion
+{
+	margin:65px;
+	padding: 10px;
+	font-family: 'Bungee Hairline', cursive;
+	background: #bbc4ef;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+}
+
 #bloc_principal
 {
 	display: flex;
@@ -122,6 +135,12 @@ h3
 	font-family: 'Bungee Hairline', cursive;
 	letter-spacing: 2px;
 	font-size: 0.8vw;
+}
+
+#bloc_message
+{
+	width: 100%;
+	height: auto;
 }
 
 .input{
