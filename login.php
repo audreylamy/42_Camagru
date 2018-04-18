@@ -7,14 +7,11 @@ if($_POST['login'] != NULL && $_POST['password'] != NULL)
 {
 	$login = htmlspecialchars($_POST['login']);
 	$password = hash('whirlpool',htmlspecialchars($_POST['password']));
-	echo($login);
-	echo($password);
 
 	$membre = new Membre($conn);
 	$membre->getLogin($login);
 	$membre->getPassword($password);
 
-	echo("here");
 	if (($membre->authentification()) === TRUE)
 	{
 		echo "Vous etes connectes";

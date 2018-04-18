@@ -20,9 +20,9 @@ session_start();
 				<?php
 				if ($_SESSION['auth'] === TRUE)
 				{
-					echo "<p id='button_connexion'><a href='users.php'>TAKE A SNAP</a></p>";
-					echo "<p id='button_profil'>YOUR PROFIL</p>";
-					echo "<p id='button_deconnexion'><a href='logout.php'>LOG OUT</a></p>";
+					echo "<p class='button_private'><a href='users.php'>TAKE A SNAP</a></p>";
+					echo "<p class='button_private'><a href='profile.php'>YOUR PROFILE</a></p>";
+					echo "<p class='button_private'><a href='logout.php'>LOG OUT</a></p>";
 				}
 				else
 					echo "<p id='button_connexion'>CONNECT</p>";
@@ -48,7 +48,7 @@ session_start();
 								<form method="post" action="new_users.php">
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="first_name">first-name :</label>
+										<label class="label" for="first_name">First-name :</label>
 										</div>
 										<div class="col-75">
 										<input class="input" type="text" name="first_name" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
@@ -196,23 +196,23 @@ session_start();
 		{
 			element.style.background = "#bbc4ef";
 		});
-		var element_deco = document.getElementById('button_deconnexion');
-		element_deco.addEventListener('mouseover', function()
-		{
-			element_deco.style.background = "#62bcfa";
-		});
-		element_deco.addEventListener('mouseout', function()
-		{
-			element_deco.style.background = "#bbc4ef";
-		});
-		var element_profil = document.getElementById('button_profil');
-		element_profil.addEventListener('mouseover', function()
-		{
-			element_profil.style.background = "#62bcfa";
-		});
-		element_profil.addEventListener('mouseout', function()
-		{
-			element_profil.style.background = "#bbc4ef";
-		});
+		// var element_deco = document.getElementById('button_deconnexion');
+		// element_deco.addEventListener('mouseover', function()
+		// {
+		// 	element_deco.style.background = "#62bcfa";
+		// });
+		// element_deco.addEventListener('mouseout', function()
+		// {
+		// 	element_deco.style.background = "#bbc4ef";
+		// });
+		// var element_profil = document.getElementById('button_profil');
+		// element_profil.addEventListener('mouseover', function()
+		// {
+		// 	element_profil.style.background = "#62bcfa";
+		// });
+		// element_profil.addEventListener('mouseout', function()
+		// {
+		// 	element_profil.style.background = "#bbc4ef";
+		// });
 	</script>
 </html>

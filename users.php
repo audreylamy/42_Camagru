@@ -15,8 +15,8 @@
 				</div>
 				<div id="button">
 					<p class="button_profil"><a href='index.php'>HOME</a></p>
-					<p class="button_profil"><a href=#>YOUR PROFIL</a></p>
-					<p class="button_profil"><a href=#>YOUR PICTURE</a></p>
+					<p class="button_profil"><a href='profile.php'>YOUR PROFILE</a></p>
+					<p class="button_profil"><a href=#>YOUR GALLERY</a></p>
 					<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
 				</div>
 			</header>

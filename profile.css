@@ -65,41 +65,62 @@ a{
 	background: #62bcfa;
 }
 
-/*GALLERY*/
+/*PROFILE*/
 
-#camera
+#bloc_profile
 {
+	display: flex;
+	justify-content: center;
 	width: 100%;
 	height: 80%;
 }
 
-#part1{
-	width: 100%;
-	height: 60%;
-	display: flex;
-	justify-content: space-between;
+h3{
+	margin-bottom: 15%;
+	font-family: 'Bungee Hairline', cursive;
+	color: white;
 }
 
-#take_picture{
-	width: 40%;
-	height: 100%;
-	margin-left: 100px;
-	border: solid 1px #fccdd3;
+#form_modif{
+	margin-top: 5%;
+	text-align: center;
 }
 
-#view_pictures{
-	width: 50%;
-	height: 120%;
-	margin-right: 100px;
-	border: solid 1px #fccdd3;
+.input{
+	width: 15vw;
+	opacity: 0.9;
+	background-color: #fccdd3;
+	border: none;
+	font-size: 0.5vw;
+	font-family: 'Abel', sans-serif;
+	letter-spacing: 2px;
+	height: 5%;
 }
 
-#choose_object{
-	width: 40%;
-	height: 30%;
-	margin-left: 100px;
-	margin-top: 2%;
-	border: solid 1px #fccdd3;
+.label
+{
+	font-size: 0.7vw;
+	color: white;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 2px;
+}
+
+.col-25{
+	margin-bottom: 1%;
+}
+
+.col-75{
+	margin-bottom: 3%;
+}
+
+.valider
+{
+	margin-top: 15px;
+	background-color: white;
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 2px;
+	font-size: 0.7vw;
 }
 
 /*FOOTER*/
