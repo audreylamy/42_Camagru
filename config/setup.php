@@ -21,7 +21,7 @@ try
 {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql_users = "CREATE TABLE users(
+    $sql_users = "CREATE TABLE IF NOT EXISTS users(
     id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	username VARCHAR(30) NOT NULL,
     first_name VARCHAR(30) NOT NULL,
@@ -49,7 +49,7 @@ try
 {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql_photos = "CREATE TABLE photos(
+    $sql_photos = "CREATE TABLE IF NOT EXISTS photos(
     id_photo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_user INT NOT NULL,
 	name VARCHAR(30) NOT NULL,
@@ -71,7 +71,7 @@ try
 {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql_comments = "CREATE TABLE comments(
+    $sql_comments = "CREATE TABLE IF NOT EXISTS comments(
     id_comment INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_user INT NOT NULL,
 	comment VARCHAR(300)
@@ -91,7 +91,7 @@ try
 {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql_photos_comments = "CREATE TABLE photos_comments(
+    $sql_photos_comments = "CREATE TABLE IF NOT EXISTS photos_comments(
     id_comment INT NOT NULL,
 	id_photo INT NOT NULL
 	) ";
@@ -110,7 +110,7 @@ try
 {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql_likes = "CREATE TABLE likes(
+    $sql_likes = "CREATE TABLE IF NOT EXISTS likes(
     id_like INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_photo INT NOT NULL
 	) ";

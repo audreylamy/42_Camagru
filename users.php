@@ -14,10 +14,10 @@
 				</div>
 				</div>
 				<div id="button">
-					<p class="button_profil">Home</p>
-					<p class="button_profil">Your profil</p>
-					<p class="button_profil">Your picture</p>
-					<p class="button_profil">Log out</p>
+					<p class="button_profil"><a href='index.php'>HOME</a></p>
+					<p class="button_profil"><a href=#>YOUR PROFIL</a></p>
+					<p class="button_profil"><a href=#>YOUR PICTURE</a></p>
+					<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
 				</div>
 			</header>
 			<div id="camera">
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 		<footer>
-			<p id="text_footer_users">Camagru with love</p>
+			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
 </html>

@@ -19,7 +19,11 @@ session_start();
 				<div id="connexion">
 				<?php
 				if ($_SESSION['auth'] === TRUE)
+				{
+					echo "<p id='button_connexion'><a href='users.php'>TAKE A SNAP</a></p>";
+					echo "<p id='button_profil'>YOUR PROFIL</p>";
 					echo "<p id='button_deconnexion'><a href='logout.php'>LOG OUT</a></p>";
+				}
 				else
 					echo "<p id='button_connexion'>CONNECT</p>";
 				?>
@@ -28,14 +32,14 @@ session_start();
 			<div id="bloc_principal">
 			<div id="gallery_photo">
 				<div id="gallery">
-					<div id="new_photo">
+					<!-- <div id="new_photo">
 						<img id="picture" src="" title="image" alt="image" />
 						<p></p>
 						<form method="GET" action="index.php" name="index.php" >
 							<textarea name="commentaire" rows="1" cols="20"></textarea>
 							<input type="submit" name="action" value="like">
 						</form>
-					</div>
+					</div> -->
 				</div>
 				<div id="se_connecter">
 					<div id="bloc_connexion">
@@ -68,7 +72,7 @@ session_start();
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="login">Login :</label>
+										<label class="label" for="login">Username :</label>
 										</div>
 										<div class="col-75">
 										<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
@@ -191,6 +195,24 @@ session_start();
 		element.addEventListener('mouseout', function()
 		{
 			element.style.background = "#bbc4ef";
+		});
+		var element_deco = document.getElementById('button_deconnexion');
+		element_deco.addEventListener('mouseover', function()
+		{
+			element_deco.style.background = "#62bcfa";
+		});
+		element_deco.addEventListener('mouseout', function()
+		{
+			element_deco.style.background = "#bbc4ef";
+		});
+		var element_profil = document.getElementById('button_profil');
+		element_profil.addEventListener('mouseover', function()
+		{
+			element_profil.style.background = "#62bcfa";
+		});
+		element_profil.addEventListener('mouseout', function()
+		{
+			element_profil.style.background = "#bbc4ef";
 		});
 	</script>
 </html>

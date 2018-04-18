@@ -36,18 +36,18 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 			$subject = 'Confirmer votre inscription';
 			$message = 'Bienvenue sur Camagru,
 			
-		  Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-		  ou copier/coller dans votre navigateur internet.
+		  	Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+		  	ou copier/coller dans votre navigateur internet.
 			
-		   http://localhost:8080/index.php'.urlencode($login).'&token='.urlencode($token).'
+		  	http://localhost:8080/index.php'.urlencode($login).'&token='.urlencode($token).'
 			
 			
-		   ---------------
-		   Ceci est un mail automatique, Merci de ne pas y répondre.';
+		   	---------------
+		   	Ceci est un mail automatique, Merci de ne pas y répondre.';
 
-		   $headers  = 'MIME-Version: 1.0' . "\r\n";
-		   $headers .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n";
-		   $headers .='Content-Transfer-Encoding: 8bit';
+		   	$headers  = 'MIME-Version: 1.0' . "\r\n";
+		   	$headers .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n";
+		   	$headers .='Content-Transfer-Encoding: 8bit';
 			mail($to, $subject, $message, $headers);
 		}
 		else

@@ -46,11 +46,18 @@ h1
 .button_profil
 {
 	padding: 10px;
-	margin-top: 100px;
+	margin-top: 63%;
 	margin-left: 10px;
+	margin-bottom: 20px;
 	font-family: 'Bungee Hairline', cursive;
 	color: white;
 	background: #bbc4ef;
+}
+
+a{
+	text-decoration: none;
+	color: white;
+	cursor: crosshair;
 }
 
 .button_profil:hover
