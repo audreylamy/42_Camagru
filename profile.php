@@ -8,9 +8,12 @@ if($_SESSION['login'] != NULL)
 	$conn->query( 'USE db_camagru' );
 	$requete = $conn->query("SELECT * FROM `users` WHERE `username` = '$login'"); 
 	$data = $requete->fetch(PDO::FETCH_ASSOC);
+	$_SESSION['id_user'] = $data['id_user'];
 	$_SESSION['first_name'] = $data['first_name'];
 	$_SESSION['last_name'] = $data['last_name'];
 	$_SESSION['email'] = $data['email'];
+	$_SESSION['password'] = $data['password'];
+	$_SESSION['confirm_password'] = $data['confirm_password'];
 }
 ?>
 
@@ -38,7 +41,10 @@ if($_SESSION['login'] != NULL)
 			<div id="bloc_profile">
 				<div id='form_modif'>
 				<h3> Here you can change informations about your profile </h3>
-				<form method="post" action="new_users.php">
+				<form method="post" action="modif.php">
+					<div id="profile_picture"></div>
+					<input id="download_picture" type="file" name="avatar">
+					<br></br>
 					<div class="row">
 						<div class="col-25">
 						<label class="label" for="first_name">First-name :</label>
@@ -76,7 +82,7 @@ if($_SESSION['login'] != NULL)
 						<label class="label" for="password">Password :</label>
 						</div>
 						<div class="col-75">
-						<input class="input" type="password" name="password" value="" placeholder="*****" required/>
+						<input class="input" type="password" name="password" value="<?php $_POST['password']; ?>" placeholder="*****" required/>
 						</div> 
 					</div>
 					<div class="row">
@@ -84,7 +90,7 @@ if($_SESSION['login'] != NULL)
 						<label class="label" for="confirm_password">Confirm password :</label>
 						</div>
 						<div class="col-75">
-						<input class="input" type="password" name="confirm_password" value="" placeholder="*****" required/>
+						<input class="input" type="password" name="confirm_password" value="<?php $_POST['confirm_password']; ?>" placeholder="*****" required/>
 						</div> 
 					</div>
 					<div class="row">

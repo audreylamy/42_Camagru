@@ -9,6 +9,12 @@ class Membre
 		$this->db = $conn;
 	}
 
+	public function getIdUser($id_user)
+	{
+		$this->id_user = $id_user;
+		return $this->id_user;
+	}
+
 	public function getFirstName($first_name)
 	{
 		$this->first_name = $first_name;
@@ -117,6 +123,30 @@ class Membre
 			$requete->bindparam(':password', $this->password);
 			$requete->bindparam(':email', $this->email);
 			$requete->bindparam(':token', $this->token);
+			$requete->execute();
+		}
+		else
+		{
+			echo "Error";
+		}
+	}
+
+	public function updateUser()
+	{
+		if(!empty($this->first_name) && !empty($this->last_name) && !empty($this->email) && !empty($this->login) 
+		&& !empty($this->password) && !empty($this->confirm_password))
+		{     
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->prepare("UPDATE `users` 
+			SET username = :login, first_name = :first_name, last_name = :last_name, password = :password, email = :email
+			WHERE `id_user` = '$this->id_user'");
+			echo "HERE";
+			echo ($this->first_name);
+			$requete->bindparam(':login', $this->login);
+			$requete->bindparam(':first_name', $this->first_name);
+			$requete->bindparam(':last_name', $this->last_name);
+			$requete->bindparam(':password', $this->password);
+			$requete->bindparam(':email', $this->email);
 			$requete->execute();
 		}
 		else

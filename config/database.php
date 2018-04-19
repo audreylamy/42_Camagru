@@ -7,7 +7,8 @@ $DB_PASSWORD = 'audrey';
 try 
 {
     $conn = new PDO($DB_DSN, $DB_USER, $DB_PASSWORD);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	// echo "connection success";
 }
 catch(PDOException $e)
 {
