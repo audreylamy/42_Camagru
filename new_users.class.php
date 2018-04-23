@@ -9,6 +9,12 @@ class Membre
 		$this->db = $conn;
 	}
 
+	public function getProfilPic($profile_pic)
+	{
+		$this->profile_pic = $profile_pic;
+		return $this->profile_pic;
+	}
+
 	public function getIdUser($id_user)
 	{
 		$this->id_user = $id_user;
@@ -135,18 +141,34 @@ class Membre
 	{
 		if(!empty($this->first_name) && !empty($this->last_name) && !empty($this->email) && !empty($this->login) 
 		&& !empty($this->password) && !empty($this->confirm_password))
-		{     
+		{    
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("UPDATE `users` 
 			SET username = :login, first_name = :first_name, last_name = :last_name, password = :password, email = :email
 			WHERE `id_user` = '$this->id_user'");
-			echo "HERE";
-			echo ($this->first_name);
+			echo ($this->profile_pic);
 			$requete->bindparam(':login', $this->login);
 			$requete->bindparam(':first_name', $this->first_name);
 			$requete->bindparam(':last_name', $this->last_name);
 			$requete->bindparam(':password', $this->password);
 			$requete->bindparam(':email', $this->email);
+			$requete->execute();
+		}
+		else
+		{
+			echo "Error";
+		}
+	}
+
+	public function updateProfilePicture()
+	{
+		if ($this->profile_pic != NULL)
+		{    
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->prepare("UPDATE `users` 
+			SET profile_pic = :avatar
+			WHERE `id_user` = '$this->id_user'");
+			$requete->bindparam(':avatar', $this->profile_pic);
 			$requete->execute();
 		}
 		else

@@ -8,6 +8,7 @@ if ($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email
 {
 	$actual_user = new Membre($conn);
 
+	$actual_user->getProfilPic($_POST['avatar']);
 	$actual_user->getIdUser($_SESSION['id_user']);
 	$actual_user->getFirstName(htmlspecialchars($_POST['first_name']));
 	$actual_user->getLastName(htmlspecialchars($_POST['last_name']));
@@ -24,10 +25,12 @@ if ($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email
 		if ($actual_user->verif_password() === TRUE)
 		{
 			$actual_user->updateUser();
+			$_SESSION['modification'] = TRUE;
 			echo "modif done";
 		}
 		else
 		{
+			$_SESSION['modification'] = FALSE;
 			echo "mauvaise confirmation de mot de passe";
 		}
 	}
@@ -37,15 +40,20 @@ if ($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email
 		{
 			$actual_user->updateUser();
 			echo "modif done";
+			$_SESSION['modification'] = TRUE;
+			header('Location: profile.php');
 		}
 		else
 		{
+			$_SESSION['modification'] = FALSE;
 			echo "mauvaise confirmation de mot de passe";
+			header('Location: profile.php');
 		}
 	}
 	else
 	{
 		echo "aucune modification";
+		header('Location: profile.php');
 	}
 
 }

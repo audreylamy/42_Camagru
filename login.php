@@ -8,6 +8,12 @@ if($_POST['login'] != NULL && $_POST['password'] != NULL)
 	$login = htmlspecialchars($_POST['login']);
 	$password = hash('whirlpool',htmlspecialchars($_POST['password']));
 
+	$conn->query( 'USE db_camagru' );
+	$requete = $conn->query("SELECT `id_user` FROM `users` WHERE `username` = '$login'"); 
+	$data = $requete->fetch(PDO::FETCH_ASSOC);
+
+	$_SESSION['id_user'] = $data['id_user'];
+
 	$membre = new Membre($conn);
 	$membre->getLogin($login);
 	$membre->getPassword($password);
