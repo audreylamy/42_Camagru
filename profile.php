@@ -2,7 +2,14 @@
 session_start();
 include('config/database.php');
 
-if ($_SESSION['id_user'] != NULL)
+// code ci-dessous regles les problemes de warning avec display_errors
+$modifaction = false;
+if (isset($_SESSION['modification'])) 
+{
+   $modification = $_SESSION['modification'];
+}
+
+if (isset($_SESSION['id_user']))
 {
 	$id_user = $_SESSION['id_user'];
 	$conn->query( 'USE db_camagru' );
@@ -46,7 +53,7 @@ if ($_SESSION['id_user'] != NULL)
 				<div id='profile_picture'>
 					<div id='bloc_picture'>
 					<?php
-					if ($_SESSION['upload_picture'] === "hello")
+					if (isset($_SESSION['upload_picture']) && $_SESSION['upload_picture'] === "hello")
 					{
 						echo '<img src="'. $_SESSION['name_picture'] . '"alt="avatar" width="100%">';
 					}
@@ -111,7 +118,7 @@ if ($_SESSION['id_user'] != NULL)
 						<label class="label" for="password">Password :</label>
 						</div>
 						<div class="col-75">
-						<input class="input" type="password" name="password" value="<?php $_POST['password']; ?>" placeholder="*****" required/>
+						<input class="input" type="password" name="password" value="" placeholder="*****" required/>
 						</div> 
 					</div>
 					<div class="row">
@@ -119,7 +126,7 @@ if ($_SESSION['id_user'] != NULL)
 						<label class="label" for="confirm_password">Confirm password :</label>
 						</div>
 						<div class="col-75">
-						<input class="input" type="password" name="confirm_password" value="<?php $_POST['confirm_password']; ?>" placeholder="*****" required/>
+						<input class="input" type="password" name="confirm_password" value="" placeholder="*****" required/>
 						</div> 
 					</div>
 					<div class="row">
@@ -131,21 +138,58 @@ if ($_SESSION['id_user'] != NULL)
 					</div>
 					<div id='problem'>
 						<?php
-						if ($_SESSION['modification'] === TRUE)
+						if (isset($modification))
 						{
-							echo "Modifications have been made";
-						}
-						else if ($_SESSION['modification'] === FALSE)
-						{
-							echo "Password error";
+							if ($modification === TRUE)
+							{
+								echo "Modifications have been made";
+							}
+							else if ($modification === FALSE)
+							{
+								echo "Password error";
+							}
 						}
 						?>
 					</div>
 				</form>
-				</div>			
+					<button id="delete" class="valider">Delete your profile</button>
+					<div id="confirm">
+					<br></br>
+						<p id="message_confirm">Do you want to delete your profile ?</p>
+						<div id="yes_no">
+							<form method="post" action="delete.php">
+								<input class="valider" type="submit" name="valider" value="Yes"/>
+							</form>
+							<button id="cancel">Cancel</button>
+						</div>
+					</div> 
+				</div>
 			</div>
 		<footer>
 			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
+	<script language="javascript">
+		var element_delete = document.getElementById('delete');
+		var element_confirm = document.getElementById('confirm');
+		element_delete.addEventListener('click', function()
+		{
+			if (element_confirm.style.visibility == "visible")
+			{
+				element_confirm.style.visibility = "hidden";
+			}
+			else
+			{
+				element_confirm.style.visibility = "visible";
+			}
+		});
+	</script>
+	<script>
+		var element_cancel = document.getElementById('cancel');
+		var element_confirm = document.getElementById('confirm');
+		element_cancel.addEventListener('click', function()
+		{
+			element_confirm.style.visibility = "hidden";
+		});
+	</script>
 </html>

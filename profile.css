@@ -150,9 +150,31 @@ h3
 	color: #8861b4c2;
 }
 
+#cancel{
+	margin: 16px;
+	background-color: white;
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 4px;
+	font-size: 0.7vw;
+	cursor: crosshair;
+	color: #8861b4c2;
+}
+
 .valider:hover
 {
-	margin-top: 15px;
+	margin-top: 16px;
+	background-color: rgba(255, 255, 255, 0);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	font-size: 0.7vw;
+	border: solid 3px white;
+	color: white;
+	cursor: crosshair;
+}
+
+#cancel:hover{
+	margin: 15px;
 	background-color: rgba(255, 255, 255, 0);
 	border: none;
 	font-family: 'Bungee Hairline', cursive;
@@ -164,6 +186,22 @@ h3
 
 #avatar{
 	margin-top: 40%;
+}
+
+#confirm
+{
+	width: 100%;
+	visibility: hidden;
+}
+
+#yes_no
+{
+	display: flex;
+}
+
+#message_confirm
+{
+	font-family: 'Abel', sans-serif;
 }
 
 /*FOOTER*/

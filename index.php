@@ -196,23 +196,5 @@ session_start();
 		{
 			element.style.background = "#bbc4ef";
 		});
-		// var element_deco = document.getElementById('button_deconnexion');
-		// element_deco.addEventListener('mouseover', function()
-		// {
-		// 	element_deco.style.background = "#62bcfa";
-		// });
-		// element_deco.addEventListener('mouseout', function()
-		// {
-		// 	element_deco.style.background = "#bbc4ef";
-		// });
-		// var element_profil = document.getElementById('button_profil');
-		// element_profil.addEventListener('mouseover', function()
-		// {
-		// 	element_profil.style.background = "#62bcfa";
-		// });
-		// element_profil.addEventListener('mouseout', function()
-		// {
-		// 	element_profil.style.background = "#bbc4ef";
-		// });
 	</script>
 </html>

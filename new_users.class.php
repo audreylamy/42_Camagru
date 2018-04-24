@@ -12,6 +12,7 @@ class Membre
 	public function getProfilPic($profile_pic)
 	{
 		$this->profile_pic = $profile_pic;
+		echo $this->profile_pic;
 		return $this->profile_pic;
 	}
 
@@ -175,6 +176,14 @@ class Membre
 		{
 			echo "Error";
 		}
+	}
+
+	public function deleteProfile()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete = $this->db->prepare("DELETE FROM `users` WHERE `id_user` = '$this->id_user'");
+		$requete->execute();
+		echo "profile suppr";
 	}
 }
 ?>
