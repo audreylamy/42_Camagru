@@ -92,11 +92,27 @@ class Membre
 		return FALSE;
 	}
 
+	public function status()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$login = $this->login;
+		$requete_status = $this->db->query("SELECT `status` FROM `users` WHERE `username` = '$login'");
+		$data = $requete_status->fetch(PDO::FETCH_ASSOC);
+		if ($data['status'] === '1')
+		{
+			echo "here";
+			return TRUE;
+		}
+		else if ($data['status'] === '0')
+		{
+			return FALSE;
+		}
+	}
+
 	public function authentification()
 	{
 		$this->db->query( 'USE db_camagru' );
 		$requete_auth = $this->db->query("SELECT `username`, `password` FROM `users`");
-		echo"here1";
 		while ($data = $requete_auth->fetch(PDO::FETCH_ASSOC))
 		{
 			if ($data['password'] === $this->password && $data['username'] === $this->login)

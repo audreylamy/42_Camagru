@@ -149,6 +149,11 @@ session_start();
 										</div>
 									</form>
 									<?php
+									if ($_SESSION['status'] === FALSE)
+									{
+										echo "<div id='bloc_message'>Please activate your email</div>";
+										echo "<style> #se_connecter { visibility: visible; }</style>";
+									}
 									if ($_SESSION['auth'] === FALSE)
 									{
 										echo "<div id='bloc_message'>Wrong login or password</div>";

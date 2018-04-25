@@ -115,7 +115,7 @@ if (isset($_SESSION['id_user']))
 					</div>
 					<div class="row">
 						<div class="col-25">
-						<label class="label" for="password">Password :</label>
+						<label class="label" for="password">Current password :</label>
 						</div>
 						<div class="col-75">
 						<input class="input" type="password" name="password" value="" placeholder="*****" required/>

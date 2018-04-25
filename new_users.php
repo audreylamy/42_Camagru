@@ -27,21 +27,20 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 		if (($membre->verif_password()) === TRUE)
 		{
 			echo "new_user";
-			$membre->ajouterMembre();
-			header('Location: index.php');
 			$_SESSION['connect'] = TRUE;
 			$_SESSION['verif_password'] = TRUE;
+
+			$membre->ajouterMembre();
+			header('Location: index.php');
 
 			$to = $email;
 			$subject = 'Confirmer votre inscription';
 			$message = 'Bienvenue sur Camagru,
 			
-		  	Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-		  	ou copier/coller dans votre navigateur internet.
+			Bonjour '.$first_name.',
+		  	Pour activer votre compte, veuillez cliquer sur le lien ci dessous.
 			
-		  	http://localhost:8080/index.php'.urlencode($login).'&token='.urlencode($token).'
-			
-			
+		  	http://localhost:8080/activation.php?login='.urlencode($login).'&token='.urlencode($token).'
 		   	---------------
 		   	Ceci est un mail automatique, Merci de ne pas y répondre.';
 

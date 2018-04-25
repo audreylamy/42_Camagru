@@ -32,7 +32,8 @@ try
 	fb_id INT,
 	twitter_id INT,
 	validation_email BOOLEAN DEFAULT 0,
-	token VARCHAR(300) NOT NULL
+	token VARCHAR(300) NOT NULL,
+	status INT DEFAULT 0 NOT NULL
 	) ";
 
     $conn->exec($sql_users);
