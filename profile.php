@@ -3,10 +3,29 @@ session_start();
 include('config/database.php');
 
 // code ci-dessous regles les problemes de warning avec display_errors
-$modifaction = false;
 if (isset($_SESSION['modification'])) 
 {
    $modification = $_SESSION['modification'];
+}
+
+if (isset($_SESSION['wrong_confirm'])) 
+{
+   $wrong_confirm = $_SESSION['wrong_confirm'];
+}
+
+if (isset($_SESSION['wrong_password'])) 
+{
+   $wrong_password = $_SESSION['wrong_password'];
+}
+
+if (isset($_SESSION['password_modif'])) 
+{
+   $password_modif = $_SESSION['password_modif'];
+}
+
+if (isset($_SESSION['password_error'])) 
+{
+   $password_error = $_SESSION['password_error'];
 }
 
 if (isset($_SESSION['id_user']))
@@ -149,6 +168,20 @@ if (isset($_SESSION['id_user']))
 								echo "Password error";
 							}
 						}
+						if (isset($wrong_confirm))
+						{
+							if ($wrong_confirm === TRUE)
+							{
+								echo "wrong confirmation";
+							}
+						}
+						if (isset($wrong_password))
+						{
+							if ($wrong_password === TRUE)
+							{
+								echo "wrong password";
+							}
+						}
 						?>
 					</div>
 				</form>
@@ -163,6 +196,64 @@ if (isset($_SESSION['id_user']))
 							<button id="cancel">Cancel</button>
 						</div>
 					</div> 
+				</div>
+				<div id='modif_password'>
+					<form method="post" action="modif_password.php">
+					<div class="row">
+						<div class="col-25">
+						<label class="label" for="password">Current password :</label>
+						</div>
+						<div class="col-75">
+						<input class="input" type="password" name="password" value="" placeholder="*****" required/>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-25">
+						<label class="label" for="new_password">New password :</label>
+						</div>
+						<div class="col-75">
+						<input class="input" type="password" name="new_password" value="" placeholder="*****" required/>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-25">
+						<label class="label" for="confirm_new_password">Confirm new password :</label>
+						</div>
+						<div class="col-75">
+						<input class="input" type="password" name="confirm_new_password" value="" placeholder="*****" required/>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-25">
+						</div>
+						<div class="col-75">
+						<input class="valider" type="submit" name="valider" value="validation"/>
+						</div> 
+					</div>
+					<div id='problem'>
+						<?php
+						if (isset($password_modif))
+						{
+							if ($password_modif === TRUE)
+							{
+								echo "Password updated";
+							}
+							else if ($password_modif === FALSE)
+							{
+								echo "Password not updated";
+							}
+						}
+						else if (isset($password_error))
+						{
+							if ($password_error === TRUE)
+							{
+								echo "Not the current password";
+							}
+						}
+		
+						?>
+					</div>
+					</form>
 				</div>
 			</div>
 		<footer>

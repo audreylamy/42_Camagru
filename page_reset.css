@@ -1,0 +1,89 @@
+html 
+{
+	height: 100%;
+}
+
+body 
+{
+	height:100%;
+	margin: 0;
+	padding: 0;
+	background-image: radial-gradient(circle at top left, #6534ff, #fccdd3);
+}
+
+header
+{
+	display: flex;
+	width: 100%;
+	height: 160px;
+	justify-content: space-between;
+}
+
+h1
+{
+	color: #fccdd3;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 8px;
+	font-size: 2.5vw;
+	margin-left: 100px;
+}
+
+#bloc_new_password
+{
+	display: flex;
+	justify-content: center;
+	margin-top: 100px;
+}
+
+.input{
+	width: 18vw;
+	opacity: 0.9;
+	background-color: #fccdd3c2;
+	border: none;
+	font-size: 0.6vw;
+	font-family: 'Abel', sans-serif;
+	letter-spacing: 2px;
+	height: 4%;
+	color: white;
+}
+
+.label
+{
+	font-size: 0.6vw;
+	color: white;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 2px;
+}
+
+.col-25{
+	margin-bottom: 1%;
+}
+
+.col-75{
+	margin-bottom: 4%;
+}
+
+.valider
+{
+	margin-top: 15px;
+	background-color: white;
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 4px;
+	font-size: 0.7vw;
+	padding: 10px;
+	cursor: crosshair;
+	color: #8861b4c2;
+}
+
+.valider:hover
+{
+	margin-top: 16px;
+	background-color: rgba(255, 255, 255, 0);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	font-size: 0.7vw;
+	border: solid 3px white;
+	color: white;
+	cursor: crosshair;
+}

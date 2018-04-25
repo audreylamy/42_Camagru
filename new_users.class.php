@@ -58,6 +58,18 @@ class Membre
 		return $this->confirm_password;
 	}
 
+	public function getNewPassword($new_password)
+	{
+		$this->new_password = $new_password;
+		return $this->new_password;
+	}
+
+	public function getConfirmNewPassword($confirm_new_password)
+	{
+		$this->confirm_new_password = $confirm_new_password;
+		return $this->confirm_new_password;
+	}
+
 	public function getConfirmToken($token)
 	{
 		$this->token = $token;
@@ -123,9 +135,33 @@ class Membre
 		return FALSE;
 	}
 
+	public function emailBdd()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete_email = $this->db->query("SELECT `email` FROM `users`");
+		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
+		{
+			if ($data['email'] === $this->email)
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
+
 	public function verif_password()
 	{
 		if ($this->password == $this->confirm_password)
+		{
+			return TRUE;
+		}
+		return FALSE;
+	}
+
+	public function verif_new_password()
+	{
+		echo "here";
+		if ($this->new_password == $this->confirm_new_password)
 		{
 			return TRUE;
 		}
@@ -161,13 +197,12 @@ class Membre
 		{    
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("UPDATE `users` 
-			SET username = :login, first_name = :first_name, last_name = :last_name, password = :password, email = :email
+			SET username = :login, first_name = :first_name, last_name = :last_name, email = :email
 			WHERE `id_user` = '$this->id_user'");
 			echo ($this->profile_pic);
 			$requete->bindparam(':login', $this->login);
 			$requete->bindparam(':first_name', $this->first_name);
 			$requete->bindparam(':last_name', $this->last_name);
-			$requete->bindparam(':password', $this->password);
 			$requete->bindparam(':email', $this->email);
 			$requete->execute();
 		}
@@ -186,6 +221,40 @@ class Membre
 			SET profile_pic = :avatar
 			WHERE `id_user` = '$this->id_user'");
 			$requete->bindparam(':avatar', $this->profile_pic);
+			$requete->execute();
+		}
+		else
+		{
+			echo "Error";
+		}
+	}
+
+	public function updatePassword()
+	{
+		if ($this->new_password != NULL && $this->confirm_new_password != NULL)
+		{    
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->prepare("UPDATE `users` 
+			SET `password` = :password
+			WHERE `id_user` = '$this->id_user'");
+			$requete->bindparam(':password', $this->new_password);
+			$requete->execute();
+		}
+		else
+		{
+			echo "Error";
+		}
+	}
+
+	public function ResetPassword()
+	{
+		if ($this->password != NULL && $this->confirm_password != NULL)
+		{    
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->prepare("UPDATE `users` 
+			SET `password` = :password
+			WHERE `username` = '$this->login'");
+			$requete->bindparam(':password', $this->password);
 			$requete->execute();
 		}
 		else

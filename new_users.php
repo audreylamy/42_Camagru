@@ -26,11 +26,11 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 	{
 		if (($membre->verif_password()) === TRUE)
 		{
-			echo "new_user";
 			$_SESSION['connect'] = TRUE;
 			$_SESSION['verif_password'] = TRUE;
 
 			$membre->ajouterMembre();
+			echo "hello";
 			header('Location: index.php');
 
 			$to = $email;

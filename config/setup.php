@@ -33,7 +33,8 @@ try
 	twitter_id INT,
 	validation_email BOOLEAN DEFAULT 0,
 	token VARCHAR(300) NOT NULL,
-	status INT DEFAULT 0 NOT NULL
+	status INT DEFAULT 0 NOT NULL,
+	token_reset VARCHAR(300)
 	) ";
 
     $conn->exec($sql_users);

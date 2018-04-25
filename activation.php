@@ -13,8 +13,6 @@ $requete = $conn->query("SELECT `token`, `status` FROM `users` WHERE `username` 
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 $clebdd = $data['token'];	// Récupération de la clé
 $status = $data['status']; // $actif contiendra alors 0 ou 1
-
-echo $status;
  
 // On teste la valeur de la variable $actif récupéré dans la BDD
 if($status == '1') // Si le compte est déjà actif on prévient

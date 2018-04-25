@@ -18,9 +18,9 @@ if($_POST['login'] != NULL && $_POST['password'] != NULL)
 	$membre->getLogin($login);
 	$membre->getPassword($password);
 
-	if (($membre->status()) === TRUE)
+	if (($membre->authentification()) === TRUE)
 	{
-		if (($membre->authentification()) === TRUE)
+		if (($membre->status()) === TRUE)
 		{
 			echo "Vous etes connectes";
 			header('Location: index.php');
@@ -29,16 +29,16 @@ if($_POST['login'] != NULL && $_POST['password'] != NULL)
 		}
 		else
 		{
-			echo "Vous avez entre un mauvais login ou mdp";
+			echo "Votre mail n'est pas actif";
 			header('Location: index.php');
-			$_SESSION['auth'] = FALSE;
+			$_SESSION['status'] = FALSE;
 		}
 	}
 	else
 	{
-		echo "Votre mail n'est pas actif";
+		echo "Vous avez entre un mauvais login ou mdp";
 		header('Location: index.php');
-		$_SESSION['status'] = FALSE;
+		$_SESSION['auth'] = FALSE;
 	}
 }
 ?>

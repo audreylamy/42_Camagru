@@ -124,46 +124,75 @@ session_start();
 								<h3>Log in</h3>
 								<form method="post" action="login.php">
 										<div class="row">
-												<div class="col-25">
-												<label class="label" for="login">Username :</label>
-												</div>
-												<div class="col-75">
-												<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" id="login" required/>
-												</div> 
+											<div class="col-25">
+											<label class="label" for="login">Username :</label>
+											</div>
+											<div class="col-75">
+											<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" id="login" required/>
+											</div> 
 										</div>
 										<div class="row">
-												<div class="col-25">
-												<label class="label" for="password">Password :</label>
-												</div>
-												<div class="col-75">
-												<input class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" id="password" required/>
-												</div> 
+											<div class="col-25">
+											<label class="label" for="password">Password :</label>
+											</div>
+											<div class="col-75">
+											<input class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" id="password" required/>
+											</div> 
 										</div>
+										<div class="row">
+											<div class="col-25">
+											</div>
+											<div class="col-75">
+											<input class="valider" type="submit" name="modif" value="Log in"/>
+											</div> 
+										</div>
+									</form>
+										<button id="forgot_password">Forgot password ?</button>
+											<?php
+											if ($_SESSION['transfert_email'] === TRUE)
+											{
+												echo "<div id='bloc_message'>Check your email</div>";
+												echo "<style> #se_connecter { visibility: visible; }</style>";
+											}
+											if ($_SESSION['mdp_reset'] === TRUE)
+											{
+												echo "<div id='bloc_message'>Password updated</div>";
+												echo "<style> #se_connecter { visibility: visible; }</style>";
+											}
+											?>
+											<?php
+											if ($_SESSION['auth'] === FALSE)
+											{
+												echo "<div id='bloc_message'>Wrong login or password</div>";
+												echo "<style> #se_connecter { visibility: visible; }</style>";
+											}
+											if ($_SESSION['status'] === FALSE)
+											{
+												echo "<div id='bloc_message'>Please activate your email</div>";
+												echo "<style> #se_connecter { visibility: visible; }</style>";
+											}
+											else if ($_SESSION['auth'] === TRUE)
+											{
+												echo "<style> #se_connecter { visibility: hidden; }</style>";
+											}
+											?>
+											<div id="forgot">
+											<form method="post" action="forgot_password.php">
+											<div class="row">
+												<p id="enter_email" >Enter your email :</p>
+												<div class="col-75">
+												<input class="input" type="email" name="email_reset" value="" id="password" required/>
+												</div>
 											<div class="row">
 												<div class="col-25">
 												</div>
 												<div class="col-75">
-											<input class="valider" type="submit" name="modif" value="Log in"/>
-											</div> 
-											<a id="forgot_password" href="#">Forgot password ?</a>
+												<input class="valider" type="submit" name="reset" value="Reset"/>
+												</div> 
+											</div>
+											</form>
+											</div>
 										</div>
-									</form>
-									<?php
-									if ($_SESSION['status'] === FALSE)
-									{
-										echo "<div id='bloc_message'>Please activate your email</div>";
-										echo "<style> #se_connecter { visibility: visible; }</style>";
-									}
-									if ($_SESSION['auth'] === FALSE)
-									{
-										echo "<div id='bloc_message'>Wrong login or password</div>";
-										echo "<style> #se_connecter { visibility: visible; }</style>";
-									}
-									else if ($_SESSION['auth'] === TRUE)
-									{
-										echo "<style> #se_connecter { visibility: hidden; }</style>";
-									}
-									?>
 							</div>
 						</div>
 					</div>
@@ -200,6 +229,21 @@ session_start();
 		element.addEventListener('mouseout', function()
 		{
 			element.style.background = "#bbc4ef";
+		});
+	</script>
+	<script>
+		var element_forgot = document.getElementById('forgot_password');
+		var element_email = document.getElementById('forgot');
+		element_forgot.addEventListener('click', function()
+		{
+			if (element_email.style.visibility == "visible")
+			{
+				element_email.style.visibility = "hidden";
+			}
+			else
+			{
+				element_email.style.visibility = "visible";
+			}
 		});
 	</script>
 </html>
