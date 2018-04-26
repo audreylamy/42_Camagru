@@ -1,3 +1,11 @@
+<?php
+session_start();
+require('new_users.class.php');
+include('config/database.php');
+
+
+?>
+
 <html lang="fr">
   	<head>
     	<meta charset="utf-8">
@@ -8,6 +16,17 @@
 		<link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Bungee+Hairline" rel="stylesheet">
  	</head>
 	<body>
+		<div id="pop_up">
+			<div id="save_picture">
+				<canvas id="canvas"></canvas>
+				<div id="message_confirm">Do you want to save this picture ?</div>
+				<br></br>
+					<div id="yes_no">
+						<button id="yes">Yes</button>
+						<button id="cancel">Cancel</button>
+					</div>
+			</div>
+		</div>
 			<header>
 				<div>
 					<h1>CAMAGRU</h1>
@@ -24,6 +43,12 @@
 				<div id="part1">
 					<div id="take_picture">
 						<button id="activation">Start Camera</button>
+						<div id="add_picture">
+							<form method="post" action="add_picture.php" enctype="multipart/form-data">
+								<input id="download_picture" type="file" name="avatar">
+								<input id="valider" type="submit" name="submit" value="Upload Image"/>
+							</form>
+						</div>
 						<div id="camera_space">
 							<video id="video"></video>
 						</div>
@@ -36,7 +61,6 @@
 					</div>
 				</div>
 				<div id="view_pictures">
-					<canvas id="canvas"></canvas>
 				</div>
 			</div>
 		<footer>
@@ -48,6 +72,14 @@
 
 	element_start.addEventListener('click', function()
 	{
+		var element_video = document.getElementById('video');
+		var element_take_picture = document.getElementById('startbutton');
+		element_take_picture.style.visibility = "visible";
+		element_video.style.visibility = "visible";
+		element_video.style.border = "solid";
+		element_video.style.borderWidth = "1px";
+		element_video.style.borderColor = "white";
+
 	(function() {
 
   	var streaming = false,
@@ -88,7 +120,7 @@
   video.addEventListener('canplay', function(ev){
     if (!streaming) 
 	{
-		var width_camera = 810;
+		var width_camera = 610;
       	height = video.videoHeight / (video.videoWidth/width_camera);
       	video.setAttribute('width', width_camera);
       	video.setAttribute('height', height);
@@ -111,11 +143,40 @@
 
   startbutton.addEventListener('click', function(ev)
   {
-      	takepicture();
-    	ev.preventDefault();
+	var element_pop_up = document.getElementById('pop_up');
+	element_pop_up.style.visibility = "visible";
+
+    takepicture();
+    ev.preventDefault();
   }, false);
 
 })();
 });
+	</script>
+
+	<script>
+		element_yes = document.getElementById('yes');
+		element_yes.addEventListener('click', function()
+		{
+			// récupération du contenue du canvas sous la forme d'une string
+			var data = canvas.toDataURL('image/png', 0)
+			data = data.replace("data:image/png base64;", "");
+
+			// création d'un formulaire pour l'envois en POST
+			var formul = document.createElement('form');
+			formul.setAttribute('method', 'POST');
+			formul.setAttribute('action', "save.php");
+
+			// création du input pour l’envoie de la string
+			var champCache = document.createElement('input');
+			champCache.setAttribute('type', 'hidden');
+			champCache.setAttribute('name', 'image');
+			champCache.setAttribute('value', data);
+			formul.appendChild(champCache);
+
+			// envois du formulaire
+			document.body.appendChild(formul);
+			formul.submit();
+		});
 	</script>
 </html>

@@ -56,7 +56,7 @@ try
 	id_user INT NOT NULL,
 	name VARCHAR(30) NOT NULL,
     creation_date DATETIME NOT NULL,
-	image_path VARCHAR(300) NOT NULL
+	-- image_path VARCHAR(300) NOT NULL
 	) ";
 
     $conn->exec($sql_photos);

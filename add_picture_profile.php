@@ -4,13 +4,14 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
+$id_user = $_SESSION['id_user'];
+
 $target_dir = "uploads/";
 $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
 $actual_user = new Membre($conn);
 
-$actual_user->getProfilPic($target_file);
-$actual_user->getIdUser($_SESSION['id_user']);
+$actual_user->getIdUser($id_user);
 
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
@@ -55,6 +56,8 @@ if ($uploadOk == 0)
 } 
 else 
 {
+    $target_file = $target_dir."".$id_user.".".$imageFileType;
+    $actual_user->getProfilPic($target_file);
 	if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) 
 	{
         echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";

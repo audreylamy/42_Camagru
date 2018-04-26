@@ -189,6 +189,17 @@ h3
 	margin-right: 10px;
 }
 
+#pb_email
+{
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
+	text-decoration: none;
+	border: none;
+	background-color: rgba(255, 255, 255, 0);
+	color: rgb(255, 255, 255);
+	margin-right: 10px;
+}
+
 #forgot{
 	visibility: hidden;
 }

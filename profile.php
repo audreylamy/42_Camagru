@@ -87,15 +87,15 @@ if (isset($_SESSION['id_user']))
 					?>	
 					</div>
 					<form method="post" action="add_picture_profile.php" enctype="multipart/form-data">
-					<input id="download_picture" type="file" name="avatar">
-					<br></br>
-					<div class="row">
-						<div class="col-25">
+						<input id="download_picture" type="file" name="avatar">
+						<br></br>
+						<div class="row">
+							<div class="col-25">
+							</div>
+							<div class="col-75">
+							<input class="valider" type="submit" name="submit" value="Upload Image"/>
+							</div> 
 						</div>
-						<div class="col-75">
-						<input class="valider" type="submit" name="submit" value="Upload Image"/>
-						</div> 
-					</div>
 					</form>
 				</div>
 				<div id='form_modif'>

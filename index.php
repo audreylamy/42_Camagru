@@ -115,7 +115,7 @@ session_start();
 								}
 								else if ($_SESSION['connect'] === TRUE && $_SESSION['verif_password'] === TRUE)
 								{
-									echo "<div id='bloc_message'>You can log in</div>";
+									echo "<div id='bloc_message'>Confirm your email</div>";
 									echo "<style> #se_connecter { visibility: visible; }</style>";
 								}
 								?>
