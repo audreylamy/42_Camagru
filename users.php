@@ -2,8 +2,6 @@
 session_start();
 require('new_users.class.php');
 include('config/database.php');
-
-
 ?>
 
 <html lang="fr">
@@ -44,13 +42,23 @@ include('config/database.php');
 					<div id="take_picture">
 						<button id="activation">Start Camera</button>
 						<div id="add_picture">
-							<form method="post" action="add_picture.php" enctype="multipart/form-data">
+							<form method="post" action="upload_picture.php" enctype="multipart/form-data">
 								<input id="download_picture" type="file" name="avatar">
-								<input id="valider" type="submit" name="submit" value="Upload Image"/>
+								<input id="submit_picture" type="submit" name="submit_picture" value="Upload Image"/>
 							</form>
 						</div>
 						<div id="camera_space">
 							<video id="video"></video>
+							<div id="upload">
+								<?php
+								if ($_SESSION['upload'] === TRUE)
+								{
+									echo "<style> #upload { visibility: visible; }</style>";
+									echo "<style> #startbutton { visibility: visible; }</style>"; 
+									echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" width="50%">';
+								}
+								?>
+							</div>
 						</div>
 						<div id="button_picture">
 							<button id="startbutton">Take a picture</button>
@@ -76,9 +84,9 @@ include('config/database.php');
 		var element_take_picture = document.getElementById('startbutton');
 		element_take_picture.style.visibility = "visible";
 		element_video.style.visibility = "visible";
-		element_video.style.border = "solid";
-		element_video.style.borderWidth = "1px";
-		element_video.style.borderColor = "white";
+
+		//supprime div 'upload'
+		element_video.nextElementSibling.remove();
 
 	(function() {
 
@@ -155,7 +163,7 @@ include('config/database.php');
 	</script>
 
 	<script>
-		element_yes = document.getElementById('yes');
+		var element_yes = document.getElementById('yes');
 		element_yes.addEventListener('click', function()
 		{
 			// récupération du contenue du canvas sous la forme d'une string
@@ -179,4 +187,25 @@ include('config/database.php');
 			formul.submit();
 		});
 	</script>
+
+	<script>
+		var element_upload = document.getElementById('submit_picture');
+		var element_take_picture = document.getElementById('startbutton');
+		element_upload.addEventListener('click', function()
+		{
+			element_take_picture.style.visibility = "visible";
+		});
+
+		// var div_upload = document.getElementById('upload');
+		// if (div_upload.style.visibility === "visible")
+		// {
+		// 	element_take_picture.addEventListener('click', function()
+		// 	{
+		// 		var element_pop_up = document.getElementById('pop_up');
+		// 		element_pop_up.style.visibility = "visible";
+		// 	});
+		// }
+	</script>
+
+
 </html>

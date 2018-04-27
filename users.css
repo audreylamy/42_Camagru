@@ -134,6 +134,16 @@ a{
 	display: block;
 	margin : auto;
 	visibility: hidden;
+	border: solid 1px white;
+}
+
+#upload{
+	text-align: center;
+	width: 80%;
+	margin-left: 10%;
+	margin-top: -100px;
+	visibility: hidden;
+	/* border: solid 1px white; */
 }
 
 #activation{
@@ -149,7 +159,7 @@ a{
 	margin-bottom: 10px;
 }
 
-#valider{
+#submit_picture{
 	background-color: rgba(255, 255, 255, 0.281);
 	border: none;
 	font-family: 'Bungee Hairline', cursive;
@@ -176,7 +186,6 @@ a{
 
 #startbutton
 {
-	margin: 5px;
 	background-color: rgba(255, 255, 255, 0.281);
 	border: none;
 	font-family: 'Bungee Hairline', cursive;
@@ -185,13 +194,14 @@ a{
 	color: white;
 	cursor: crosshair;
 	display: block;
-	margin : auto;
+	margin-left : auto;
+	margin-right : auto;
+	margin-top: 10px;
 	visibility: hidden;
 }
 
 #startbutton:hover
 {
-	margin: 5px;
 	background-color: rgba(255, 255, 255, 0.562);
 	border: none;
 	font-family: 'Bungee Hairline', cursive;
@@ -200,7 +210,8 @@ a{
 	color: white;
 	cursor: crosshair;
 	display: block;
-	margin : auto;
+	margin-left : auto;
+	margin-right : auto;
 }
 
 #choose_object{

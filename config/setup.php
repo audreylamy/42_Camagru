@@ -54,9 +54,8 @@ try
     $sql_photos = "CREATE TABLE IF NOT EXISTS photos(
     id_photo INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_user INT NOT NULL,
-	name VARCHAR(30) NOT NULL,
     creation_date DATETIME NOT NULL,
-	-- image_path VARCHAR(300) NOT NULL
+	image_path VARCHAR(300) NOT NULL
 	) ";
 
     $conn->exec($sql_photos);

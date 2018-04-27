@@ -6,17 +6,26 @@ include('config/database.php');
 
 $id_user = $_SESSION['id_user'];
 
-$target_dir = "uploads/";
+$target_dir = "uploads/gallery/";
+
+if (!(file_exists($target_dir)))
+{
+	mkdir('uploads/gallery', 0777, TRUE);
+	echo "create 'gallery'";
+}
+else
+{
+	echo "existe";
+}
+
 $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
-
-$actual_user = new Membre($conn);
-
-$actual_user->getIdUser($id_user);
 
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+echo $imageFileType;
 // Check if image file is a actual image or fake image
-if (isset($_POST["submit"])) 
+if (isset($_POST["submit_picture"])) 
 {
 	$check = getimagesize($_FILES["avatar"]["tmp_name"]);
     if($check !== false) 
@@ -30,18 +39,6 @@ if (isset($_POST["submit"]))
         $uploadOk = 0;
     }
 }
-
-// Check if file already exists
-// if (file_exists($target_file)) {
-//     echo "Sorry, file already exists.";
-//     $uploadOk = 0;
-// }
-
-// // Check file size
-// if ($_FILES["avatar"]["size"] > 500000) {
-//     echo "Sorry, your file is too large.";
-//     $uploadOk = 0;
-// }
 
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
@@ -58,16 +55,14 @@ if ($uploadOk == 0)
 } 
 else 
 {
-    $target_file = $target_dir."".$id_user.".".$imageFileType;
-    $actual_user->getProfilPic($target_file);
+	$name = date("Y-m-d H:i:s");
+    $target_file = $target_dir.$name.".".$imageFileType;
 	if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) 
 	{
-        echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
-        $_SESSION['upload_picture'] = "hello";
-        echo $_SESSION['upload_picture'];
-        $_SESSION['name_picture'] = $target_file;
-        $actual_user->updateProfilePicture();
-        header('Location: profile.php');
+		echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
+		$_SESSION['upload'] = TRUE;
+		$_SESSION['target'] = $target_file;
+        header("Location: users.php?upload=TRUE&target=$target_file");
 	} 
 	else 
 	{
