@@ -120,30 +120,148 @@ a{
 	justify-content: center;
 }
 
+#take_picture_filter
+{
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+	height: 100%;
+}
+
 #take_picture
 {
 	display: flex;
 	flex-direction: column;	
 	justify-content: center;
-	width: 35%;
+	width: 100%;
 	height: 100%;
 	background-color: rgba(255, 255, 255, 0.363);
 }
 
+#filter{
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	width: 30%;
+	height: 100%;
+}
+
+.filter_button
+{
+	margin-top: 15px;
+	background-color: rgba(212, 186, 236, 0.452);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 4px;
+	font-size: 0.7vw;
+	padding: 10px;
+	cursor: crosshair;
+	color: #ffffffc2;
+}
+
+.filter_button:hover
+{
+	margin-top: 15px;
+	background-color: rgba(255, 255, 255, 0.295);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 4px;
+	font-size: 0.7vw;
+	padding: 10px;
+	cursor: crosshair;
+	color: #ffffffc2;
+}
+
+/*MODIFICATION BOUTON TYPE RANGE*/
+
+input[type=range].range {
+	-webkit-appearance: none;     /*nécessaire pour Chrome */
+	padding: 0;                   /* nécessaire pour IE */
+	font: inherit;                /* même rendu suivant font document */
+	outline: none;
+	color: rgb(58, 170, 204);                  /* sert pour couleur de référence, via currentColor, pour le curseur */
+	opacity: .8;
+	background: rgba(255, 255, 255, 0.733);             /* sert pour couleur de fond de la zone de déplacement */
+	box-sizing: border-box;       /* même modèle de boîte pour tous */
+	transition: opacity .2s;
+	cursor: pointer;
+	height: 5px;
+}
+
+/*CHROME*/
+/* la zone de déplacement */
+input[type=range].range::-webkit-slider-runnable-track {
+	height: 100%;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;  /* supprimé définie sur l'input */
+  }
+  /* le curseur */
+  input[type=range].range::-webkit-slider-thumb {
+	-webkit-appearance: none;       /* également nécessaire sur le curseur */
+	width: 0.5em;
+	height: 5px;                
+	border: none;
+	border-radius: 0;               /* pris en compte sur Webkit et Edge */
+	background: currentColor;       /* pris en compte sur Webkit only */
+  }
+
+/*FIREFOX*/
+  /* la zone de déplacement */
+input[type=range].range::-moz-range-track {
+	height: 70%;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;  /* supprimé définie sur l'input */
+  }
+  /* le curseur */
+  input[type=range].range::-moz-range-thumb {
+	width: 0.5em;
+	height: inherit;                /* s'adapte à la hauteur de l'input */
+	border: none;                   /* supprimer la bordure */
+	border-radius: 0;               /* supprimer le rayon */
+	background: currentColor;
+  }
+  /* barre progression avant */
+  input[type=range].range::-moz-range-progress {
+	height: 10;
+	background: transparent;        /* supprime barre progression avant */
+  }
+
 #video{
+	position: relative;
 	display: block;
 	margin : auto;
 	visibility: hidden;
-	border: solid 1px white;
+	z-index: 300;
+}
+
+#filter_image_video{
+	position: absolute;
+	z-index: 3000;
 }
 
 #upload{
-	text-align: center;
-	width: 80%;
-	margin-left: 10%;
-	margin-top: -100px;
+	position: relative;
+	width: 23vw;
+	height: 13vw;
+	margin-left:27%;
+	margin-top: -140px;
 	visibility: hidden;
-	/* border: solid 1px white; */
+	border: solid 1px white;
+	background-color: white;
+}
+
+#img
+{
+	margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	position: absolute;
+	max-width: 100%;
+	max-height: 100%;
 }
 
 #activation{
@@ -198,6 +316,7 @@ a{
 	margin-right : auto;
 	margin-top: 10px;
 	visibility: hidden;
+
 }
 
 #startbutton:hover
@@ -214,20 +333,59 @@ a{
 	margin-right : auto;
 }
 
-#choose_object{
-	width: 61%;
-	height: 100%;
-	border: solid 1px #fccdd3;
+#startbuttonUpload
+{
+	background-color: rgba(255, 255, 255, 0.281);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	font-size: 0.7vw;
+	border: solid 1px white;
+	color: white;
+	cursor: crosshair;
+	display: block;
+	margin-left : auto;
+	margin-right : auto;
+	margin-top: 10px;
+	visibility: hidden;
+}
+
+#startbuttonUpload:hover
+{
+	background-color: rgba(255, 255, 255, 0.562);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	font-size: 0.7vw;
+	border: solid 1px white;
+	color: white;
+	cursor: crosshair;
+	display: block;
+	margin-left : auto;
+	margin-right : auto;
 }
 
 #view_pictures{
-	width: 100%;
+	width: 25%;
+	height: 160%;
+	border: solid 1px #fccdd3;
+}
+
+#choose_object{
+	width: 70%;
 	height: 30%;
 	margin-top: 60px;
 	margin-right: 100px;
 	border: solid 1px #fccdd3;
 }
 
+.img_filter{
+	background-color: Transparent;
+	border-color: rgba(216, 216, 216, 0) rgba(209, 209, 209, 0) rgba(186, 186, 186, 0);
+}
+
+#filter_image{
+	position: absolute;
+	visibility: hidden;
+}
 
 
 /*FOOTER*/

@@ -78,7 +78,7 @@ if (isset($_SESSION['id_user']))
 					}
 					else if ($_SESSION['profile_pic'] === NULL)
 					{
-						echo "<img id='avatar' src='uploads/photo.png' alt='avatar' width='100%'>";
+						echo "<img id='avatar' src='uploads/photo.jpg' alt='avatar' width='100%'>";
 					}
 					else if ($_SESSION['profile_pic'] != NULL)
 					{
