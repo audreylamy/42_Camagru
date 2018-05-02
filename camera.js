@@ -2,13 +2,16 @@ var element_start = document.getElementById('activation');
 
 	element_start.addEventListener('click', function()
 	{
-		var element_video = document.getElementById('video');
+		var element_video = document.getElementById('video_space');
 		var element_take_picture = document.getElementById('startbutton');
+		var element_upload = document.getElementById('upload');
+		var img_camera = document.getElementById('filter_image_video');
 		element_take_picture.style.visibility = "visible";
 		element_video.style.visibility = "visible";
+		img_camera.style.visibility = "hidden";
 
-		//supprime div 'upload'
-		element_video.nextElementSibling.remove();
+		// supprime div 'upload'
+		element_upload.remove();
 
 	(function() {
 
@@ -67,7 +70,6 @@ var element_start = document.getElementById('activation');
     	canvas.width = width_picture;
     	canvas.height = height_picture;
 		canvas.getContext('2d').drawImage(video, 0, 0, width_picture, height_picture);
-		canvas.getContext('2d').drawImage(upload, 0, 0, width_picture, height_picture);
     	var data = canvas.toDataURL('uploads');
     	photo.setAttribute('src', data);
   }

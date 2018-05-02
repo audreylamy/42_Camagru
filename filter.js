@@ -1,6 +1,6 @@
 var FILTER_VALS = {};
 var el = document.getElementById('upload');
-var el_video = document.getElementById('video');
+var el_video = document.getElementById('video_space');
 function set(filter, value) {
   FILTER_VALS[filter] = typeof value == 'number' ? Math.round(value * 10) / 10 : value;
   if (value == 0 || (typeof value == 'string' && value.indexOf('0') == 0)) 

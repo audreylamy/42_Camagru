@@ -228,12 +228,22 @@ input[type=range].range::-moz-range-track {
 	background: transparent;        /* supprime barre progression avant */
   }
 
-#video{
+#video_space{
 	position: relative;
-	display: block;
-	margin : auto;
+	text-align: center;
+	width: 42%;
+	height: 65%;
 	visibility: hidden;
+	margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#video{
 	z-index: 300;
+	width: 100%;
 }
 
 #filter_image_video{
@@ -246,7 +256,7 @@ input[type=range].range::-moz-range-track {
 	width: 23vw;
 	height: 13vw;
 	margin-left:27%;
-	margin-top: -140px;
+	margin-top: -340px;
 	visibility: hidden;
 	border: solid 1px white;
 	background-color: white;
@@ -265,6 +275,7 @@ input[type=range].range::-moz-range-track {
 }
 
 #activation{
+	/* margin-top: 20%; */
 	margin-left: auto;
 	margin-right: auto;
 	background-color: rgba(255, 255, 255, 0.281);
@@ -314,7 +325,7 @@ input[type=range].range::-moz-range-track {
 	display: block;
 	margin-left : auto;
 	margin-right : auto;
-	margin-top: 10px;
+	margin-top: 20px;
 	visibility: hidden;
 
 }

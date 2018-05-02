@@ -49,9 +49,10 @@ include('config/database.php');
 							</form>
 						</div>
 						<div id="camera_space">
-							<video id="video">
+							<div id="video_space">
 								<img id="filter_image_video" src="" alt="avatar">
-							</video>
+								<video id="video"></video>
+							</div>
 							<div id="upload">
 								<?php
 								if ($_SESSION['upload'] === TRUE)
@@ -91,7 +92,6 @@ include('config/database.php');
 							</section>
 						</div>
 					<div id="view_pictures">
-
 					</div>
 
 				</div>
@@ -106,10 +106,139 @@ include('config/database.php');
 			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
-	<script type="text/javascript" src="camera.js"></script>
-	<script type="text/javascript" src="filter.js"></script>
+	<!-- <script type="text/javascript" src="camera.js"></script> -->
+	<!-- <script type="text/javascript" src="filter.js"></script> -->
 
 	<script>
+		var FILTER_VALS = {};
+var el = document.getElementById('upload');
+var el_video = document.getElementById('video_space');
+function set(filter, value) {
+  FILTER_VALS[filter] = typeof value == 'number' ? Math.round(value * 10) / 10 : value;
+  if (value == 0 || (typeof value == 'string' && value.indexOf('0') == 0)) 
+{
+	delete FILTER_VALS[filter];
+ }
+  render();
+}
+
+function render() {
+  var vals = [];
+  Object.keys(FILTER_VALS).sort().forEach(function(key, i) {
+	vals.push(key + '(' + FILTER_VALS[key] + ')');
+ });
+  var val = vals.join(' ');
+console.log(val);
+  el.style.webkitFilter = val;
+el_video.style.webkitFilter = val;
+}
+
+var invert = document.getElementById('invert');
+invert.addEventListener('click', function()
+{
+	el.style.WebkitFilter = "invert(100%)";
+	el_video.style.WebkitFilter = "invert(100%)";
+});
+
+var no_filter = document.getElementById('no_filter');
+no_filter.addEventListener('click', function()
+{
+	el.style.WebkitFilter = "none";
+	el_video.style.WebkitFilter = "none";
+});
+	</script>
+	<script type="text/javascript">
+		var element_start = document.getElementById('activation');
+
+	element_start.addEventListener('click', function()
+	{
+		var element_video = document.getElementById('video_space');
+		var element_take_picture = document.getElementById('startbutton');
+		var element_upload = document.getElementById('upload');
+		var img_camera = document.getElementById('filter_image_video');
+		element_take_picture.style.visibility = "visible";
+		element_video.style.visibility = "visible";
+		img_camera.style.visibility = "hidden";
+
+		// supprime div 'upload'
+		element_upload.remove();
+
+	(function() {
+
+  	var streaming = false,
+      	video        = document.querySelector('#video'),
+      	cover        = document.querySelector('#cover'),
+      	canvas       = document.querySelector('#canvas'),
+      	startbutton  = document.querySelector('#startbutton');
+
+ 	 navigator.getMedia = (navigator.getUserMedia ||
+                    	navigator.webkitGetUserMedia ||
+                        navigator.mozGetUserMedia ||
+                        navigator.msGetUserMedia);
+
+  	navigator.getMedia(
+	{
+     		video: true,
+      		audio: false
+    },
+    function(stream) 
+	{
+      if (navigator.mozGetUserMedia) 
+	  {
+        	video.mozSrcObject = stream;
+      } 
+	  else 
+	  {
+        	var vendorURL = window.URL || window.webkitURL;
+        	video.src = vendorURL.createObjectURL(stream);
+      }
+      video.play();
+    },
+    function(err) 
+	{
+      	console.log("An error occured! " + err);
+    }
+  );
+
+  video.addEventListener('canplay', function(ev){
+    if (!streaming) 
+	{
+		var width_camera = document.getElementById('video').offsetWidth;
+		console.log(width_camera);
+      	height = video.videoHeight / (video.videoWidth/width_camera);
+      	video.setAttribute('width', width_camera);
+      	video.setAttribute('height', height);
+      	canvas.setAttribute('width',width_camera);
+      	canvas.setAttribute('height', height);
+      	streaming = true;
+    }
+  }, false);
+
+  function takepicture() 
+  {
+	  	var height_picture = 300;
+	  	var width_picture = 420;
+    	canvas.width = width_picture;
+    	canvas.height = height_picture;
+		canvas.getContext('2d').drawImage(video, 0, 0, width_picture, height_picture);
+    	// var data = canvas.toDataURL('uploads');
+    	// photo.setAttribute('src', data);
+  }
+
+  startbutton.addEventListener('click', function(ev)
+  {
+	var element_pop_up = document.getElementById('pop_up');
+	element_pop_up.style.visibility = "visible";
+
+    takepicture();
+    ev.preventDefault();
+  }, false);
+
+})();
+});
+	</script>
+	<script>
+	//envoie photo camera dans gallery puis sauvegarde dans la BDD
 		var element_yes = document.getElementById('yes');
 		element_yes.addEventListener('click', function()
 		{
@@ -129,6 +258,7 @@ include('config/database.php');
 			champCache.setAttribute('value', data);
 			formul.appendChild(champCache);
 
+
 			// envois du formulaire
 			document.body.appendChild(formul);
 			formul.submit();
@@ -142,9 +272,7 @@ include('config/database.php');
 		{
 			element_take_picture.style.visibility = "visible";
 		});
-	</script>
-
-	<script>
+		
 		var take_picture = document.getElementById('startbuttonUpload');
 		take_picture.addEventListener('click', function()
 		{
@@ -154,16 +282,14 @@ include('config/database.php');
 	</script>
 
 	<script>
-	
-				
-	</script>
-
-	<script>
+	if (document.getElementById("upload"))
+	{
 		var image1 = document.getElementById('image1');
 		var element_filter = document.getElementById('filter_image');
+		var img_camera = document.getElementById('filter_image_video');
 		image1.addEventListener('click', function()
 		{
-			element_filter.src= "filter/corne1.png";
+			element_filter.src= "filter/corne11.png";
 			element_filter.style.width= "25%";
 			element_filter.style.visibility= "visible";
 			element_filter.style.margin= "auto";
@@ -171,6 +297,7 @@ include('config/database.php');
 			element_filter.style.bottom= 100;
 			element_filter.style.right= 100;
 			element_filter.style.left= 100;
+			img_camera.style.visibility= "hidden";
 		});
 
 		var image2 = document.getElementById('image2');
@@ -184,6 +311,7 @@ include('config/database.php');
 			element_filter.style.bottom= 0;
 			element_filter.style.right= 0;
 			element_filter.style.left= 400;
+			img_camera.style.visibility= "hidden";
 		});
 
 		var image3 = document.getElementById('image3');
@@ -197,6 +325,7 @@ include('config/database.php');
 			element_filter.style.bottom= 0;
 			element_filter.style.right= 400;
 			element_filter.style.left= 0;
+			img_camera.style.visibility= "hidden";
 		});
 
 		var image4 = document.getElementById('image4');
@@ -210,20 +339,25 @@ include('config/database.php');
 			element_filter.style.bottom= 0;
 			element_filter.style.right= 400;
 			element_filter.style.left= 0;
+			img_camera.style.visibility= "hidden";
 		});
+	}
 	</script>
 
 <script>
+	var element_start = document.getElementById('activation');
+	var element_filter_video = document.getElementById('filter_image_video');
+	element_start.addEventListener('click', function()
+	{
 		var image1 = document.getElementById('image1');
-		var element_filter_video = document.getElementById('filter_image_video');
 		image1.addEventListener('click', function()
 		{
-			element_filter_video.src= "filter/corne1.png";
+			element_filter_video.src= "filter/corne11.png";
 			element_filter_video.style.width= "25%";
 			element_filter_video.style.visibility= "visible";
 			element_filter_video.style.margin= "auto";
-			element_filter_video.style.top= 15;
-			element_filter_video.style.bottom= 100;
+			element_filter_video.style.top= 100;
+			element_filter_video.style.bottom= 0;
 			element_filter_video.style.right= 100;
 			element_filter_video.style.left= 100;
 		});
@@ -266,7 +400,33 @@ include('config/database.php');
 			element_filter_video.style.right= 400;
 			element_filter_video.style.left= 0;
 		});
+	});
 	</script>
 
+	<script>
+
+	//superpostion des de la camera et du filtres en AJAX
+
+	var element_take_picture = document.getElementById('startbutton');
+	element_take_picture.addEventListener('click', function()
+	{
+		var canvas1 = document.getElementById("canvas");
+		var img    = canvas1.toDataURL('image/png', true);
+		img = img.replace("data:image/png base64;", "");
+
+		var img_camera = document.getElementById('filter_image_video');
+		var filter = img_camera.src;
+		var get = new XMLHttpRequest();
+		get.open("POST", "superposition_filter.php", true);
+		get.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		get.onreadystatechange = function () 
+		{
+  			if (get.readyState != 4 || get.status != 200) return;
+  				alert("Success: " + get.responseText);
+		};
+		get.send('img1=' + img + '&img2=' + filter);
+	});
+	
+	</script>
 
 </html>
