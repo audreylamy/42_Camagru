@@ -3,46 +3,39 @@ session_start();
 require('image.class.php');
 include('config/database.php');
 
-//envoie photo camera dans gallery puis sauvegarde dans la BDD
+// envoie photo camera dans gallery puis sauvegarde dans la BDD
 
 $picture_save = 0;
 
-$data = $_POST['image'];
-$image_bis = explode(',', $data);
+$data = $_POST['target'];
 
 $id_user = $_SESSION['id_user'];
+echo $id_user;
 
 $target_dir = "uploads/gallery/";
 
 if (!(file_exists($target_dir)))
 {
 	mkdir('uploads/gallery', 0777, TRUE);
-	echo "create 'gallery'";
-}
-else
-{
-	echo "existe";
 }
 
 $date = date("Y-m-d H:i:s");
 $name = date("Y-m-d H:i:s");
-$pos  = strpos($data, ';');
-$type = explode(':', substr($data, 0, $pos))[1];
-$type = explode('/', $type)[1];
+$image_bis = explode('/', $data);
+$type = explode('.', $image_bis[2]);
 
-if (isset($date) && isset($name) && isset($type))
+if (isset($date) && isset($name) && isset($type[1]))
 {
-	if($type != "jpg" && $type != "png" && $type != "jpeg"
-	&& $type != "gif" ) 
+	if($type[1] != "jpg" && $type[1] != "png" && $type[1] != "jpeg"
+	&& $type[1] != "gif" ) 
 	{
 		echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
 		$picture_save = 0;
 	}
 	else
 	{
-		$image_path = $target_dir.$name.".".$type;
-		$image_decode = base64_decode($image_bis[1]);
-		file_put_contents($image_path, $image_decode);
+		$image_path = $target_dir.$name.".".$type[1];
+		copy($data, $image_path);
 		$picture_save = 1;
 	}
 }

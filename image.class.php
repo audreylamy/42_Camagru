@@ -18,7 +18,6 @@ class Picture
 	public function getDate($creation_date)
 	{
 		$this->creation_date = $creation_date;
-		echo $this->creation_date;
 		return $this->creation_date;
 	}
 
@@ -32,7 +31,6 @@ class Picture
 	{
 		if(!empty($this->id_user) && !empty($this->creation_date) && !empty($this->image_path))
 		{     
-			echo "here";
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("INSERT INTO `photos` (`id_user`, `creation_date`, `image_path`) 
 			VALUES(:id_user, :creation_date, :image_path)");

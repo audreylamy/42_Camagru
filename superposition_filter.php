@@ -4,22 +4,28 @@ $img = $_POST['img1'];
 $filter = $_POST['img2'];
 
 $part = explode(',', $img);
-// echo $part[1];
 $data = base64_decode($part[1]);
-echo $data;
-file_put_contents('image.png', $data);
 
+$target_dir = "uploads/save/";
+
+if (!(file_exists($target_dir)))
+{
+	mkdir('uploads/save', 0777, TRUE);
+}
+
+$image_path = $target_dir."image.png";
+file_put_contents($image_path, $data);
  
-// Traitement de l'image source
-$source = imagecreatefrompng($data);
+// Traitement de l'image source (filtre)
+$source = imagecreatefrompng($filter);
 $largeur_source = imagesx($source);
 $hauteur_source = imagesy($source);
-echo $source;
+
 imagealphablending($source, true);
 imagesavealpha($source, true);
  
-// Traitement de l'image destination
-$destination = imagecreatefrompng($img);
+// Traitement de l'image destination (image de la video)
+$destination = imagecreatefrompng($image_path);
 $largeur_destination = imagesx($destination);
 $hauteur_destination = imagesy($destination);
   
@@ -32,8 +38,20 @@ $destination_y =  ($hauteur_destination - $hauteur_source)/2;
 imagecopy($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source);
  
 // On affiche l'image de destination
-$hello = imagepng($destination);
-echo $hello;
+header('Content-Type: image/png');
+$target_dir_final = "uploads/image_final/";
+
+if (!(file_exists($target_dir_final)))
+{
+	mkdir('uploads/image_final', 0777, TRUE);
+}
+
+$name = date("Y-m-d H:i:s");
+$filename = $target_dir_final.$name.".png";
+imagepng($destination, $filename);
+echo $filename;
+
+// On detruit les deux images $source et $destination
 imagedestroy($source);
 imagedestroy($destination);
  

@@ -53,7 +53,7 @@ var element_start = document.getElementById('activation');
   video.addEventListener('canplay', function(ev){
     if (!streaming) 
 	{
-		var width_camera = 500;
+		var width_camera = document.getElementById('video').offsetWidth;
       	height = video.videoHeight / (video.videoWidth/width_camera);
       	video.setAttribute('width', width_camera);
       	video.setAttribute('height', height);
@@ -70,14 +70,37 @@ var element_start = document.getElementById('activation');
     	canvas.width = width_picture;
     	canvas.height = height_picture;
 		canvas.getContext('2d').drawImage(video, 0, 0, width_picture, height_picture);
-    	var data = canvas.toDataURL('uploads');
-    	photo.setAttribute('src', data);
+    	var data = canvas.toDataURL('image/png', true);
+
+		var img_camera = document.getElementById('filter_image_video');
+		var filter = img_camera.src;
+		var get = new XMLHttpRequest();
+		get.open("POST", "superposition_filter.php", true);
+		get.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		get.send('img1=' + encodeURIComponent(data) + '&img2=' + filter);
+		get.onreadystatechange = function () 
+		{
+  			if (get.readyState != 4 || get.status != 200)
+			{
+				readURL(get.responseText);
+			}
+		};
   }
+
+  function readURL(img_final) 
+  	{  
+        image = document.getElementById('image_final');
+        // Clear image container
+        image.removeAttribute('src'); 
+		 // Put image in created image tags
+        image.src = img_final;
+    }
 
   startbutton.addEventListener('click', function(ev)
   {
 	var element_pop_up = document.getElementById('pop_up');
 	element_pop_up.style.visibility = "visible";
+	console.log("hello");
 
     takepicture();
     ev.preventDefault();
