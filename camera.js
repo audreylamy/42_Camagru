@@ -75,7 +75,7 @@ var element_start = document.getElementById('activation');
 		var img_camera = document.getElementById('filter_image_video');
 		var filter = img_camera.src;
 		var get = new XMLHttpRequest();
-		get.open("POST", "superposition_filter.php", true);
+		get.open("POST", "superposition_filter_camera.php", true);
 		get.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		get.send('img1=' + encodeURIComponent(data) + '&img2=' + filter);
 		get.onreadystatechange = function () 
@@ -100,7 +100,6 @@ var element_start = document.getElementById('activation');
   {
 	var element_pop_up = document.getElementById('pop_up');
 	element_pop_up.style.visibility = "visible";
-	console.log("hello");
 
     takepicture();
     ev.preventDefault();

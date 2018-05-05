@@ -21,7 +21,9 @@ include('config/database.php');
 					<div id="yes_no">
 						<canvas id="canvas"></canvas>
 						<div id="message_confirm">Do you want to save this picture ?</div>
-						<img id="image_final" src="" alt="image_final">
+						<div id="image_final_div">
+							<img id="image_final" src="" alt="image_final">
+						</div>
 						<div id="button_yes_no">
 							<button id="yes">Yes</button>
 							<button id="cancel">Cancel</button>
@@ -63,7 +65,7 @@ include('config/database.php');
 								{
 									echo "<style> #upload { visibility: visible; }</style>";
 									echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
-									echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar">';
+									echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" >';
 								}
 								?>
 								<img id="filter_image" src="" alt="avatar">
@@ -112,20 +114,23 @@ include('config/database.php');
 	</body>
 	<script type="text/javascript" src="camera.js"></script>
 	<script type="text/javascript" src="filter.js"></script>
+	<script type="text/javascript" src="upload_filter.js"></script>
 
 	<script>
 	//envoie photo camera dans gallery puis sauvegarde dans la BDD
 		var element_yes = document.getElementById('yes');
 		element_yes.addEventListener('click', function()
 		{
-			var target = "uploads/image_final/image.png";
+			var div = document.getElementById("image_final");
+       		var target = div.getAttribute("src");
 			var get = new XMLHttpRequest();
 			get.open("POST", "save.php", true);
 			get.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 			get.send('target=' + target);
 			get.onreadystatechange = function () 
 			{
-  				if (get.readyState != 4 || get.status != 200) return;
+				  if (get.readyState != 4 || get.status != 200) return;
+				  	alert(get.responseText);
 			};
 			var element_pop_up = document.getElementById('pop_up');
 			element_pop_up.style.visibility = "hidden";
@@ -138,13 +143,6 @@ include('config/database.php');
 		element_upload.addEventListener('click', function()
 		{
 			element_take_picture.style.visibility = "visible";
-		});
-		
-		var take_picture = document.getElementById('startbuttonUpload');
-		take_picture.addEventListener('click', function()
-		{
-			var element_pop_up = document.getElementById('pop_up');
-			element_pop_up.style.visibility = "visible";
 		});
 	</script>
 

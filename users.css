@@ -117,10 +117,20 @@ a{
 	height: 100%;
 }
 
-#image_final{
+#image_final_div
+{
 	position: absolute;
+	max-width: 60%;
+	max-height: 40%;
+	background-color: rgb(255, 16, 16);
 	top: 20%;
 	left: 17%;
+} 
+
+ #image_final
+{
+	width:100%;
+	display:block;
 }
 
 #message_confirm
@@ -259,7 +269,13 @@ input[type=range].range::-moz-range-track {
 	width: 100%;
 }
 
-#filter_image_video{
+#filter_image_video
+{
+	margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 	position: absolute;
 	z-index: 3000;
 }
@@ -271,8 +287,8 @@ input[type=range].range::-moz-range-track {
 	margin-left:27%;
 	margin-top: -340px;
 	visibility: hidden;
-	border: solid 1px white;
-	background-color: white;
+	/* border: solid 1px white;
+	background-color: white; */
 }
 
 #img
@@ -286,6 +302,21 @@ input[type=range].range::-moz-range-track {
 	max-width: 100%;
 	max-height: 100%;
 }
+
+#filter_image
+{
+	margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+	position: absolute;
+	visibility: hidden;
+	max-width: 100%;
+	max-height: 100%;
+	display:block;
+}
+
 
 #activation{
 	/* margin-top: 20%; */
@@ -387,13 +418,15 @@ input[type=range].range::-moz-range-track {
 	margin-right : auto;
 }
 
-#view_pictures{
+#view_pictures
+{
 	width: 25%;
 	height: 160%;
 	border: solid 1px #fccdd3;
 }
 
-#choose_object{
+#choose_object
+{
 	width: 70%;
 	height: 30%;
 	margin-top: 60px;
@@ -401,16 +434,11 @@ input[type=range].range::-moz-range-track {
 	border: solid 1px #fccdd3;
 }
 
-.img_filter{
+.img_filter
+{
 	background-color: Transparent;
 	border-color: rgba(216, 216, 216, 0) rgba(209, 209, 209, 0) rgba(186, 186, 186, 0);
 }
-
-#filter_image{
-	position: absolute;
-	visibility: hidden;
-}
-
 
 /*FOOTER*/
 

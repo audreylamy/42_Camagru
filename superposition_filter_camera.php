@@ -1,12 +1,10 @@
 <?php
-header('Content-Type: image/png');
 
 $img = $_POST['img1'];
 $filter = $_POST['img2'];
 
 $part = explode(',', $img);
 $data = base64_decode($part[1]);
-echo $data;
 
 $target_dir = "uploads/save/";
 
@@ -36,10 +34,11 @@ $destination_x = ($largeur_destination - $largeur_source)/2;
 $destination_y =  ($hauteur_destination - $hauteur_source)/2;
   
 // On place l'image source dans l'image de destination
-imagecopymerge($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source, 100);
+imagecopymerge($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source);
 imagecopy($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source);
  
 // On affiche l'image de destination
+header('Content-Type: image/png');
 $target_dir_final = "uploads/image_final/";
 
 if (!(file_exists($target_dir_final)))
@@ -50,7 +49,7 @@ if (!(file_exists($target_dir_final)))
 $name = date("Y-m-d H:i:s");
 $filename = $target_dir_final.$name.".png";
 imagepng($destination, $filename);
-// echo $filename;
+echo $filename;
 
 // On detruit les deux images $source et $destination
 imagedestroy($source);
