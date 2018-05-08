@@ -1,5 +1,16 @@
 <?php
 session_start();
+include('config/database.php');
+
+// if (isset($_SESSION['id_user']))
+// {
+// 	$id_user = $_SESSION['id_user'];
+// 	$conn->query( 'USE db_camagru' );
+// 	$requete = $conn->query("SELECT `profile_pic`, `username`  FROM `users` WHERE `id_user` = '$id_user'"); 
+// 	$data = $requete->fetch(PDO::FETCH_ASSOC);
+// 	$_SESSION['login'] = $data['username'];
+// 	$_SESSION['profile_pic'] = $data['profile_pic'];
+// }
 ?>
 
 <html lang="fr">
@@ -13,33 +24,59 @@ session_start();
  	</head>
 	<body>
 			<header>
-				<div>
-					<h1>CAMAGRU</h1>
+				<div id="header_part1">
+					<div id="camagru">
+						<h1>CAMAGRU</h1>
+					</div>
+					<div id="user_name">
+						<?php
+							if ($_SESSION['login'] != NULL)
+							{
+								echo "<div id='hello'>";
+								echo Hello." "." ".$_SESSION['login'];
+								echo "</div>";
+								echo '<div id="img_profile"><img src="'.$_SESSION['profile_pic'].'"alt="avatar"></div>';
+							}
+						?>
+					</div>
 				</div>
 				<div id="connexion">
-				<?php
-				if ($_SESSION['auth'] === TRUE)
-				{
-					echo "<p class='button_private'><a href='users.php'>TAKE A SNAP</a></p>";
-					echo "<p class='button_private'><a href='profile.php'>YOUR PROFILE</a></p>";
-					echo "<p class='button_private'><a href='logout.php'>LOG OUT</a></p>";
-				}
-				else
-					echo "<p id='button_connexion'>CONNECT</p>";
-				?>
+					<?php
+					if ($_SESSION['auth'] === TRUE)
+					{
+						echo "<p class='button_private'><a href='users.php'>TAKE A SNAP</a></p>";
+						echo "<p class='button_private'><a href='profile.php'>YOUR PROFILE</a></p>";
+						echo "<p class='button_private'><a href='logout.php'>LOG OUT</a></p>";
+					}
+					else
+						echo "<p id='button_connexion'>CONNECT</p>";
+					?>
 				</div>
 			</header>
 			<div id="bloc_principal">
 			<div id="gallery_photo">
 				<div id="gallery">
-					<!-- <div id="new_photo">
-						<img id="picture" src="" title="image" alt="image" />
-						<p></p>
-						<form method="GET" action="index.php" name="index.php" >
-							<textarea name="commentaire" rows="1" cols="20"></textarea>
-							<input type="submit" name="action" value="like">
-						</form>
-					</div> -->
+					<?php
+						$conn->query('USE db_camagru');
+						$id_user = $_SESSION['id_user'];
+						$limite = 8;
+						$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+						(int)$debut = ($page - 1) * $limite;
+						$requete = $conn->prepare("SELECT `image_path` FROM `photos` LIMIT :limite OFFSET :debut");
+						$requete->bindValue('limite', $limite, PDO::PARAM_INT);
+						$requete->bindValue('debut', $debut, PDO::PARAM_INT);
+						$requete->execute();
+						
+						while ($data = $requete->fetch(PDO::FETCH_ASSOC)):?>
+							<div id="div_picture">
+								<img id="img_user" src="<?php echo $data['image_path'];?>" alt="picture_user">
+							</div>
+							
+						<?php endwhile; ?>
+						<div id="previous_next">
+							<a id="button_previous" href="?page=<?php echo $page - 1; ?>">Previous</a>
+							<a id="button_next" href="?page=<?php echo $page + 1; ?>">Next</a>
+						</div>
 				</div>
 				<div id="se_connecter">
 					<div id="bloc_connexion">

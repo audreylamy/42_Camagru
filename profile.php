@@ -61,7 +61,7 @@ if (isset($_SESSION['id_user']))
 				</div>
 				<div id="button">
 					<p class="button_profil"><a href='index.php'>HOME</a></p>
-					<p class="button_profil"><a href=#>YOUR GALLERY</a></p>
+					<p class="button_profil"><a href='users.php'>TAKE A SNAP</a></p>
 					<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
 				</div>
 			</header>
@@ -78,7 +78,7 @@ if (isset($_SESSION['id_user']))
 					}
 					else if ($_SESSION['profile_pic'] === NULL)
 					{
-						echo "<img id='avatar' src='uploads/photo.jpg' alt='avatar' width='100%'>";
+						echo "<img id='avatar' src='img/photo2.png' alt='avatar' width='100%'>";
 					}
 					else if ($_SESSION['profile_pic'] != NULL)
 					{

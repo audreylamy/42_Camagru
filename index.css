@@ -22,6 +22,13 @@ header
 	display: flex;
 	width: 100%;
 	height: 160px;
+	flex-direction: column;
+}
+
+#header_part1{
+	width: 100%;
+	height:50%;
+	display: flex;
 	justify-content: space-between;
 }
 
@@ -34,10 +41,48 @@ h1
 	margin-left: 100px;
 }
 
+#user_name
+{
+	margin-top: 2%;
+	margin-right: 5%;
+	width: 13%;
+	height:50%;
+	display: flex;
+	justify-content: center;
+}
+
+#hello
+{
+
+	margin-top: 4%;
+	width: 50%;
+	font-family: 'Bungee Hairline', cursive;
+}
+
+#img_profile
+{
+	width: 50%;
+	height: 100%;
+	object-fit: contain;
+}
+
+#img_profile img
+{
+	height: 100%;
+	overflow:hidden;
+    -webkit-border-radius:100%;
+    -moz-border-radius:100%;
+	border-radius:100%;
+	box-shadow: 1px 1px 12px #555;
+	object-fit: contain;
+}
+
+
+
 #connexion
 {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	text-align: center;
 	margin-right: 3%;
 }
@@ -45,7 +90,6 @@ h1
 #button_connexion
 {
 	padding: 10px;
-	margin-top: 100px;
 	margin-left: 15px;
 	margin-bottom: 20px;
 	color: white;
@@ -57,7 +101,6 @@ h1
 .button_private
 {
 	padding: 10px;
-	margin-top: 100px;
 	margin-left: 15px;
 	margin-bottom: 20px;
 	color: white;
@@ -100,16 +143,20 @@ a{
 	justify-content: center;
 	flex-wrap: wrap;
 	width: 70%;
-	height: 70%;
+	height: 80%;
 	margin-left: 100px;
 	border: solid 1px #fccdd3;
 }
 
-#new_photo
+#div_picture
 {
-	width: 15%;
-	height: 10%;
-	margin-left: 30px;
+	width: 25%;
+}
+
+#img_user
+{
+	width:100%;
+	object-fit: contain;
 }
 
 /*CONNEXION*/

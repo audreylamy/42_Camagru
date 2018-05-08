@@ -1,5 +1,7 @@
 <?php
 
+header('Content-Type: image/png');
+
 $img = $_POST['img1'];
 $filter = $_POST['img2'];
 
@@ -38,7 +40,7 @@ imagecopymerge($destination, $source, $destination_x, $destination_y, 0, 0, $lar
 imagecopy($destination, $source, $destination_x, $destination_y, 0, 0, $largeur_source, $hauteur_source);
  
 // On affiche l'image de destination
-header('Content-Type: image/png');
+
 $target_dir_final = "uploads/image_final/";
 
 if (!(file_exists($target_dir_final)))

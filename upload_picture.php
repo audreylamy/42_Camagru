@@ -1,7 +1,8 @@
 <?php
 session_start();
-require('new_users.class.php');
+require('resize_image.class.php');
 include('config/database.php');
+
 $id_user = $_SESSION['id_user'];
 $target_dir = "uploads/save_upload/";
 if (!(file_exists($target_dir)))
@@ -52,6 +53,9 @@ else
 	{
 		echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
 		// rename($target_file, $target_dir.'image.png');
+		$resize = new ResizeImage($target_file);
+		$resize->resample(600, 400);
+		$resize->save($target_file);
 		$_SESSION['upload'] = TRUE;
 		$_SESSION['target'] = $target_file;
         header("Location: users.php");

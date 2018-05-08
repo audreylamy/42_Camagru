@@ -6,7 +6,13 @@ include('config/database.php');
 
 $id_user = $_SESSION['id_user'];
 
-$target_dir = "uploads/";
+$target_dir = "uploads/profile_picture/";
+
+if (!(file_exists($target_dir)))
+{
+	mkdir('uploads/profile_picture/', 0777, TRUE);
+}
+
 $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 
 $actual_user = new Membre($conn);

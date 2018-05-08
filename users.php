@@ -39,7 +39,6 @@ include('config/database.php');
 				<div id="button">
 					<p class="button_profil"><a href='index.php'>HOME</a></p>
 					<p class="button_profil"><a href='profile.php'>YOUR PROFILE</a></p>
-					<p class="button_profil"><a href=#>YOUR GALLERY</a></p>
 					<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
 				</div>
 			</header>
@@ -66,6 +65,7 @@ include('config/database.php');
 									echo "<style> #upload { visibility: visible; }</style>";
 									echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
 									echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" >';
+									echo '<img id="img_bis" src="" alt="avatar2">';
 								}
 								?>
 								<img id="filter_image" src="" alt="avatar">
@@ -80,24 +80,38 @@ include('config/database.php');
 						</div>
 							<section id="filter">
 								<button class="filter_button" id="grayscale">Grayscale</button>
-								<input class="range" type="range" oninput="set('grayscale', this.valueAsNumber);" value="0" step="0.1" min="0" max="1">
 								<button class="filter_button" id="sepia">Sepia</button>
-								<input class="range" type="range" oninput="set('sepia', this.valueAsNumber);" value="0" step="0.1" min="0" max="1">
-								<button class="filter_button" id="blur">Blur</button>
-								<input class="range" type="range" oninput="set('blur', this.value + 'px');" value="0" step="1" min="0" max="10">
 								<button class="filter_button" id="saturate">Saturate</button>
-								<input class="range" type="range" oninput="set('saturate', this.valueAsNumber);" value="0" step="0.1" min="0" max="10">
 								<button class="filter_button" id="contrast">Contrast</button>
-								<input class="range" type="range" oninput="set('contrast', this.valueAsNumber);" value="0" step="0.1" min="0" max="10">
-								<button class="filter_button" id="brightness">brightness</button>
-								<input class="range" type="range" oninput="set('brightness', this.valueAsNumber);" value="0" step="0.1" min="0" max="10">
-								<button class="filter_button" id="hue-rotate">hue-rotate</button>
-								<input class="range" type="range" oninput="set('hue-rotate', this.value + 'deg');" value="0" step="30" min="0" max="360">
+								<button class="filter_button" id="hue-rotate1">hue-rotate green</button>
+								<button class="filter_button" id="hue-rotate2">hue-rotate blue</button>
+								<button class="filter_button" id="hue-rotate3">hue-rotate pink</button>
 								<button class="filter_button" id="invert">invert</button>
 								<button class="filter_button" id="no_filter">no filter</button>
 							</section>
 						</div>
 					<div id="view_pictures">
+						<?php
+						$conn->query('USE db_camagru');
+						$id_user = $_SESSION['id_user'];
+						$limite = 3;
+						$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
+						(int)$debut = ($page - 1) * $limite;
+						$requete = $conn->prepare("SELECT `image_path` FROM `photos` WHERE id_user = '$id_user' LIMIT :limite OFFSET :debut");
+						$requete->bindValue('limite', $limite, PDO::PARAM_INT);
+						$requete->bindValue('debut', $debut, PDO::PARAM_INT);
+						$requete->execute();
+						
+						while ($data = $requete->fetch(PDO::FETCH_ASSOC)):?>
+							<div id="div_picture">
+								<img id="img_user" src="<?php echo $data['image_path'];?>" alt="picture_user">
+							</div>
+							
+						<?php endwhile; ?>
+						<div id="previous_next">
+							<a id="button_previous" href="?page=<?php echo $page - 1; ?>">Previous</a>
+							<a id="button_next" href="?page=<?php echo $page + 1; ?>">Next</a>
+						</div>
 					</div>
 
 				</div>
@@ -115,27 +129,7 @@ include('config/database.php');
 	<script type="text/javascript" src="camera.js"></script>
 	<script type="text/javascript" src="filter.js"></script>
 	<script type="text/javascript" src="upload_filter.js"></script>
-
-	<script>
-	//envoie photo camera dans gallery puis sauvegarde dans la BDD
-		var element_yes = document.getElementById('yes');
-		element_yes.addEventListener('click', function()
-		{
-			var div = document.getElementById("image_final");
-       		var target = div.getAttribute("src");
-			var get = new XMLHttpRequest();
-			get.open("POST", "save.php", true);
-			get.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			get.send('target=' + target);
-			get.onreadystatechange = function () 
-			{
-				  if (get.readyState != 4 || get.status != 200) return;
-				  	alert(get.responseText);
-			};
-			var element_pop_up = document.getElementById('pop_up');
-			element_pop_up.style.visibility = "hidden";
-		});
-	</script>
+	<script type="text/javascript" src="save_and_cancel.js"></script>
 
 	<script>
 		var element_upload = document.getElementById('submit_picture');
