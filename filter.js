@@ -78,6 +78,6 @@ invert.addEventListener('click', function()
 var no_filter = document.getElementById('no_filter');
 no_filter.addEventListener('click', function()
 {
-  el.style.WebkitFilter = "none";
   el_video.style.WebkitFilter = "none";
+  el.style.WebkitFilter = "none";
 });

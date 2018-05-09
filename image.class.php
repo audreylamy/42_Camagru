@@ -9,6 +9,12 @@ class Picture
 		$this->db = $conn;
 	}
 
+	public function getIdPhoto($id_photo)
+	{
+		$this->id_photo = $id_photo;
+		return $this->id_photo;
+	}
+
 	public function getIdUser($id_user)
 	{
 		$this->id_user = $id_user;
@@ -26,7 +32,24 @@ class Picture
 		$this->image_path = $image_path;
 		return $this->image_path;
 	}
-	
+
+	public function findImagePath_idUser()
+	{
+		if(!empty($this->id_photo))
+		{     
+			$id_photo = $this->id_photo;
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->query("SELECT `id_user`, `image_path` FROM `photos` WHERE `id_photo` = '$id_photo'");
+			$data = $requete->fetch(PDO::FETCH_ASSOC);
+			return array($data['id_user'], $data['image_path']);
+		}
+		else
+		{
+			return NULL;
+			echo "Error";
+		}
+	}
+
 	public function addPicture()
 	{
 		if(!empty($this->id_user) && !empty($this->creation_date) && !empty($this->image_path))

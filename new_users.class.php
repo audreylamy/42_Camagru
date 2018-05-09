@@ -270,5 +270,24 @@ class Membre
 		$requete->execute();
 		echo "profile suppr";
 	}
+
+	public function findInfoUser()
+	{
+		if(!empty($this->id_user))
+		{     
+			$id_user = $this->id_user;
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->query("SELECT `username`, `profile_pic` FROM `users` WHERE `id_user` = '$id_user'");
+			$data = $requete->fetch(PDO::FETCH_ASSOC);
+			return array($data['username'], $data['profile_pic']);
+		}
+		else
+		{
+			return NULL;
+			echo "Error";
+		}
+		
+	}
+	
 }
 ?>

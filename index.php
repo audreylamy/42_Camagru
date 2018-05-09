@@ -2,15 +2,15 @@
 session_start();
 include('config/database.php');
 
-// if (isset($_SESSION['id_user']))
-// {
-// 	$id_user = $_SESSION['id_user'];
-// 	$conn->query( 'USE db_camagru' );
-// 	$requete = $conn->query("SELECT `profile_pic`, `username`  FROM `users` WHERE `id_user` = '$id_user'"); 
-// 	$data = $requete->fetch(PDO::FETCH_ASSOC);
-// 	$_SESSION['login'] = $data['username'];
-// 	$_SESSION['profile_pic'] = $data['profile_pic'];
-// }
+if (isset($_SESSION['id_user']))
+{
+	$id_user = $_SESSION['id_user'];
+	$conn->query( 'USE db_camagru' );
+	$requete = $conn->query("SELECT `profile_pic`, `username`  FROM `users` WHERE `id_user` = '$id_user'"); 
+	$data = $requete->fetch(PDO::FETCH_ASSOC);
+	$_SESSION['login'] = $data['username'];
+	$_SESSION['profile_pic'] = $data['profile_pic'];
+}
 ?>
 
 <html lang="fr">
@@ -23,7 +23,39 @@ include('config/database.php');
 		<link href="https://fonts.googleapis.com/css?family=Allerta+Stencil|Bungee+Hairline" rel="stylesheet">
  	</head>
 	<body>
-			<header>
+		<header>
+
+			<div id="pop_up">
+				<div id="bloc_pop_up">
+					<div id="bloc_profile_comments">
+						<div id="bloc_login_picture">
+							<p id="username"></p>
+							<div id="img_profile2">
+								<img id="avatar" src="" alt="avatar1">
+							</div>
+						</div>
+						<div id="bloc_cross">
+							<img id="cross" src="img/cross.png" alt="cross">
+						</div>
+					</div>
+					<div id="bloc_info_pop_up">
+						<canvas id="canvas"></canvas>
+						<div id="login_picture"></div>
+						<div id="image_clic">
+							<img id="image_final" alt="image_final">
+						</div>
+						<div id="bloc_comments">
+							<div id="profile_by_comments"></div>
+							<div id="input_comments">
+								
+								<input id="texte_comments" type="text" name="name" placeholder="add comment...">
+								<input class="valider" type="submit" name="valider" value="Sign up"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 				<div id="header_part1">
 					<div id="camagru">
 						<h1>CAMAGRU</h1>
@@ -35,11 +67,19 @@ include('config/database.php');
 								echo "<div id='hello'>";
 								echo Hello." "." ".$_SESSION['login'];
 								echo "</div>";
-								echo '<div id="img_profile"><img src="'.$_SESSION['profile_pic'].'"alt="avatar"></div>';
+								if ($_SESSION['profile_pic'] === NULL)
+								{
+									echo '<div id="img_profile"><img src="img/photo2.png"alt="avatar"></div>';
+								}
+								else
+								{
+									echo '<div id="img_profile"><img src="'.$_SESSION['profile_pic'].'"alt="avatar1"></div>';
+								}
 							}
 						?>
 					</div>
 				</div>
+
 				<div id="connexion">
 					<?php
 					if ($_SESSION['auth'] === TRUE)
@@ -59,17 +99,18 @@ include('config/database.php');
 					<?php
 						$conn->query('USE db_camagru');
 						$id_user = $_SESSION['id_user'];
-						$limite = 8;
+						$limite = 12;
 						$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
 						(int)$debut = ($page - 1) * $limite;
-						$requete = $conn->prepare("SELECT `image_path` FROM `photos` LIMIT :limite OFFSET :debut");
+						$requete = $conn->prepare("SELECT `id_photo`, `image_path` FROM `photos` LIMIT :limite OFFSET :debut");
 						$requete->bindValue('limite', $limite, PDO::PARAM_INT);
 						$requete->bindValue('debut', $debut, PDO::PARAM_INT);
 						$requete->execute();
-						
+
 						while ($data = $requete->fetch(PDO::FETCH_ASSOC)):?>
+
 							<div id="div_picture">
-								<img id="img_user" src="<?php echo $data['image_path'];?>" alt="picture_user">
+								<img onclick="create_popup(<?php echo $data['id_photo'];?>)" id="img_user" src="<?php echo $data['image_path'];?>" alt="picture_user">
 							</div>
 							
 						<?php endwhile; ?>
@@ -241,46 +282,6 @@ include('config/database.php');
 			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
-	<script language="javascript">
-		var element_connect = document.getElementById('button_connexion');
-		var bloc_connexion = document.getElementById('se_connecter');
-		element_connect.addEventListener('click', function()
-		{
-			if (bloc_connexion.style.visibility == "visible")
-			{
-				bloc_connexion.style.visibility = "hidden";
-			}
-			else
-			{
-				bloc_connexion.style.visibility = "visible";
-			}
-		});
-
-	</script>
-	<script>
-		var element = document.getElementById('button_connexion');
-		element.addEventListener('mouseover', function()
-		{
-			element.style.background = "#62bcfa";
-		});
-		element.addEventListener('mouseout', function()
-		{
-			element.style.background = "#bbc4ef";
-		});
-	</script>
-	<script>
-		var element_forgot = document.getElementById('forgot_password');
-		var element_email = document.getElementById('forgot');
-		element_forgot.addEventListener('click', function()
-		{
-			if (element_email.style.visibility == "visible")
-			{
-				element_email.style.visibility = "hidden";
-			}
-			else
-			{
-				element_email.style.visibility = "visible";
-			}
-		});
-	</script>
+	<script type="text/javascript" src="index_popup_image.js"></script>
+	<script type="text/javascript" src="index.js"></script>
 </html>
