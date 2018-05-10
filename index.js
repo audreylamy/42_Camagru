@@ -40,6 +40,13 @@ var element_cross = document.getElementById('cross');
 var element_pop_up = document.getElementById('pop_up');
 element_cross.addEventListener('click', function()
 {
-	console.log("here");
 	element_pop_up.style.visibility = "hidden";
+	element.style.visibility = "hidden";
+});
+
+var button_connect = document.getElementById('open_connect');
+button_connect.addEventListener('click', function()
+{
+	element_pop_up.style.visibility = "hidden";
+	bloc_connexion.style.visibility = "visible";
 });

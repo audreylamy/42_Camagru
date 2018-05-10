@@ -28,6 +28,9 @@ if (isset($_SESSION['id_user']))
 			<div id="pop_up">
 				<div id="bloc_pop_up">
 					<div id="bloc_profile_comments">
+						<div id="like">
+								nb like
+						</div>
 						<div id="bloc_login_picture">
 							<p id="username"></p>
 							<div id="img_profile2">
@@ -44,12 +47,22 @@ if (isset($_SESSION['id_user']))
 						<div id="image_clic">
 							<img id="image_final" alt="image_final">
 						</div>
+						<?php
+							if (!isset($_SESSION['login']))
+							{
+								echo '<p id="info_log">Please create an account or log in if you want to comment/like this picture</p>';
+								echo '<style> #bloc_comments { visibility: hidden; }</style>';
+								echo '<button id="open_connect">New account or log in</button>';
+							}
+							?>
 						<div id="bloc_comments">
-							<div id="profile_by_comments"></div>
+							<div id="profile_by_comments">
+							
+
+							</div>
 							<div id="input_comments">
-								
-								<input id="texte_comments" type="text" name="name" placeholder="add comment...">
-								<input class="valider" type="submit" name="valider" value="Sign up"/>
+								<input id="text_comments" type="text" name="name" value="" placeholder="add comment...">
+								<input id="add" name="add" value="add" onClick="send_comment(<?php echo $_SESSION['id_user'];?>);"/>
 							</div>
 						</div>
 					</div>
@@ -284,4 +297,5 @@ if (isset($_SESSION['id_user']))
 	</body>
 	<script type="text/javascript" src="index_popup_image.js"></script>
 	<script type="text/javascript" src="index.js"></script>
+	<script type="text/javascript" src="add_comments.js"></script>
 </html>
