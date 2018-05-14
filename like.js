@@ -1,8 +1,11 @@
 function like() 
 {
+	var image_coeur = document.getElementById("image_coeur");
+	image_coeur.style.visibility = "visible";
+
+	var image_path = document.getElementById("image_final").src;
+
 	var formData = new FormData();
-	formData.append('id_user', id_user);
-	formData.append('comment', comment);
 	formData.append('image_path', image_path);
 
 	var object = {};
@@ -19,13 +22,8 @@ function like()
 		{
 			if (httpRequest.status === 200) 
 			{
-				// console.log(httpRequest.responseText);
-				console.log(JSON.parse(httpRequest.responseText));
-				// var array = JSON.parse(httpRequest.responseText);
-				// var id_user = array[0];
-				// var image_path = array[1];
-				// var id_user = id_user.replace('"', "");
-				// var image_path = image_path.replace('"', "");
+				var nb_like = JSON.parse(httpRequest.responseText);
+				add_nbLike_DOM(nb_like);
 			} 
 			else 
 			{
@@ -37,4 +35,13 @@ function like()
 	httpRequest.open('POST', 'like.php', true);
 	httpRequest.setRequestHeader('Content-Type', 'application/json');
 	httpRequest.send(json);
+}
+
+function add_nbLike_DOM(nb_like)
+{
+	var image_coeur = document.getElementById("image_coeur");
+	image_coeur.style.visibility = "hidden";
+
+	var bloc_like = document.getElementById('like');
+	bloc_like.innerHTML= nb_like;
 }

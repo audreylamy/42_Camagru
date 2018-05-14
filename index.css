@@ -34,6 +34,12 @@ body
 	box-shadow: 1px 1px 15px rgba(255, 255, 255, 0.548);
 }
 
+#like
+{
+	font-family: 'Bungee Hairline', cursive;
+	font-size: 1.5em;
+}
+
 #bloc_profile_comments
 {
 	width: 100%;
@@ -133,6 +139,21 @@ body
 	border-bottom: solid 10px #fccdd3b4;
 }
 
+#image_coeur
+{
+	position: absolute;
+	top: 0;  
+    bottom: 0;  
+    left: 0;  
+	right: 0;  
+	margin: auto;
+	max-height: 50%;  
+    max-width: 50%;
+	z-index: 10;
+	object-fit: contain;
+	visibility: hidden;
+}
+
 #info_log
 {
 	margin-top: 5%;
@@ -209,6 +230,8 @@ body
 	width: 10%;
 	height: auto;
 	margin-left: 5%;
+	font-family: 'Bungee Hairline', cursive;
+	color: #6534ff;
 }
 
 #comment_user
@@ -218,6 +241,7 @@ body
 	overflow-wrap: break-word;
 	margin-left: 5%;
 	float: left;
+	font-family: 'Abel', sans-serif;
 }
 
 #input_comments
@@ -225,6 +249,7 @@ body
 	display: flex;
 	width: 100%;
 	height: 25%;
+	font-family: 'Abel', sans-serif;
 }
 
 #text_comments
@@ -242,7 +267,7 @@ body
 {
 	background-color: #fccdd3b4;
 	border: none;
-	font-family: 'Abel', sans-serif;
+	font-family: 'Bungee Hairline', cursive;
 	letter-spacing: 2px;
 	font-size: 0.5vw;
 	border-top: solid 1px #fccdd3b4;

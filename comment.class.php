@@ -68,5 +68,14 @@ class Comment
 			echo "Error";
 		}
 	}
+
+	public function countNbCommentTotal()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete = $this->db->prepare("SELECT count(`id_comment`) from `comments`");
+		$requete->execute();
+		$data = $requete->fetchColumn();
+		return $data;
+	}
 }
 ?>

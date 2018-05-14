@@ -84,5 +84,7 @@ class Picture
 			echo "Error";
 		}
 	}
+
+	
 }
 ?>

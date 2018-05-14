@@ -1,6 +1,14 @@
 <?php
 session_start();
 include('config/database.php');
+require('like.class.php');
+require('comment.class.php');
+
+$like = new Like($conn);
+$nb_like_total = $like->countNbLikeTotal();
+
+$comment1 = new Comment($conn);
+$nb_comment_total = $comment1->countNbCommentTotal();
 
 if (isset($_SESSION['id_user']))
 {
@@ -29,7 +37,6 @@ if (isset($_SESSION['id_user']))
 				<div id="bloc_pop_up">
 					<div id="bloc_profile_comments">
 						<div id="like">
-								nb like
 						</div>
 						<div id="bloc_login_picture">
 							<p id="username"></p>
@@ -46,6 +53,7 @@ if (isset($_SESSION['id_user']))
 						<div id="login_picture"></div>
 						<div id="image_clic" ondblclick="like()">
 							<img id="image_final" alt="image_final">
+							<img id="image_coeur" alt="coeur" src="img/coeur.png">
 						</div>
 						<?php
 							if (!isset($_SESSION['login']))
@@ -287,12 +295,23 @@ if (isset($_SESSION['id_user']))
 				</div>
 			</div>
 		<footer>
-			<p id="text_footer">likes</p>
-			<p id="text_footer">Comments</p>
+			<p id="text_footer">
+				<?php
+				echo $nb_like_total;
+				?>
+				likes
+			</p>
+			<p id="text_footer">
+				<?php
+				echo $nb_comment_total;
+				?>
+				Comments
+			</p>
 			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
 	<script type="text/javascript" src="index_popup_image.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="add_comments.js"></script>
+	<script type="text/javascript" src="like.js"></script>
 </html>

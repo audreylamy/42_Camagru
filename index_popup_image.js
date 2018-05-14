@@ -29,6 +29,7 @@ function create_popup(id_photo)
 				readURL(image_path);
 				findInfoProfile(id_user);
 				addCommentsPhoto(id_photo);
+				show_nbLike(id_photo);
 			} 
 			else 
 			{
@@ -186,4 +187,39 @@ function addComment(login, comment, profile_pic, i)
 	style_i = document.getElementById(i);
 	style_i.style.display = "flex";
 	style_i.style.margin = "3%";
+}
+
+function show_nbLike(id_photo)
+{
+	console.log("here");
+	var formData = new FormData();
+	formData.append('id_photo', id_photo);
+
+	var object = {};
+	formData.forEach(function(value, key)
+	{
+	  object[key] = value;
+	});
+	var json = JSON.stringify(object);
+	
+	var httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = function(data) 
+	{
+		if (httpRequest.readyState === XMLHttpRequest.DONE) 
+		{
+			if (httpRequest.status === 200) 
+			{
+				var nb_like = JSON.parse(httpRequest.responseText);
+				add_nbLike_DOM(nb_like);
+			} 
+			else 
+			{
+				console.log('Error: ' + httpRequest.status);
+			}
+		}
+	};
+
+	httpRequest.open('POST', 'count_nblike.php', true);
+	httpRequest.setRequestHeader('Content-Type', 'application/json');
+	httpRequest.send(json);
 }
