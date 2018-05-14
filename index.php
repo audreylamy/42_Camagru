@@ -44,7 +44,7 @@ if (isset($_SESSION['id_user']))
 					<div id="bloc_info_pop_up">
 						<canvas id="canvas"></canvas>
 						<div id="login_picture"></div>
-						<div id="image_clic">
+						<div id="image_clic" ondblclick="like()">
 							<img id="image_final" alt="image_final">
 						</div>
 						<?php
@@ -56,13 +56,10 @@ if (isset($_SESSION['id_user']))
 							}
 							?>
 						<div id="bloc_comments">
-							<div id="profile_by_comments">
-							
-
-							</div>
+							<div id="profile_by_comments"></div>
 							<div id="input_comments">
 								<input id="text_comments" type="text" name="name" value="" placeholder="add comment...">
-								<input id="add" name="add" value="add" onClick="send_comment(<?php echo $_SESSION['id_user'];?>);"/>
+								<input id="add" name="add" type="submit" value="add" onClick="send_comment(<?php echo $_SESSION['id_user'];?>);"/>
 							</div>
 						</div>
 					</div>
@@ -78,7 +75,7 @@ if (isset($_SESSION['id_user']))
 							if ($_SESSION['login'] != NULL)
 							{
 								echo "<div id='hello'>";
-								echo Hello." "." ".$_SESSION['login'];
+								echo Hello." ".$_SESSION['login'];
 								echo "</div>";
 								if ($_SESSION['profile_pic'] === NULL)
 								{
@@ -86,7 +83,7 @@ if (isset($_SESSION['id_user']))
 								}
 								else
 								{
-									echo '<div id="img_profile"><img src="'.$_SESSION['profile_pic'].'"alt="avatar1"></div>';
+									echo '<div id="img_profile"><img id="img_profile1" src="'.$_SESSION['profile_pic'].'"alt="avatar1"></div>';
 								}
 							}
 						?>

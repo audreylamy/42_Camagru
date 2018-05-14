@@ -75,7 +75,8 @@ try
     $sql_comments = "CREATE TABLE IF NOT EXISTS comments(
     id_comment INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_user INT NOT NULL,
-	comment VARCHAR(300)
+	comment VARCHAR(300),
+	creation_date DATETIME NOT NULL
 	) ";
 
     $conn->exec($sql_comments);

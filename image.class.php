@@ -52,12 +52,11 @@ class Picture
 
 	public function findIdPhoto()
 	{
-		if(!empty($this->id_user) && !empty($this->image_path))
+		if(!empty($this->image_path))
 		{     
-			$id_user = $this->id_user;
 			$image_path = $this->image_path;
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->query("SELECT `id_photo` FROM `photos` WHERE `id_user` = '$id_user' AND `image_path` = '$image_path'");
+			$requete = $this->db->query("SELECT `id_photo` FROM `photos` WHERE `image_path` = '$image_path'");
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return $data['id_photo'];
 		}

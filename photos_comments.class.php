@@ -12,12 +12,14 @@ class PhotosComments
 	public function getIdComment($id_comment)
 	{
 		$this->id_comment = $id_comment;
+		echo $this->getIdComment;
 		return $this->id_comment;
 	}
 
 	public function getIdPhoto($id_photo)
 	{
 		$this->id_photo = $id_photo;
+		echo $this->getIdPhoto;
 		return $this->id_photo;
 	}
 
@@ -25,8 +27,8 @@ class PhotosComments
 	{
 		if(!empty($this->id_comment) && !empty($this->id_photo))
 		{    
-			echo $this->id_comment;
-			echo $this->id_photo;
+			// echo $this->id_comment;
+			// echo $this->id_photo;
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("INSERT INTO `photos_comments` (`id_comment`, `id_photo`) 
 			VALUES(:id_comment, :id_photo)");

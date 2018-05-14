@@ -27,15 +27,22 @@ class Comment
 		return $this->comment;
 	}
 
+	public function getCreationDate($creation_date)
+	{
+		$this->creation_date = $creation_date;
+		return $this->creation_date;
+	}
+
 	public function addComment()
 	{
-		if(!empty($this->id_user) && !empty($this->comment))
+		if(!empty($this->id_user) && !empty($this->comment) && !empty($this->creation_date))
 		{     
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->prepare("INSERT INTO `Comments` (`id_user`, `comment`) 
-			VALUES(:id_user, :comment)");
+			$requete = $this->db->prepare("INSERT INTO `Comments` (`id_user`, `comment`, `creation_date`) 
+			VALUES(:id_user, :comment, :creation_date)");
 			$requete->bindparam(':id_user', $this->id_user);
 			$requete->bindparam(':comment', $this->comment);
+			$requete->bindparam(':creation_date', $this->creation_date);
 			$requete->execute();
 		}
 		else
