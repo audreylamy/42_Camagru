@@ -85,6 +85,12 @@ class Picture
 		}
 	}
 
-	
+	public function deletePhotosUser()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete = $this->db->prepare("DELETE FROM `photos` WHERE `id_user` = '$this->id_user'");
+		$requete->execute();
+	}
+
 }
 ?>

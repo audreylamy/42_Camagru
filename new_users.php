@@ -3,15 +3,21 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
-if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'] != NULL && $_POST['login'] != NULL && $_POST['password'] != NULL && $_POST['confirm_password'] != NULL)
+$_POST = json_decode(file_get_contents('php://input'), true);
+$first_name = $_POST['first_name'];
+$last_name = $_POST['last_name'];
+$login = $_POST['login'];
+$email = $_POST['email'];
+$password = $_POST['password'];
+$confirm_password = $_POST['confirm_password'];
+
+if($first_name != NULL && $last_name != NULL && $email != NULL && $login != NULL && $password != NULL && $confirm_password != NULL)
 {
-	$first_name = htmlspecialchars($_POST['first_name']);
-	$last_name = htmlspecialchars($_POST['last_name']);
-	$email = htmlspecialchars($_POST['email']);
-	$login = htmlspecialchars($_POST['login']);
-	$password = hash('whirlpool',htmlspecialchars($_POST['password']));
-	$confirm_password = hash('whirlpool',htmlspecialchars($_POST['confirm_password']));
+	$password = hash('whirlpool',htmlspecialchars($password));
+	$confirm_password = hash('whirlpool',htmlspecialchars($confirm_password));
 	$token = bin2hex(random_bytes(16));
+
+	// echo json_encode($confirm_password);
 
 	$membre = new Membre($conn);
 	$membre->getFirstName($first_name);
@@ -30,7 +36,6 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 			$_SESSION['verif_password'] = TRUE;
 
 			$membre->ajouterMembre();
-			echo "hello";
 			header('Location: index.php');
 
 			$to = $email;
@@ -51,21 +56,21 @@ if($_POST['first_name'] != NULL && $_POST['last_name'] != NULL && $_POST['email'
 		}
 		else
 		{
-			echo "password isn't correct";
+			// echo "password isn't correct";
 			header('Location: index.php');
 			$_SESSION['verif_password'] = FALSE;
 		}
 	}
 	else
 	{
-		echo "This users already exist";
+		// echo "This users already exist";
 		header('Location: index.php');
 		$_SESSION['connect'] = FALSE;
 	}
 }
 else
 {
-	echo 'donnees manquantes';
+	// echo 'donnees manquantes';
 }
 
 ?>

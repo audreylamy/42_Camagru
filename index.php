@@ -80,7 +80,7 @@ if (isset($_SESSION['id_user']))
 					</div>
 					<div id="user_name">
 						<?php
-							if ($_SESSION['login'] != NULL)
+							if ($_SESSION['login'] != NULL && $_SESSION['login'] != NULL)
 							{
 								echo "<div id='hello'>";
 								echo Hello." ".$_SESSION['login'];
@@ -141,13 +141,13 @@ if (isset($_SESSION['id_user']))
 					<div id="bloc_connexion">
 						<div id="nouveau">
 							<h3>Join us</h3>
-								<form method="post" action="new_users.php">
+								<form>
 									<div class="row">
 										<div class="col-25">
 										<label class="label" for="first_name">First-name :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="first_name" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
+										<input id="first_name" class="input" type="text" name="first_name" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -155,7 +155,7 @@ if (isset($_SESSION['id_user']))
 										<label class="label" for="last_name">Last-name :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="last_name" value="<?php htmlspecialchars($_POST['last_name']); ?>" required/>	
+										<input id="last_name" class="input" type="text" name="last_name" value="<?php htmlspecialchars($_POST['last_name']); ?>" required/>	
 										</div>
 									</div>
 									<div class="row">
@@ -163,7 +163,7 @@ if (isset($_SESSION['id_user']))
 										<label class="label" for="email">Email :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="email" name="email" value="<?php htmlspecialchars($_POST['email']); ?>" required/>
+										<input id="email" class="input" type="email" name="email" value="<?php htmlspecialchars($_POST['email']); ?>" required/>
 										</div>
 									</div>
 									<div class="row">
@@ -171,7 +171,7 @@ if (isset($_SESSION['id_user']))
 										<label class="label" for="login">Username :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
+										<input id="login" class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -179,7 +179,7 @@ if (isset($_SESSION['id_user']))
 										<label class="label" for="password">Password :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" required/>
+										<input id="password1" class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
@@ -187,14 +187,14 @@ if (isset($_SESSION['id_user']))
 										<label class="label" for="confirm_password">Confirm password :</label>
 										</div>
 										<div class="col-75">
-										<input class="input" type="password" name="confirm_password" value="<?php htmlspecialchars($_POST['confirm_password']); ?>" required/>
+										<input id="confirm_password" class="input" type="password" name="confirm_password" value="<?php htmlspecialchars($_POST['confirm_password']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
 										</div>
 										<div class="col-75">
-										<input class="valider" type="submit" name="valider" value="Sign up"/>
+										<input id="sign_up" class="valider" type="submit" name="valider" value="Sign up"/>
 										</div> 
 									</div>
 								</form>
@@ -310,6 +310,7 @@ if (isset($_SESSION['id_user']))
 			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
+	<script type="text/javascript" src="new_users.js"></script>
 	<script type="text/javascript" src="index_popup_image.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="add_comments.js"></script>
