@@ -33,15 +33,10 @@ function create_profile(first_name, last_name, login, email, password, confirm_p
 	{
 		if (httpRequest.readyState === XMLHttpRequest.DONE) 
 		{
-			if (httpRequest.status === 200) 
+			if (httpRequest.status === 200 || httpRequest.status === 0) 
 			{
 				console.log(httpRequest.responseText);
-				// console.log(JSON.parse(httpRequest.responseText));
-				// var array = JSON.parse(httpRequest.responseText);
-				// var id_user = array[0];
-				// var image_path = array[1];
-				// var id_user = id_user.replace('"', "");
-				// var image_path = image_path.replace('"', "");
+				location.reload();
 			} 
 			else 
 			{
@@ -50,7 +45,7 @@ function create_profile(first_name, last_name, login, email, password, confirm_p
 		}
 	};
 
-	httpRequest.open('POST', 'new_users.php', true);
-	httpRequest.setRequestHeader('Content-Type', 'application/json');
+	httpRequest.open('POST', 'new_users.php', true, 'toto', 'tata');
+	httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	httpRequest.send(json);
 }

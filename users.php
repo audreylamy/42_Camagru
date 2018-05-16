@@ -32,15 +32,36 @@ include('config/database.php');
 			</div>
 		</div>
 			<header>
-				<div>
-					<h1>CAMAGRU</h1>
-				</div>
-				</div>
-				<div id="button">
-					<p class="button_profil"><a href='index.php'>HOME</a></p>
-					<p class="button_profil"><a href='profile.php'>YOUR PROFILE</a></p>
-					<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
-				</div>
+			<div id="header_part1">
+			<div id="camagru">
+				<h1>CAMAGRU</h1>
+			</div>
+			<div id="user_name">
+					<?php
+						if ($_SESSION['login'] != NULL)
+						{
+							echo "<div id='hello'>";
+							echo Hello." ".$_SESSION['login'];
+							echo "</div>";
+							if ($_SESSION['profile_pic'] === NULL)
+							{
+								echo '<div id="img_profile"><img src="img/photo2.png"alt="avatar"></div>';
+							}
+							else
+							{
+								echo '<div id="img_profile"><img id="img_profile1" src="'.$_SESSION['profile_pic'].'"alt="avatar1"></div>';
+							}
+						}
+					?>
+			</div>
+		</div>
+		<div id="header_part2">
+			<div id="button">
+				<p class="button_profil"><a href='index.php'>HOME</a></p>
+				<p class="button_profil"><a href='profile.php'>YOUR PROFILE</a></p>
+				<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
+			</div>
+		</div>
 			</header>
 			<div id="camera">
 				<div id="part1">
@@ -97,14 +118,19 @@ include('config/database.php');
 						$limite = 3;
 						$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
 						(int)$debut = ($page - 1) * $limite;
-						$requete = $conn->prepare("SELECT `image_path` FROM `photos` WHERE id_user = '$id_user' LIMIT :limite OFFSET :debut");
+						$requete = $conn->prepare("SELECT `id_photo`, `image_path` FROM `photos` WHERE id_user = '$id_user' LIMIT :limite OFFSET :debut");
 						$requete->bindValue('limite', $limite, PDO::PARAM_INT);
 						$requete->bindValue('debut', $debut, PDO::PARAM_INT);
 						$requete->execute();
 						
 						while ($data = $requete->fetch(PDO::FETCH_ASSOC)):?>
-							<div id="div_picture">
-								<img id="img_user" src="<?php echo $data['image_path'];?>" alt="picture_user">
+							<div id="div_picture" class="<?php echo $data['id_photo'];?>">
+								<input type="hidden" name="id_photo" value="<?php echo $data['id_photo'];?>">
+								<img class="img_user" id="<?php echo "picture".$data['id_photo'];?> open_delete" onclick="open_delete(<?php echo $data['id_photo'];?>)" src="<?php echo $data['image_path'];?>" alt="picture_user">
+								<div class="delete_picture" id="<?php echo $data['id_photo'];?>">
+									<button id="delete_yes" onclick="delete_picture(<?php echo $data['id_photo'];?>)">YES</button>
+									<button id="delete_no" onclick="close_delete(<?php echo $data['id_photo'];?>)">NO</button>
+								</div>
 							</div>
 							
 						<?php endwhile; ?>
@@ -130,6 +156,7 @@ include('config/database.php');
 	<script type="text/javascript" src="filter.js"></script>
 	<script type="text/javascript" src="upload_filter.js"></script>
 	<script type="text/javascript" src="save_and_cancel.js"></script>
+	<script type="text/javascript" src="delete_picture.js"></script>
 
 	<script>
 		var element_upload = document.getElementById('submit_picture');

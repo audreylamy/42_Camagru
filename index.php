@@ -36,8 +36,13 @@ if (isset($_SESSION['id_user']))
 			<div id="pop_up">
 				<div id="bloc_pop_up">
 					<div id="bloc_profile_comments">
-						<div id="like">
-						</div>
+						<?php
+						if (isset($_SESSION['login']))
+						{
+							echo '<style> #like { visibility: visible; }</style>';
+						}
+						?>
+						<div id="like"></div>
 						<div id="bloc_login_picture">
 							<p id="username"></p>
 							<div id="img_profile2">
@@ -51,10 +56,21 @@ if (isset($_SESSION['id_user']))
 					<div id="bloc_info_pop_up">
 						<canvas id="canvas"></canvas>
 						<div id="login_picture"></div>
-						<div id="image_clic" ondblclick="like()">
-							<img id="image_final" alt="image_final">
-							<img id="image_coeur" alt="coeur" src="img/coeur.png">
-						</div>
+						<?php
+							if (isset($_SESSION['login']))
+							{
+								echo '<div id="image_clic" ondblclick="like()">';
+								echo '<img id="image_final" alt="image_final">';
+								echo '<img id="image_coeur" alt="coeur" src="img/coeur.png">';
+								echo '</div>';
+							}
+							else
+							{
+								echo '<div id="image_clic">';
+								echo '<img id="image_final" alt="image_final">';
+								echo '</div>';
+							}
+						?>
 						<?php
 							if (!isset($_SESSION['login']))
 							{
@@ -80,7 +96,7 @@ if (isset($_SESSION['id_user']))
 					</div>
 					<div id="user_name">
 						<?php
-							if ($_SESSION['login'] != NULL && $_SESSION['login'] != NULL)
+							if ($_SESSION['login'] != NULL)
 							{
 								echo "<div id='hello'>";
 								echo Hello." ".$_SESSION['login'];
@@ -144,57 +160,57 @@ if (isset($_SESSION['id_user']))
 								<form>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="first_name">First-name :</label>
+										<label class="label">First-name :</label>
 										</div>
 										<div class="col-75">
-										<input id="first_name" class="input" type="text" name="first_name" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
+										<input id="first_name" class="input" type="text" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="last_name">Last-name :</label>
+										<label class="label">Last-name :</label>
 										</div>
 										<div class="col-75">
-										<input id="last_name" class="input" type="text" name="last_name" value="<?php htmlspecialchars($_POST['last_name']); ?>" required/>	
+										<input id="last_name" class="input" type="text" value="<?php htmlspecialchars($_POST['last_name']); ?>" required/>	
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="email">Email :</label>
+										<label class="label">Email :</label>
 										</div>
 										<div class="col-75">
-										<input id="email" class="input" type="email" name="email" value="<?php htmlspecialchars($_POST['email']); ?>" required/>
+										<input id="email" class="input" type="email" value="<?php htmlspecialchars($_POST['email']); ?>" required/>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="login">Username :</label>
+										<label class="label" >Username :</label>
 										</div>
 										<div class="col-75">
-										<input id="login" class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
+										<input id="login" class="input" type="text" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="password">Password :</label>
+										<label class="label">Password :</label>
 										</div>
 										<div class="col-75">
-										<input id="password1" class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" required/>
+										<input id="password1" class="input" type="password" value="<?php htmlspecialchars($_POST['password']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
-										<label class="label" for="confirm_password">Confirm password :</label>
+										<label class="label">Confirm password :</label>
 										</div>
 										<div class="col-75">
-										<input id="confirm_password" class="input" type="password" name="confirm_password" value="<?php htmlspecialchars($_POST['confirm_password']); ?>" required/>
+										<input id="confirm_password" class="input" type="password" value="<?php htmlspecialchars($_POST['confirm_password']); ?>" required/>
 										</div> 
 									</div>
 									<div class="row">
 										<div class="col-25">
 										</div>
 										<div class="col-75">
-										<input id="sign_up" class="valider" type="submit" name="valider" value="Sign up"/>
+										<input id="sign_up" class="valider" type="submit" name="submit" value="Sign up"/>
 										</div> 
 									</div>
 								</form>
@@ -218,28 +234,28 @@ if (isset($_SESSION['id_user']))
 							</div>
 						<div id="ancien">
 								<h3>Log in</h3>
-								<form method="post" action="login.php">
+								<form>
 										<div class="row">
 											<div class="col-25">
-											<label class="label" for="login">Username :</label>
+											<label class="label">Username :</label>
 											</div>
 											<div class="col-75">
-											<input class="input" type="text" name="login" value="<?php htmlspecialchars($_POST['login']); ?>" id="login" required/>
+											<input id="login1" class="input" type="text" value="<?php htmlspecialchars($_POST['login']); ?>" id="login1" required/>
 											</div> 
 										</div>
 										<div class="row">
 											<div class="col-25">
-											<label class="label" for="password">Password :</label>
+											<label class="label">Password :</label>
 											</div>
 											<div class="col-75">
-											<input class="input" type="password" name="password" value="<?php htmlspecialchars($_POST['password']); ?>" id="password" required/>
+											<input id="password" class="input" type="password" value="<?php htmlspecialchars($_POST['password']); ?>" required/>
 											</div> 
 										</div>
 										<div class="row">
 											<div class="col-25">
 											</div>
 											<div class="col-75">
-											<input class="valider" type="submit" name="modif" value="Log in"/>
+											<input id="log_in" class="valider" type="submit" name="submit" value="Log in"/>
 											</div> 
 										</div>
 									</form>
@@ -311,6 +327,7 @@ if (isset($_SESSION['id_user']))
 		</footer>
 	</body>
 	<script type="text/javascript" src="new_users.js"></script>
+	<script type="text/javascript" src="login.js"></script>
 	<script type="text/javascript" src="index_popup_image.js"></script>
 	<script type="text/javascript" src="index.js"></script>
 	<script type="text/javascript" src="add_comments.js"></script>

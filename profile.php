@@ -55,15 +55,37 @@ if (isset($_SESSION['id_user']))
  	</head>
 	<body>
 			<header>
-				<div>
+
+			<div id="header_part1">
+				<div id="camagru">
 					<h1>CAMAGRU</h1>
 				</div>
+				<div id="user_name">
+						<?php
+							if ($_SESSION['login'] != NULL)
+							{
+								echo "<div id='hello'>";
+								echo Hello." ".$_SESSION['login'];
+								echo "</div>";
+								if ($_SESSION['profile_pic'] === NULL)
+								{
+									echo '<div id="img_profile"><img src="img/photo2.png"alt="avatar"></div>';
+								}
+								else
+								{
+									echo '<div id="img_profile"><img id="img_profile1" src="'.$_SESSION['profile_pic'].'"alt="avatar1"></div>';
+								}
+							}
+						?>
 				</div>
+			</div>
+			<div id="header_part2">
 				<div id="button">
 					<p class="button_profil"><a href='index.php'>HOME</a></p>
 					<p class="button_profil"><a href='users.php'>TAKE A SNAP</a></p>
 					<p class="button_profil"><a href='logout.php'>LOG OUT</a></p>
 				</div>
+			</div>
 			</header>
 			<div id="title">
 			<h3> Here you can change informations about your profile </h3>

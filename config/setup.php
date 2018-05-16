@@ -28,7 +28,7 @@ try
     last_name VARCHAR(30) NOT NULL,
 	password VARCHAR(300) NOT NULL,
     email VARCHAR(50),
-	profile_pic VARCHAR(100),
+	profile_pic VARCHAR(100) DEFAULT 'img/photo2.png',
 	fb_id INT,
 	twitter_id INT,
 	validation_email BOOLEAN DEFAULT 0,
