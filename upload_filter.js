@@ -47,6 +47,7 @@ function takepicture()
 
 	var img_filter = document.getElementById('filter_image');
 	var filter = img_filter.src;
+	console.log(filter);
 	var image = document.getElementById('img');
 	var img = getBase64Image(image);
 

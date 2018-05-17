@@ -7,7 +7,7 @@ function send_comment(id_user)
 	login = login.split(" ");
 	login = login[1];
 	var profile_pic = document.getElementById("img_profile1").src;
-
+	
 	var formData = new FormData();
 	formData.append('id_user', id_user);
 	formData.append('comment', comment);

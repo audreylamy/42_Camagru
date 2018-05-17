@@ -67,37 +67,37 @@ include('config/database.php');
 				<div id="part1">
 					<div id="take_picture_filter">
 						<div id="take_picture">
-						<button id="activation">Start Camera</button>
-						<div id="add_picture">
-							<form method="post" action="upload_picture.php" enctype="multipart/form-data">
-								<input id="download_picture" type="file" name="avatar">
-								<input id="submit_picture" type="submit" name="submit_picture" value="Upload Image"/>
-							</form>
-						</div>
-						<div id="camera_space">
-							<div id="video_space">
-								<img id="filter_image_video" src="" alt="avatar">
-								<video id="video"></video>
+							<button id="activation">Start Camera</button>
+							<div id="add_picture">
+								<form method="post" action="upload_picture.php" enctype="multipart/form-data">
+									<input id="download_picture" type="file" name="avatar">
+									<input id="submit_picture" type="submit" name="submit_picture" value="Upload Image"/>
+								</form>
 							</div>
-							<div id="upload">
-								<?php
-								if ($_SESSION['upload'] === TRUE)
-								{
-									echo "<style> #upload { visibility: visible; }</style>";
-									echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
-									echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" >';
-									echo '<img id="img_bis" src="" alt="avatar2">';
-								}
-								?>
-								<img id="filter_image" src="" alt="avatar">
+							<div id="camera_space">
+								<div id="video_space">
+									<img id="filter_image_video" src="" alt="avatar">
+									<video id="video"></video>
+								</div>
+								<div id="upload">
+									<?php
+									if ($_SESSION['upload'] === TRUE)
+									{
+										echo "<style> #upload { visibility: visible; }</style>";
+										echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
+										echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" >';
+										echo '<img id="img_bis" src="" alt="avatar2">';
+									}
+									?>
+									<img id="filter_image" src="" alt="avatar">
+								</div>
+								<div id="button_picture">
+									<button id="startbutton">Take a picture</button>
+								</div>
+								<div id="button_picture_upload">
+									<button id="startbuttonUpload">Take a picture</button>
+								</div>
 							</div>
-							<div id="button_picture">
-								<button id="startbutton">Take a picture</button>
-							</div>
-							<div id="button_picture_upload">
-								<button id="startbuttonUpload">Take a picture</button>
-							</div>
-						</div>
 						</div>
 							<section id="filter">
 								<button class="filter_button" id="grayscale">Grayscale</button>
@@ -142,10 +142,18 @@ include('config/database.php');
 
 				</div>
 				<div id="choose_object">
-					<img id="image1" src="filter/corne11.png"alt="avatar">
-					<img id="image2" src="filter/caticorn1.png"alt="avatar">
-					<img id="image3" src="filter/caticorn22.png"alt="avatar">
-					<img id="image4" src="filter/caticorn33.png"alt="avatar">
+					<?php
+						if ($_SESSION['upload'] === TRUE)
+						{
+							echo "<style> #show_filter { visibility: visible; }</style>";
+						}
+					?>
+					<div id="show_filter">
+						<img class="img_div" id="image1" src="filter/rainbow.png"alt="avatar">
+						<img class="img_div" id="image2" src="filter/caticorn1.png"alt="avatar">
+						<img class="img_div" id="image3" src="filter/caticorn22.png"alt="avatar">
+						<img class="img_div" id="image4" src="filter/caticorn33.png"alt="avatar">
+					</div>
 				</div>
 			</div>
 		<footer>
@@ -154,89 +162,8 @@ include('config/database.php');
 	</body>
 	<script type="text/javascript" src="camera.js"></script>
 	<script type="text/javascript" src="filter.js"></script>
+	<script type="text/javascript" src="filter_image.js"></script>
 	<script type="text/javascript" src="upload_filter.js"></script>
 	<script type="text/javascript" src="save_and_cancel.js"></script>
 	<script type="text/javascript" src="delete_picture.js"></script>
-
-	<script>
-		var element_upload = document.getElementById('submit_picture');
-		var element_take_picture = document.getElementById('startbutton');
-		element_upload.addEventListener('click', function()
-		{
-			element_take_picture.style.visibility = "visible";
-		});
-	</script>
-
-	<script>
-	if (document.getElementById("upload"))
-	{
-		var image1 = document.getElementById('image1');
-		var element_filter = document.getElementById('filter_image');
-		var img_camera = document.getElementById('filter_image_video');
-		image1.addEventListener('click', function()
-		{
-			element_filter.src= "filter/corne11.png";
-			element_filter.style.visibility= "visible";
-		});
-
-		var image2 = document.getElementById('image2');
-		image2.addEventListener('click', function()
-		{
-			element_filter.src= "filter/caticorn1.png";
-			element_filter.style.visibility= "visible";
-		});
-
-		var image3 = document.getElementById('image3');
-		image3.addEventListener('click', function()
-		{
-			element_filter.src= "filter/caticorn22.png";
-			element_filter.style.visibility= "visible";
-		});
-
-		var image4 = document.getElementById('image4');
-		image4.addEventListener('click', function()
-		{
-			element_filter.src= "filter/caticorn33.png";
-			element_filter.style.visibility= "visible";
-		});
-	}
-	</script>
-
-<script>
-	var element_start = document.getElementById('activation');
-	var element_filter_video = document.getElementById('filter_image_video');
-	element_start.addEventListener('click', function()
-	{
-		var image1 = document.getElementById('image1');
-		image1.addEventListener('click', function()
-		{
-			element_filter_video.src= "filter/corne11.png";
-			element_filter_video.style.visibility= "visible";
-		});
-
-		var image2 = document.getElementById('image2');
-		image2.addEventListener('click', function()
-		{
-			element_filter_video.src= "filter/caticorn1.png";
-			element_filter_video.style.visibility= "visible";
-		});
-
-		var image3 = document.getElementById('image3');
-		image3.addEventListener('click', function()
-		{
-			element_filter_video.src= "filter/caticorn22.png";
-			element_filter_video.style.visibility= "visible";
-		});
-
-		var image4 = document.getElementById('image4');
-		image4.addEventListener('click', function()
-		{
-			element_filter_video.src= "filter/caticorn33.png";
-			element_filter_video.style.visibility= "visible";
-		});
-	});
-	</script>
-
-	
-
 </html>

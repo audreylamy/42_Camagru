@@ -174,13 +174,14 @@ class Membre
 		&& !empty($this->password) && !empty($this->confirm_password) && !empty($this->token))
 		{     
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->prepare("INSERT INTO `users` (`username`, `first_name`, `last_name`, `password`, `email`, `token`) 
-			VALUES(:login, :first_name, :last_name, :password, :email, :token)");
+			$requete = $this->db->prepare("INSERT INTO `users` (`username`, `first_name`, `last_name`, `password`, `email`, `profile_pic`, `token`) 
+			VALUES(:login, :first_name, :last_name, :password, :email, :profile_pic, :token)");
 			$requete->bindparam(':login', $this->login);
 			$requete->bindparam(':first_name', $this->first_name);
 			$requete->bindparam(':last_name', $this->last_name);
 			$requete->bindparam(':password', $this->password);
 			$requete->bindparam(':email', $this->email);
+			$requete->bindValue(':profile_pic', "img/photo2.png");
 			$requete->bindparam(':token', $this->token);
 			$requete->execute();
 		}

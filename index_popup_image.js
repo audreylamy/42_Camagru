@@ -76,8 +76,13 @@ function findInfoProfile(id_user)
 				var array = JSON.parse(httpRequest.responseText);
 				var login = array[0];
 				var profile_pic = array[1];
-				var login = login.replace('"', "");
-				var profile_pic = profile_pic.replace('"', "");
+				console.log(profile_pic);
+				// var login = login.replace('"', "");
+				// var profile_pic = profile_pic.replace('"', "");
+				if (profile_pic == undefined)
+				{
+					profile_pic = "img/photo2.png";
+				}
 				readURL2(profile_pic);
 				readInfo(login);
 			} 

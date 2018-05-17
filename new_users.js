@@ -1,3 +1,5 @@
+
+
 var sign_up = document.getElementById("sign_up");
 
 sign_up.addEventListener('click', function()

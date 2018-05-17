@@ -8,7 +8,6 @@ class ResizeImage
 
 	function __construct($file)
 	{
-		echo $file;
 		if (null !== $file) 
 		{
 			if (is_file($file)) 
@@ -24,10 +23,9 @@ class ResizeImage
 
 	public function setImageFile($file)
     {
-		// echo "here";
 		if (!(is_readable($file) && is_file($file))) 
 		{
-			// echo "here";
+
             throw new InvalidArgumentException("Image file $file is not readable");
         }
 		if (is_resource($this->image)) 
@@ -35,7 +33,6 @@ class ResizeImage
             imagedestroy($this->image);
         }
 		list ($this->width, $this->height, $type) = getimagesize($file);
-		echo $type;
         switch ($type) {
             case IMAGETYPE_GIF  :
                 $this->image = imagecreatefromgif($file);
@@ -49,7 +46,6 @@ class ResizeImage
             default             :
                 throw new InvalidArgumentException("Image type $type not supported");
 		}
-		echo $this->image;
         return $this;
     }
 
