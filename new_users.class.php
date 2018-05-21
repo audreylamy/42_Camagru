@@ -278,7 +278,7 @@ class Membre
 		{     
 			$id_user = $this->id_user;
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->query("SELECT `username`, `profile_pic` FROM `users` WHERE `id_user` = '$id_user'");
+			$requete = $this->db->query("SELECT `username`, `profile_pic` FROM `users` WHERE `id_user` = '$this->id_user'");
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return array($data['username'], $data['profile_pic']);
 		}
@@ -288,6 +288,34 @@ class Membre
 			echo "Error";
 		}
 		
+	}
+
+	public function ON()
+	{
+		if ($this->id_user != NULL)
+		{    
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->prepare("UPDATE `users` 
+			SET `activation_comment` = :activation_comment
+			WHERE `id_user` = :id_user");
+			$requete->bindValue(':activation_comment', 1);
+			$requete->bindparam(':id_user', $this->id_user);
+			$requete->execute();
+		}
+	}
+
+	public function OFF()
+	{
+		if ($this->id_user != NULL)
+		{    
+			$this->db->query( 'USE db_camagru' );
+			$requete = $this->db->prepare("UPDATE `users` 
+			SET `activation_comment` = :activation_comment
+			WHERE `id_user` = :id_user");
+			$requete->bindValue(':activation_comment', 0);
+			$requete->bindparam(':id_user', $this->id_user);
+			$requete->execute();
+		}
 	}
 	
 }

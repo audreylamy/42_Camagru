@@ -11,25 +11,14 @@ $image_path = $_POST['image_path'];
 
 //FIND email de la personne a qui appartient la photo
 $conn->query( 'USE db_camagru' );
-$requete = $conn->query("SELECT `email` FROM `users` WHERE `username` = '$login_user_picture'");
+$requete = $conn->query("SELECT `email`, `activation_comment` FROM `users` WHERE `username` = '$login_user_picture'");
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 $email = $data['email'];
+$activation_comment = $data['activation_comment'];
 
-echo json_encode($email);
+$array = array('email' => $email, 'activation_comment' => $activation_comment);
 
-//email 
-$to = $email;
-$subject = 'New comment Camagru';
-$message = 'Bonjour '.$login_user_picture.',
+echo json_encode($array);
 
-Vous avez un nouveau commentaire : '.$comment.'
-
-Pour voir votre nouveau commentaire : http://localhost:8080/index.php';
-
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n";
-$headers .='Content-Transfer-Encoding: 8bit';
-mail($to, $subject, $message, $headers);
-header('Location: index.php');
 
 ?>

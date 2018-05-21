@@ -141,6 +141,37 @@ h3
 	/* margin-right: 4%; */
 }
 
+#notification_comment
+{
+	margin-top: 60%;
+}
+
+#notification_yes, #notification_no
+{
+	margin-right: 6%;
+	margin-top: 15px;
+	background-color: white;
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	letter-spacing: 4px;
+	font-size: 0.7vw;
+	padding: 10px;
+	cursor: crosshair;
+	color: #8861b4c2;
+}
+
+#notification_yes:hover, #notification_no:hover
+{
+	margin-top: 16px;
+	background-color: rgba(255, 255, 255, 0);
+	border: none;
+	font-family: 'Bungee Hairline', cursive;
+	font-size: 0.7vw;
+	border: solid 3px white;
+	color: white;
+	cursor: crosshair;
+}
+
 #form_modif{
 	width: 20%;
 	height: 80%;
@@ -261,6 +292,7 @@ h3
 #message_confirm
 {
 	font-family: 'Abel', sans-serif;
+	font-size: 0.7vw;
 }
 
 /*FOOTER*/

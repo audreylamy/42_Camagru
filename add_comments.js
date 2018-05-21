@@ -114,8 +114,10 @@ function send_email(image_path, login_user_picture, comment)
 			if (httpRequest.status === 200) 
 			{
 				// console.log(httpRequest.responseText);
-				var email = JSON.parse(httpRequest.responseText);
-				console.log(email);
+				var array = JSON.parse(httpRequest.responseText);
+				var email = array['email'];
+				var activation_comment = array['activation_comment'];
+				send(email, activation_comment, login_user_picture, comment);
 			} 
 			else 
 			{
@@ -125,6 +127,46 @@ function send_email(image_path, login_user_picture, comment)
 	};
 
 	httpRequest.open('POST', 'send_email_comment.php', true);
+	httpRequest.setRequestHeader('Content-Type', 'application/json');
+	httpRequest.send(json);
+}
+
+function send(email, activation_comment, login_user_picture, comment)
+{
+	var formData = new FormData();
+	formData.append('email', email);
+	formData.append('activation_comment', activation_comment);
+	formData.append('login_user_picture', login_user_picture);
+	formData.append('comment', comment);
+	console.log(email);
+	console.log(activation_comment);
+	console.log(login_user_picture);
+	console.log(comment);
+
+	var object = {};
+	formData.forEach(function(value, key)
+	{
+	  object[key] = value;
+	});
+	var json = JSON.stringify(object);
+	
+	var httpRequest = new XMLHttpRequest();
+	httpRequest.onreadystatechange = function(data) 
+	{
+		if (httpRequest.readyState === XMLHttpRequest.DONE) 
+		{
+			if (httpRequest.status === 200) 
+			{
+				console.log(JSON.parse(httpRequest.responseText));
+			} 
+			else 
+			{
+				console.log('Error: ' + httpRequest.status);
+			}
+		}
+	};
+
+	httpRequest.open('POST', 'send_info_comment.php', true);
 	httpRequest.setRequestHeader('Content-Type', 'application/json');
 	httpRequest.send(json);
 }

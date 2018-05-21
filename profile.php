@@ -108,6 +108,7 @@ if (isset($_SESSION['id_user']))
 					}
 					?>	
 					</div>
+					<div>
 					<form method="post" action="add_picture_profile.php" enctype="multipart/form-data">
 						<input id="download_picture" type="file" name="avatar">
 						<br></br>
@@ -119,6 +120,12 @@ if (isset($_SESSION['id_user']))
 							</div> 
 						</div>
 					</form>
+					</div>
+					<div id="notification_comment">
+						<p id="message_confirm">Notifications comments</p>
+						<button onclick="notification_activate(<?php echo $_SESSION['id_user'];?>)" id="notification_yes">yes</button>
+						<button	onclick="notification_desactivate(<?php echo $_SESSION['id_user'];?>)" id="notification_no">No</button>
+					</div>
 				</div>
 				<div id='form_modif'>
 				<form method="post" action="modif.php">
@@ -282,6 +289,7 @@ if (isset($_SESSION['id_user']))
 			<p id="text_footer">Camagru with love</p>
 		</footer>
 	</body>
+	<script type="text/javascript" src="activation_comment.js"></script>
 	<script language="javascript">
 		var element_delete = document.getElementById('delete');
 		var element_confirm = document.getElementById('confirm');

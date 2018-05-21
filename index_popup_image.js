@@ -57,6 +57,7 @@ function findInfoProfile(id_user)
 	var formData = new FormData();
 	formData.append('id_user', id_user);
 
+	console.log(id_user);
 	var object = {};
 	formData.forEach(function(value, key)
 	{
@@ -76,6 +77,7 @@ function findInfoProfile(id_user)
 				var array = JSON.parse(httpRequest.responseText);
 				var login = array[0];
 				var profile_pic = array[1];
+				console.log(login);
 				console.log(profile_pic);
 				// var login = login.replace('"', "");
 				// var profile_pic = profile_pic.replace('"', "");

@@ -6,7 +6,7 @@ var element_start = document.getElementById('activation');
 		var element_take_picture = document.getElementById('startbutton');
 		var element_upload = document.getElementById('upload');
 		var img_camera = document.getElementById('filter_image_video');
-		element_take_picture.style.visibility = "visible";
+		// element_take_picture.style.visibility = "visible";
 		element_video.style.visibility = "visible";
 		img_camera.style.visibility = "hidden";
 

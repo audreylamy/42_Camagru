@@ -18,6 +18,8 @@ $status = $data['status']; // $actif contiendra alors 0 ou 1
 if($status == '1') // Si le compte est déjà actif on prévient
 {
     echo "Votre compte est déjà actif !";
+    $_SESSION['activate_already'] = TRUE;
+    header('Location: activation_page.php');
 }
 else // Si ce n'est pas le cas on passe aux comparaisons
 {
@@ -25,6 +27,8 @@ else // Si ce n'est pas le cas on passe aux comparaisons
     {
         // Si elles correspondent on active le compte !	
         echo "Votre compte a bien été activé !";
+        $_SESSION['activate_account'] = TRUE;
+        header('Location: activation_page.php');
  
         // La requête qui va passer notre champ actif de 0 à 1
 		$update_status = $conn->prepare("UPDATE `users` SET `status` = 1 WHERE `username` like :login ");
@@ -34,6 +38,8 @@ else // Si ce n'est pas le cas on passe aux comparaisons
     else // Si les deux clés sont différentes on provoque une erreur...
     {
         echo "Erreur ! Votre compte ne peut être activé...";
+        $_SESSION['activate_account'] = FALSE;
+        header('Location: activation_page.php');
     }
 }
 ?>

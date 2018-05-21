@@ -67,12 +67,14 @@ include('config/database.php');
 				<div id="part1">
 					<div id="take_picture_filter">
 						<div id="take_picture">
-							<button id="activation">Start Camera</button>
-							<div id="add_picture">
-								<form method="post" action="upload_picture.php" enctype="multipart/form-data">
+							<div id="bloc_activation">
+								<button id="activation">Start Camera</button>
+								<div id="add_picture">
+									<form method="post" action="upload_picture.php" enctype="multipart/form-data">
 									<input id="download_picture" type="file" name="avatar">
 									<input id="submit_picture" type="submit" name="submit_picture" value="Upload Image"/>
-								</form>
+									</form>
+								</div>
 							</div>
 							<div id="camera_space">
 								<div id="video_space">
@@ -84,13 +86,15 @@ include('config/database.php');
 									if ($_SESSION['upload'] === TRUE)
 									{
 										echo "<style> #upload { visibility: visible; }</style>";
-										echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
+										// echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
 										echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" >';
 										echo '<img id="img_bis" src="" alt="avatar2">';
 									}
 									?>
 									<img id="filter_image" src="" alt="avatar">
 								</div>
+							</div>
+							<div id="bloc_take_picture">
 								<div id="button_picture">
 									<button id="startbutton">Take a picture</button>
 								</div>

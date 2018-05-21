@@ -7,10 +7,9 @@ include('config/database.php');
 $_POST = json_decode(file_get_contents('php://input'), true);
 $id_user = $_POST['id_user'];
 
-// echo $id_user;
+//activate notification
+$activate = new Membre($conn);
+$activate->getIdUser($id_user);
+$activate->ON();
 
-$user = new Membre($conn);
-$user->getIdUser($id_user);
-$array = $user->findInfoUser();
-echo json_encode($array);
 ?>

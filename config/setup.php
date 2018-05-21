@@ -34,7 +34,8 @@ try
 	validation_email BOOLEAN DEFAULT 0,
 	token VARCHAR(300) NOT NULL,
 	status INT DEFAULT 0 NOT NULL,
-	token_reset VARCHAR(300)
+	token_reset VARCHAR(300),
+	activation_comment INT DEFAULT 1
 	) ";
 
     $conn->exec($sql_users);
