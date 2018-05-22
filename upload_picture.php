@@ -37,7 +37,8 @@ if (isset($_POST["submit_picture"]))
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) 
 {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+	header("Location: users.php");
     $uploadOk = 0;
 }
 if ($uploadOk == 0) 

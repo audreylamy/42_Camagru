@@ -1,5 +1,7 @@
 <?php
- $_POST['login'] = $_GET['login'];
+session_start();
+
+$_POST['login'] = $_GET['login'];
 ?>
 <html lang="fr">
   	<head>

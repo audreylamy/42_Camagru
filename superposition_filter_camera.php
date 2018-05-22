@@ -22,6 +22,7 @@ file_put_contents($image_path, $data);
 $source = imagecreatefrompng($filter);
 $largeur_source = imagesx($source);
 $hauteur_source = imagesy($source);
+// echo $largeur_source;
 
 imagealphablending($source, true);
 imagesavealpha($source, true);
@@ -30,6 +31,8 @@ imagesavealpha($source, true);
 $destination = imagecreatefrompng($image_path);
 $largeur_destination = imagesx($destination);
 $hauteur_destination = imagesy($destination);
+// echo $largeur_destination;
+// echo $hauteur_destination;
   
 // Calcul des coordonnées pour placer l'image source dans l'image de destination
 $destination_x = ($largeur_destination - $largeur_source)/2;

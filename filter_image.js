@@ -32,7 +32,7 @@ image1.addEventListener('click', function()
 var image2 = document.getElementById('image2');
 image2.addEventListener('click', function()
 {
-	element_filter.src= "filter/caticorn1.png";
+	element_filter.src= "filter/coeur_coeur.png";
 	element_filter.style.visibility= "visible";
 	element_take_picture.style.visibility = "hidden";
 	element_take_picture_upload.style.visibility = "visible";
@@ -41,7 +41,7 @@ image2.addEventListener('click', function()
 var image3 = document.getElementById('image3');
 image3.addEventListener('click', function()
 {
-	element_filter.src= "filter/caticorn22.png";
+	element_filter.src= "filter/caticorn.png";
 	element_filter.style.visibility= "visible";
 	element_take_picture.style.visibility = "hidden";
 	element_take_picture_upload.style.visibility = "visible";
@@ -50,7 +50,25 @@ image3.addEventListener('click', function()
 var image4 = document.getElementById('image4');
 image4.addEventListener('click', function()
 {
-	element_filter.src= "filter/caticorn33.png";
+	element_filter.src= "filter/cat.png";
+	element_filter.style.visibility= "visible";
+	element_take_picture.style.visibility = "hidden";
+	element_take_picture_upload.style.visibility = "visible";
+});
+
+var image5 = document.getElementById('image5');
+image5.addEventListener('click', function()
+{
+	element_filter.src= "filter/licorne.png";
+	element_filter.style.visibility= "visible";
+	element_take_picture.style.visibility = "hidden";
+	element_take_picture_upload.style.visibility = "visible";
+});
+
+var image6 = document.getElementById('image6');
+image6.addEventListener('click', function()
+{
+	element_filter.src= "filter/omg.png";
 	element_filter.style.visibility= "visible";
 	element_take_picture.style.visibility = "hidden";
 	element_take_picture_upload.style.visibility = "visible";
@@ -74,7 +92,7 @@ image1.addEventListener('click', function()
 var image2 = document.getElementById('image2');
 image2.addEventListener('click', function()
 {
-	element_filter_video.src= "filter/caticorn1.png";
+	element_filter_video.src= "filter/coeur_coeur.png";
 	element_filter_video.style.visibility= "visible";
 	element_take_picture_upload.style.visibility = "hidden";
 	element_take_picture.style.visibility = "visible";
@@ -83,7 +101,7 @@ image2.addEventListener('click', function()
 var image3 = document.getElementById('image3');
 image3.addEventListener('click', function()
 {
-	element_filter_video.src= "filter/caticorn22.png";
+	element_filter_video.src= "filter/caticorn.png";
 	element_filter_video.style.visibility= "visible";
 	element_take_picture_upload.style.visibility = "hidden";
 	element_take_picture.style.visibility = "visible";
@@ -92,7 +110,25 @@ image3.addEventListener('click', function()
 var image4 = document.getElementById('image4');
 image4.addEventListener('click', function()
 {
-	element_filter_video.src= "filter/caticorn33.png";
+	element_filter_video.src= "filter/cat.png";
+	element_filter_video.style.visibility= "visible";
+	element_take_picture_upload.style.visibility = "hidden";
+	element_take_picture.style.visibility = "visible";
+});
+
+var image5 = document.getElementById('image5');
+image5.addEventListener('click', function()
+{
+	element_filter_video.src= "filter/licorne.png";
+	element_filter_video.style.visibility= "visible";
+	element_take_picture_upload.style.visibility = "hidden";
+	element_take_picture.style.visibility = "visible";
+});
+
+var image6 = document.getElementById('image6');
+image6.addEventListener('click', function()
+{
+	element_filter_video.src= "filter/omg.png";
 	element_filter_video.style.visibility= "visible";
 	element_take_picture_upload.style.visibility = "hidden";
 	element_take_picture.style.visibility = "visible";

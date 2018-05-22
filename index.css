@@ -311,7 +311,7 @@ h1
 
 #user_name
 {
-	margin-top: 2%;
+	margin-top: 60px;
 	margin-right: 5%;
 	width: 13%;
 	height:50%;
@@ -360,6 +360,17 @@ h1
 	color: white;
 	font-family: 'Bungee Hairline', cursive;
 	background: #bbc4ef;
+	cursor: crosshair;
+}
+
+#button_connexion:hover
+{
+	padding: 10px;
+	margin-left: 15px;
+	margin-bottom: 20px;
+	color: white;
+	font-family: 'Bungee Hairline', cursive;
+	background: #62bcfa;
 	cursor: crosshair;
 }
 
@@ -519,6 +530,8 @@ h3
 {
 	width: 100%;
 	height: auto;
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
 }
 
 .input{

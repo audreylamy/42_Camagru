@@ -121,9 +121,13 @@ if (isset($_SESSION['id_user']))
 						echo "<p class='button_private'><a href='users.php'>TAKE A SNAP</a></p>";
 						echo "<p class='button_private'><a href='profile.php'>YOUR PROFILE</a></p>";
 						echo "<p class='button_private'><a href='logout.php'>LOG OUT</a></p>";
+						echo "<style> #se_connecter { visibility: hidden; }</style>";
 					}
 					else
+					{
 						echo "<p id='button_connexion'>CONNECT</p>";
+						echo "<style> #se_connecter { visibility: visible; }</style>";
+					}
 					?>
 				</div>
 			</header>
@@ -215,6 +219,11 @@ if (isset($_SESSION['id_user']))
 									</div>
 								</form>
 								<?php
+								if ($_SESSION['regex'] === FALSE)
+								{
+									echo "<div id='bloc_message'>Your password is not secure</div>";
+									echo "<style> #se_connecter { visibility: visible; }</style>";
+								}
 								if ($_SESSION['connect'] === FALSE)
 								{
 									echo "<div id='bloc_message'>login or email already exists</div>";
@@ -293,7 +302,7 @@ if (isset($_SESSION['id_user']))
 											<div class="row">
 												<p id="enter_email" >Enter your email :</p>
 												<div class="col-75">
-												<input class="input" type="email" name="email_reset" value="" id="password" required/>
+												<input class="input" type="email" name="email_reset" value="" id="password2" required/>
 												</div>
 											<div class="row">
 												<div class="col-25">

@@ -79,12 +79,12 @@ a{
 
 #user_name
 {
-	margin-top: 2%;
+	margin-top: 60px;
 	margin-right: 5%;
 	width: 13%;
 	height:50%;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: center;
 }
 
 #hello

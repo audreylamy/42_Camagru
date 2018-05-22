@@ -2,6 +2,11 @@
 session_start();
 include('config/database.php');
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 // code ci-dessous regles les problemes de warning avec display_errors
 if (isset($_SESSION['modification'])) 
 {

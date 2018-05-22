@@ -8,8 +8,27 @@ $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $login = $_POST['login'];
 $email = $_POST['email'];
-$password = $_POST['password'];
-$confirm_password = $_POST['confirm_password'];
+
+/* minimum 1 lettre minuscule, minimum 1 lettre majuscule, minimum un chiffre, minimum 6 caracteres */
+if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['password']))
+{
+	$password = htmlspecialchars($_POST['password']);
+}
+else
+{
+	$_SESSION['regex'] = FALSE;
+	header('Location: index.php');
+}
+
+if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['confirm_password']))
+{
+	$confirm_password = htmlspecialchars($_POST['confirm_password']);
+}
+else
+{
+	$_SESSION['regex'] = FALSE;
+	header('Location: index.php');
+}
 
 if($first_name != NULL && $last_name != NULL && $email != NULL && $login != NULL && $password != NULL && $confirm_password != NULL)
 {

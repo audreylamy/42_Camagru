@@ -2,6 +2,11 @@
 session_start();
 require('new_users.class.php');
 include('config/database.php');
+
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
 ?>
 
 <html lang="fr">
@@ -154,9 +159,11 @@ include('config/database.php');
 					?>
 					<div id="show_filter">
 						<img class="img_div" id="image1" src="filter/rainbow.png"alt="avatar">
-						<img class="img_div" id="image2" src="filter/caticorn1.png"alt="avatar">
-						<img class="img_div" id="image3" src="filter/caticorn22.png"alt="avatar">
-						<img class="img_div" id="image4" src="filter/caticorn33.png"alt="avatar">
+						<img class="img_div" id="image2" src="filter/coeur_coeur.png"alt="avatar">
+						<img class="img_div" id="image3" src="filter/caticorn.png"alt="avatar">
+						<img class="img_div" id="image4" src="filter/cat.png"alt="avatar">
+						<img class="img_div" id="image5" src="filter/licorne.png"alt="avatar">
+						<img class="img_div" id="image6" src="filter/omg.png"alt="avatar">
 					</div>
 				</div>
 			</div>
