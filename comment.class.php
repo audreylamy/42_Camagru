@@ -58,7 +58,10 @@ class Comment
 			$id_user = $this->id_user;
 			$comment = $this->comment;
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->query("SELECT `id_comment` FROM `comments` WHERE `id_user` = '$id_user' AND `comment` = '$comment'");
+			$requete = $this->db->prepare("SELECT `id_comment` FROM `comments` WHERE `id_user` = :id_user AND `comment` = :comment");
+			$requete->bindparam(':id_user', $id_user);
+			$requete->bindparam(':comment', $comment);
+			$requete->execute();
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return $data['id_comment'];
 		}

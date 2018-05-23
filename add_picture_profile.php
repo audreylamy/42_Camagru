@@ -65,16 +65,17 @@ if ($uploadOk == 0)
 } 
 else 
 {
-    $target_file = $target_dir."".$id_user.".".$imageFileType;
+    $date= date("Y-m-d H:i:s");
+    $target_file = $target_dir."".$id_user."".$date.".".$imageFileType;
+    echo $target_file;
     $actual_user->getProfilPic($target_file);
 	if (move_uploaded_file($_FILES["avatar"]["tmp_name"], $target_file)) 
 	{
         echo "The file ". basename( $_FILES["avatar"]["name"]). " has been uploaded.";
+         header('Location: profile.php');
         $_SESSION['upload_picture'] = "hello";
-        echo $_SESSION['upload_picture'];
         $_SESSION['name_picture'] = $target_file;
         $actual_user->updateProfilePicture();
-        header('Location: profile.php');
 	} 
 	else 
 	{

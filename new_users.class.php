@@ -79,7 +79,8 @@ class Membre
 	public function verif_bdd_login()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete_login = $this->db->query("SELECT `username` FROM `users`"); 
+		$requete_login = $this->db->prepare("SELECT `username` FROM `users`"); 
+		$requete_login->execute();
 		while ($data = $requete_login->fetch(PDO::FETCH_ASSOC))
 		{
 			if ($data['username'] === $this->login)
@@ -93,7 +94,8 @@ class Membre
 	public function verif_bdd_email()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete_email = $this->db->query("SELECT `email` FROM `users`");
+		$requete_email = $this->db->prepare("SELECT `email` FROM `users`");
+		$requete_email->execute();
 		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
 		{
 			if ($data['email'] === $this->email)
@@ -108,11 +110,12 @@ class Membre
 	{
 		$this->db->query( 'USE db_camagru' );
 		$login = $this->login;
-		$requete_status = $this->db->query("SELECT `status` FROM `users` WHERE `username` = '$login'");
+		$requete_status = $this->db->prepare("SELECT `status` FROM `users` WHERE `username` = :login");
+		$requete_status->bindparam(':login', $login);
+		$requete_status->execute();
 		$data = $requete_status->fetch(PDO::FETCH_ASSOC);
 		if ($data['status'] === '1')
 		{
-			echo "here";
 			return TRUE;
 		}
 		else if ($data['status'] === '0')
@@ -124,7 +127,8 @@ class Membre
 	public function authentification()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete_auth = $this->db->query("SELECT `username`, `password` FROM `users`");
+		$requete_auth = $this->db->prepare("SELECT `username`, `password` FROM `users`");
+		$requete_auth->execute();
 		while ($data = $requete_auth->fetch(PDO::FETCH_ASSOC))
 		{
 			if ($data['password'] === $this->password && $data['username'] === $this->login)
@@ -138,7 +142,8 @@ class Membre
 	public function emailBdd()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete_email = $this->db->query("SELECT `email` FROM `users`");
+		$requete_email = $this->db->prepare("SELECT `email` FROM `users`");
+		$requete_email->execute();
 		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
 		{
 			if ($data['email'] === $this->email)
@@ -199,12 +204,13 @@ class Membre
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("UPDATE `users` 
 			SET username = :login, first_name = :first_name, last_name = :last_name, email = :email
-			WHERE `id_user` = '$this->id_user'");
+			WHERE `id_user` = :id_user");
 			echo ($this->profile_pic);
 			$requete->bindparam(':login', $this->login);
 			$requete->bindparam(':first_name', $this->first_name);
 			$requete->bindparam(':last_name', $this->last_name);
 			$requete->bindparam(':email', $this->email);
+			$requete->bindparam(':id_user', $this->id_user);
 			$requete->execute();
 		}
 		else
@@ -220,8 +226,9 @@ class Membre
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("UPDATE `users` 
 			SET profile_pic = :avatar
-			WHERE `id_user` = '$this->id_user'");
+			WHERE `id_user` = :id_user");
 			$requete->bindparam(':avatar', $this->profile_pic);
+			$requete->bindparam(':id_user', $this->id_user);
 			$requete->execute();
 		}
 		else
@@ -237,8 +244,9 @@ class Membre
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("UPDATE `users` 
 			SET `password` = :password
-			WHERE `id_user` = '$this->id_user'");
+			WHERE `id_user` = :id_user");
 			$requete->bindparam(':password', $this->new_password);
+			$requete->bindparam(':id_user', $this->id_user);
 			$requete->execute();
 		}
 		else
@@ -254,8 +262,9 @@ class Membre
 			$this->db->query( 'USE db_camagru' );
 			$requete = $this->db->prepare("UPDATE `users` 
 			SET `password` = :password
-			WHERE `username` = '$this->login'");
+			WHERE `username` = :login");
 			$requete->bindparam(':password', $this->password);
+			$requete->bindparam(':login', $this->login);
 			$requete->execute();
 		}
 		else
@@ -267,7 +276,8 @@ class Membre
 	public function deleteProfile()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete = $this->db->prepare("DELETE FROM `users` WHERE `id_user` = '$this->id_user'");
+		$requete = $this->db->prepare("DELETE FROM `users` WHERE `id_user` = :id_user");
+		$requete->bindparam(':id_user', $this->id_user);
 		$requete->execute();
 		echo "profile suppr";
 	}
@@ -278,7 +288,9 @@ class Membre
 		{     
 			$id_user = $this->id_user;
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->query("SELECT `username`, `profile_pic` FROM `users` WHERE `id_user` = '$this->id_user'");
+			$requete = $this->db->prepare("SELECT `username`, `profile_pic` FROM `users` WHERE `id_user` = :id_user");
+			$requete->bindparam(':id_user', $id_user);
+			$requete->execute();
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return array($data['username'], $data['profile_pic']);
 		}

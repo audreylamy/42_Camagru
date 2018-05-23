@@ -37,7 +37,9 @@ if (isset($_SESSION['id_user']))
 {
 	$id_user = $_SESSION['id_user'];
 	$conn->query( 'USE db_camagru' );
-	$requete = $conn->query("SELECT * FROM `users` WHERE `id_user` = '$id_user'"); 
+	$requete = $conn->prepare("SELECT * FROM `users` WHERE `id_user` = :id_user"); 
+	$requete->bindparam(':id_user', $id_user);
+	$requete->execute();
 	$data = $requete->fetch(PDO::FETCH_ASSOC);
 	$_SESSION['login'] = $data['username'];
 	$_SESSION['first_name'] = $data['first_name'];
@@ -266,22 +268,26 @@ if (isset($_SESSION['id_user']))
 					</div>
 					<div id='problem'>
 						<?php
+						if ($_SESSION['regex_new'] === FALSE)
+						{
+							echo "<div class='bloc_message'>Your new password is not secure</div>";
+						}
 						if (isset($password_modif))
 						{
 							if ($password_modif === TRUE)
 							{
-								echo "Password updated";
+								echo "<div class='bloc_message'>Password updated</div>";
 							}
 							else if ($password_modif === FALSE)
 							{
-								echo "Password not updated";
+								echo "<div class='bloc_message'>Password not updated</div>";
 							}
 						}
 						else if (isset($password_error))
 						{
 							if ($password_error === TRUE)
 							{
-								echo "Not the current password";
+								echo "<div class='bloc_message'>Not the current password</div>";
 							}
 						}
 		

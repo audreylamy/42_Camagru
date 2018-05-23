@@ -27,7 +27,7 @@ function logIn_user(login, password)
 		{
 			if (httpRequest.status === 200 || httpRequest.status === 0) 
 			{
-				alert(httpRequest.responseText);
+				// alert(httpRequest.responseText);
 				location.reload();
 			} 
 			else 

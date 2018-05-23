@@ -9,7 +9,9 @@ $cle = $_GET['token'];
 //  echo $cle;
 // Récupération de la clé correspondant au $login dans la base de données
 $conn->query( 'USE db_camagru' );
-$requete = $conn->query("SELECT `token`, `status` FROM `users` WHERE `username` = '$login'");
+$requete = $conn->prepare("SELECT `token`, `status` FROM `users` WHERE `username` = :login");
+$requete->bindParam(':login', $login);
+$requete->execute();
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 $clebdd = $data['token'];	// Récupération de la clé
 $status = $data['status']; // $actif contiendra alors 0 ou 1

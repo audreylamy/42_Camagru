@@ -24,6 +24,8 @@ function like()
 			{
 				var nb_like = JSON.parse(httpRequest.responseText);
 				add_nbLike_DOM(nb_like);
+				var image_coeur = document.getElementById("image_coeur");
+				image_coeur.style.visibility = "hidden";
 			} 
 			else 
 			{
@@ -39,9 +41,6 @@ function like()
 
 function add_nbLike_DOM(nb_like)
 {
-	var image_coeur = document.getElementById("image_coeur");
-	image_coeur.style.visibility = "hidden";
-
 	var bloc_like = document.getElementById('like');
 	bloc_like.innerHTML= nb_like;
 }

@@ -5,12 +5,41 @@ include('config/database.php');
 
 $id_user = $_SESSION['id_user'];
 $conn->query( 'USE db_camagru' );
-$requete = $conn->query("SELECT `password` FROM `users` WHERE `id_user` = '$id_user'");
+$requete = $conn->prepare("SELECT `password` FROM `users` WHERE `id_user` = :id_user");
+$requete->bindparam(':id_user', $id_user);
+$requete->execute();
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 
-$current_password = hash('whirlpool',htmlspecialchars($_POST['password']));
-$new_password = hash('whirlpool',htmlspecialchars($_POST['new_password']));
-$confirm_new_password = hash('whirlpool',htmlspecialchars($_POST['confirm_new_password']));
+/* minimum 1 lettre minuscule, minimum 1 lettre majuscule, minimum un chiffre, minimum 6 caracteres */
+if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['password']))
+{
+	$current_password = hash('whirlpool',htmlspecialchars($_POST['password']));
+}
+else
+{
+	$_SESSION['regex_new'] = FALSE;
+	header('Location: profile.php');
+}
+
+if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['new_password']))
+{
+	$new_password = hash('whirlpool',htmlspecialchars($_POST['new_password']));
+}
+else
+{
+	$_SESSION['regex_new'] = FALSE;
+	header('Location: profile.php');
+}
+
+if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['confirm_new_password']))
+{
+	$confirm_new_password = hash('whirlpool',htmlspecialchars($_POST['confirm_new_password']));
+}
+else
+{
+	$_SESSION['regex_new'] = FALSE;
+	header('Location: profile.php');
+}
 
 if ($current_password != NULL && $new_password != NULL && $confirm_new_password != NULL)
 {

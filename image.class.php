@@ -39,7 +39,9 @@ class Picture
 		{     
 			$id_photo = $this->id_photo;
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->query("SELECT `id_user`, `image_path` FROM `photos` WHERE `id_photo` = '$id_photo'");
+			$requete = $this->db->prepare("SELECT `id_user`, `image_path` FROM `photos` WHERE `id_photo` = :id_photo");
+			$requete->bindparam(':id_photo', $id_photo);
+			$requete->execute();
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return array($data['id_user'], $data['image_path']);
 		}
@@ -56,7 +58,9 @@ class Picture
 		{     
 			$image_path = $this->image_path;
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->query("SELECT `id_photo` FROM `photos` WHERE `image_path` = '$image_path'");
+			$requete = $this->db->prepare("SELECT `id_photo` FROM `photos` WHERE `image_path` = :image_path");
+			$requete->bindparam(':image_path', $image_path);
+			$requete->execute();
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 			return $data['id_photo'];
 		}

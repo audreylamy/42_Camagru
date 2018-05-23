@@ -176,6 +176,7 @@ body
 	background: #bbc4ef;
 	cursor: crosshair;
 	font-size: 1.3em;
+	/* visibility: hidden; */
 }
 
 #open_connect:hover{
@@ -526,12 +527,22 @@ h3
 	font-size: 0.8vw;
 }
 
-#bloc_message
+.row
+{
+	margin-top: 3px;
+}
+
+.bloc_message
 {
 	width: 100%;
 	height: auto;
 	font-family: 'Abel', sans-serif;
 	font-size: 0.5vw;
+}
+
+#message_password
+{
+	margin-bottom: -15px;
 }
 
 .input{

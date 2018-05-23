@@ -329,7 +329,7 @@ a{
 
 #video_space{
 	position: absolute;
-	width: 50%;
+	width: 45%;
 	height: auto;
 	visibility: hidden;
 	margin: auto;
@@ -357,7 +357,7 @@ a{
 #filter_image_video
 {
 	object-fit: contain;
-	width: 90%;
+	width: 99%;
 	margin: auto;
     top: 0;
     bottom: 0;
@@ -380,7 +380,7 @@ a{
 {
 	object-fit: contain;
 	position: absolute;
-	width:100%;
+	width:50%;
 	height:100%;
 	margin: auto;
     top: 0;

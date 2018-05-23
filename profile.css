@@ -295,6 +295,14 @@ h3
 	font-size: 0.7vw;
 }
 
+.bloc_message
+{
+	width: 100%;
+	height: auto;
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
+}
+
 /*FOOTER*/
 
 footer

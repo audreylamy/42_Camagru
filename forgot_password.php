@@ -3,13 +3,13 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
-echo $_POST['email_reset'];
-
 if($_POST['email_reset'] != NULL )
 {
 	$email = $_POST['email_reset'];
 	$conn->query( 'USE db_camagru' );
-	$requete = $conn->query("SELECT `username` FROM `users` WHERE `email` = '$email'");
+	$requete = $conn->prepare("SELECT `username` FROM `users` WHERE `email` = :email");
+	$requete->bindparam(':email', $email);
+	$requete->execute();
 	$data = $requete->fetch(PDO::FETCH_ASSOC);
 	$login = $data['username'];
 
@@ -21,7 +21,9 @@ if($_POST['email_reset'] != NULL )
 		$token_reset = bin2hex(random_bytes(16));
 
 		//insertion du token dans l'utilisateur qui contient le mail envoye pour reset le password
-		$update_status = $conn->prepare("UPDATE `users` SET `token_reset` = '$token_reset' WHERE `email` = '$email'");
+		$update_status = $conn->prepare("UPDATE `users` SET `token_reset` = :token_reset WHERE `email` = :email");
+		$update_status->bindparam(':token_reset', $token_reset);
+		$update_status->bindparam(':email', $email);
 		$update_status->execute();
 
 		$to = $email;

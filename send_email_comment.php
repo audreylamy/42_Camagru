@@ -11,7 +11,9 @@ $image_path = $_POST['image_path'];
 
 //FIND email de la personne a qui appartient la photo
 $conn->query( 'USE db_camagru' );
-$requete = $conn->query("SELECT `email`, `activation_comment` FROM `users` WHERE `username` = '$login_user_picture'");
+$requete = $conn->prepare("SELECT `email`, `activation_comment` FROM `users` WHERE `username` = :login");
+$requete->bindparam(':login', $login_user_picture);
+$requete->execute();
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 $email = $data['email'];
 $activation_comment = $data['activation_comment'];

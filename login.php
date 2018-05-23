@@ -22,7 +22,9 @@ if ($login != NULL && $password != NULL)
 		if (($membre->status()) === TRUE)
 		{
 			$conn->query( 'USE db_camagru' );
-			$requete = $conn->query("SELECT `id_user` FROM `users` WHERE `username` = '$login'"); 
+			$requete = $conn->prepare("SELECT `id_user` FROM `users` WHERE `username` = :login"); 
+			$requete->bindparam(':login', $login);
+			$requete->execute();
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 		
 			$_SESSION['id_user'] = $data['id_user'];

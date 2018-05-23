@@ -1,4 +1,3 @@
-
 function takepicture() 
 {
 	function getBase64Image(img) 

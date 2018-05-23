@@ -42,7 +42,8 @@ class Like
 		if(!empty($this->id_photo))
 		{     
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->prepare("SELECT count(`id_like`) from `likes` WHERE `id_photo` = '$this->id_photo'");
+			$requete = $this->db->prepare("SELECT count(`id_like`) from `likes` WHERE `id_photo` = :id_photo");
+			$requete->bindparam(':id_photo', $this->id_photo);
 			$requete->execute();
 			$data = $requete->fetchColumn();
 			return $data;

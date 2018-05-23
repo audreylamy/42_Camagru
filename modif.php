@@ -5,7 +5,9 @@ include('config/database.php');
 
 $id_user = $_SESSION['id_user'];
 $conn->query( 'USE db_camagru' );
-$requete = $conn->query("SELECT `password` FROM `users` WHERE `id_user` = '$id_user'");
+$requete = $conn->prepare("SELECT `password` FROM `users` WHERE `id_user` = :id_user");
+$requete->bindparam(':id_user', $id_user);
+$requete->execute();
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 
 $current_password = hash('whirlpool',htmlspecialchars($_POST['password']));

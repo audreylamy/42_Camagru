@@ -14,7 +14,9 @@ if (isset($_SESSION['id_user']))
 {
 	$id_user = $_SESSION['id_user'];
 	$conn->query( 'USE db_camagru' );
-	$requete = $conn->query("SELECT `profile_pic`, `username`  FROM `users` WHERE `id_user` = '$id_user'"); 
+	$requete = $conn->prepare("SELECT `profile_pic`, `username`  FROM `users` WHERE `id_user` = :id_user"); 
+	$requete->bindparam(':id_user', $id_user);
+	$requete->execute();
 	$data = $requete->fetch(PDO::FETCH_ASSOC);
 	$_SESSION['login'] = $data['username'];
 	$_SESSION['profile_pic'] = $data['profile_pic'];
@@ -76,7 +78,8 @@ if (isset($_SESSION['id_user']))
 							{
 								echo '<p id="info_log">Please create an account or log in if you want to comment/like this picture</p>';
 								echo '<style> #bloc_comments { visibility: hidden; }</style>';
-								echo '<button id="open_connect">New account or log in</button>';
+								echo '<button onclick="open_connect()" id="open_connect">New account or log in</button>';
+								echo '<style> #image_coeur { visibility: hidden; }</style>';
 							}
 							?>
 						<div id="bloc_comments">
@@ -125,8 +128,7 @@ if (isset($_SESSION['id_user']))
 					}
 					else
 					{
-						echo "<p id='button_connexion'>CONNECT</p>";
-						echo "<style> #se_connecter { visibility: visible; }</style>";
+						echo "<p onclick='open_se_connecter()' id='button_connexion'>CONNECT</p>";
 					}
 					?>
 				</div>
@@ -194,6 +196,7 @@ if (isset($_SESSION['id_user']))
 										<input id="login" class="input" type="text" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
 										</div> 
 									</div>
+									<p id="message_password" class='bloc_message'>At list one lowercase & one number<p>
 									<div class="row">
 										<div class="col-25">
 										<label class="label">Password :</label>
@@ -221,22 +224,22 @@ if (isset($_SESSION['id_user']))
 								<?php
 								if ($_SESSION['regex'] === FALSE)
 								{
-									echo "<div id='bloc_message'>Your password is not secure</div>";
+									echo "<div class='bloc_message'>Your password is not secure</div>";
 									echo "<style> #se_connecter { visibility: visible; }</style>";
 								}
 								if ($_SESSION['connect'] === FALSE)
 								{
-									echo "<div id='bloc_message'>login or email already exists</div>";
+									echo "<div class='bloc_message'>login or email already exists</div>";
 									echo "<style> #se_connecter { visibility: visible; }</style>";
 								}
 								else if ($_SESSION['verif_password'] === FALSE)
 								{
-									echo "<div id='bloc_message'>Password is not correct</div>";
+									echo "<div class='bloc_message'>Password is not correct</div>";
 									echo "<style> #se_connecter { visibility: visible; }</style>";
 								}
 								else if ($_SESSION['connect'] === TRUE && $_SESSION['verif_password'] === TRUE)
 								{
-									echo "<div id='bloc_message'>Confirm your email</div>";
+									echo "<div class='bloc_message'>Confirm your email</div>";
 									echo "<style> #se_connecter { visibility: visible; }</style>";
 								}
 								?>
@@ -272,24 +275,24 @@ if (isset($_SESSION['id_user']))
 											<?php
 											if ($_SESSION['transfert_email'] === TRUE)
 											{
-												echo "<div id='bloc_message'>Check your email</div>";
+												echo "<div class='bloc_message'>Check your email</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 											}
 											if ($_SESSION['mdp_reset'] === TRUE)
 											{
-												echo "<div id='bloc_message'>Password updated</div>";
+												echo "<div class='bloc_message'>Password updated</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 											}
 											?>
 											<?php
 											if ($_SESSION['auth'] === FALSE)
 											{
-												echo "<div id='bloc_message'>Wrong login or password</div>";
+												echo "<div class='bloc_message'>Wrong login or password</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 											}
 											if ($_SESSION['status'] === FALSE)
 											{
-												echo "<div id='bloc_message'>Please activate your email</div>";
+												echo "<div class='bloc_message'>Please activate your email</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 											}
 											else if ($_SESSION['auth'] === TRUE)

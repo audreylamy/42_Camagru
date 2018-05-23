@@ -20,7 +20,7 @@ $_POST['login'] = $_GET['login'];
 	</header>
 	<div id="bloc_new_password">
 		<form method="post" action="modif_password_bdd.php">
-			<input name="login" type="hidden" value="<?php echo $_POST['login'];?>">
+			<input name="login" type="hidden" value="<?php echo htmlspecialchars($_POST['login']);?>">
 			<div class="row">
 				<div class="col-25">
 				<label class="label" for="password">New password :</label>
@@ -43,7 +43,13 @@ $_POST['login'] = $_GET['login'];
 				<div class="col-75">
 				<input class="valider" type="submit" name="valider" value="Reset your password"/>
 				</div> 
-				</div>
+			</div>
+			<?php
+			if ($_SESSION['regex_new'] === FALSE)
+			{
+				echo "<div class='bloc_message'>Your new password is not secure</div>";
+			}
+			?>
 		</form>		
 	</div>										
 	</body>
