@@ -3,6 +3,11 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 if($_POST['email_reset'] != NULL )
 {
 	$email = $_POST['email_reset'];

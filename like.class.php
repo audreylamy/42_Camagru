@@ -62,5 +62,13 @@ class Like
 		$data = $requete->fetchColumn();
 		return $data;
 	}
+
+	public function deleteLikesBDD()
+	{
+		$this->db->query('USE db_camagru');
+		$requete = $this->db->prepare("DELETE FROM `likes` WHERE `id_photo` = :id_photo");
+		$requete->bindparam(':id_photo', $this->id_photo);
+		$requete->execute();
+	}
 }
 ?>

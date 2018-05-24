@@ -3,6 +3,11 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
+if ($_POST['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 $_POST = json_decode(file_get_contents('php://input'), true);
 $login = $_POST['login'];
 $password = $_POST['password'];

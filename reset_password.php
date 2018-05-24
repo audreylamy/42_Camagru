@@ -3,6 +3,11 @@ session_start();
 include('config/database.php');
 require('new_users.class.php');
 
+if ($_GET['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 // Récupération des variables nécessaires à l'activation
 $login = $_GET['login'];
 $cle = $_GET['token'];

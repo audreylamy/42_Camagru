@@ -3,8 +3,12 @@ session_start();
 require('image.class.php');
 include('config/database.php');
 
-// envoie photo camera dans gallery puis sauvegarde dans la BDD
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
 
+// envoie photo camera dans gallery puis sauvegarde dans la BDD
 $picture_save = 0;
 
 $data = $_POST['target'];

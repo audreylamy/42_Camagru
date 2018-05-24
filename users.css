@@ -389,6 +389,7 @@ a{
 	right: 0;
 	display: inline-block;
 	filter:none;
+	visibility: hidden;
 	/* border:solid 1px white; */
 }
 
@@ -532,7 +533,7 @@ footer
 #view_pictures
 {
 	position: relative;
-	width: 25%;
+	width: 26%;
 	height: 160%;
 	/* border: solid 1px #fccdd3; */
 	/* display: flex; */
@@ -616,3 +617,61 @@ footer
 	width: auto;
 	border: solid 1px white;
 }
+
+/*FILTER*/
+
+/*MODIFICATION BOUTON TYPE RANGE*/
+
+input[type=range].range {
+	-webkit-appearance: none;     /*nécessaire pour Chrome */
+	padding: 0;                   /* nécessaire pour IE */
+	font: inherit;                /* même rendu suivant font document */
+	outline: none;
+	color: rgb(58, 170, 204);                  /* sert pour couleur de référence, via currentColor, pour le curseur */
+	opacity: .8;
+	background: rgba(255, 255, 255, 0.733);             /* sert pour couleur de fond de la zone de déplacement */
+	box-sizing: border-box;       /* même modèle de boîte pour tous */
+	transition: opacity .2s;
+	cursor: pointer;
+	height: 5px;
+}
+
+/*CHROME*/
+/* la zone de déplacement */
+input[type=range].range::-webkit-slider-runnable-track {
+	height: 100%;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;  /* supprimé définie sur l'input */
+  }
+  /* le curseur */
+  input[type=range].range::-webkit-slider-thumb {
+	-webkit-appearance: none;       /* également nécessaire sur le curseur */
+	width: 0.5em;
+	height: 5px;                
+	border: none;
+	border-radius: 0;               /* pris en compte sur Webkit et Edge */
+	background: currentColor;       /* pris en compte sur Webkit only */
+  }
+
+/*FIREFOX*/
+  /* la zone de déplacement */
+input[type=range].range::-moz-range-track {
+	height: 70%;
+	border: none;
+	border-radius: 0;
+	background-color: transparent;  /* supprimé définie sur l'input */
+  }
+  /* le curseur */
+  input[type=range].range::-moz-range-thumb {
+	width: 0.5em;
+	height: inherit;                /* s'adapte à la hauteur de l'input */
+	border: none;                   /* supprimer la bordure */
+	border-radius: 0;               /* supprimer le rayon */
+	background: currentColor;
+  }
+  /* barre progression avant */
+  input[type=range].range::-moz-range-progress {
+	height: 10;
+	background: transparent;        /* supprime barre progression avant */
+  }

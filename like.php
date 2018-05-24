@@ -5,6 +5,11 @@ require('like.class.php');
 require('image.class.php');
 include('config/database.php');
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 $_POST = json_decode(file_get_contents('php://input'), true);
 $image_path = $_POST['image_path'];
 $image_path = explode("/", $image_path);

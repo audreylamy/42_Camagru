@@ -1,6 +1,11 @@
 <?php
 session_start();
 
+if ($_GET['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 $_POST['login'] = $_GET['login'];
 ?>
 <html lang="fr">

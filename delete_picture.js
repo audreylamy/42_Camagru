@@ -12,7 +12,6 @@ function close_delete(id_photo)
 
 function delete_picture(id_photo)
 {
-	console.log(id_photo);
 	var formData = new FormData();
 	formData.append('id_photo', id_photo);
 
@@ -30,7 +29,6 @@ function delete_picture(id_photo)
 		{
 			if (httpRequest.status === 200 || httpRequest.status === 0) 
 			{
-				console.log(httpRequest.responseText);
 				location.reload();
 				// suppr_picture(id_photo);
 			} 

@@ -92,14 +92,16 @@ class Picture
 	public function deletePhotosUser()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete = $this->db->prepare("DELETE FROM `photos` WHERE `id_user` = '$this->id_user'");
+		$requete = $this->db->prepare("DELETE FROM `photos` WHERE `id_user` = :id_user");
+		$requete->bindparam(':id_user', $this->id_user);
 		$requete->execute();
 	}
 
 	public function deletePhotoBDD()
 	{
 		$this->db->query( 'USE db_camagru' );
-		$requete = $this->db->prepare("DELETE FROM `photos` WHERE `id_photo` = '$this->id_photo'");
+		$requete = $this->db->prepare("DELETE FROM `photos` WHERE `id_photo` = :id_photo");
+		$requete->bindparam(':id_photo', $this->id_photo);
 		$requete->execute();
 	}
 

@@ -3,6 +3,11 @@ session_start();
 require('resize_image.class.php');
 include('config/database.php');
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 $id_user = $_SESSION['id_user'];
 $target_dir = "uploads/save_upload/";
 if (!(file_exists($target_dir)))

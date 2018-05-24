@@ -3,6 +3,11 @@ session_start();
 include('config/database.php');
 require('new_users.class.php');
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 $login = $_POST['login'];
 
 if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", htmlspecialchars($_POST['password'])))

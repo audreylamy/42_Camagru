@@ -3,6 +3,11 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 $id_user = $_SESSION['id_user'];
 $conn->query( 'USE db_camagru' );
 $requete = $conn->prepare("SELECT `password` FROM `users` WHERE `id_user` = :id_user");

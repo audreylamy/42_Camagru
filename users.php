@@ -92,10 +92,10 @@ if ($_SESSION['login'] === NULL)
 									{
 										echo "<style> #upload { visibility: visible; }</style>";
 										// echo "<style> #startbuttonUpload { visibility: visible; }</style>"; 
-										echo '<img id="img" src="'. $_SESSION['target'] . '"alt="avatar" >';
-										echo '<img id="img_bis" src="" alt="avatar2">';
+										echo "<style> #img { visibility: visible; }</style>";
 									}
 									?>
+									<img id="img" src="<?php echo $_SESSION['target'];?>" alt="avatar" >
 									<img id="filter_image" src="" alt="avatar">
 								</div>
 							</div>
@@ -108,17 +108,24 @@ if ($_SESSION['login'] === NULL)
 								</div>
 							</div>
 						</div>
-							<section id="filter">
-								<button class="filter_button" id="grayscale">Grayscale</button>
-								<button class="filter_button" id="sepia">Sepia</button>
-								<button class="filter_button" id="saturate">Saturate</button>
-								<button class="filter_button" id="contrast">Contrast</button>
-								<button class="filter_button" id="hue-rotate1">hue-rotate green</button>
-								<button class="filter_button" id="hue-rotate2">hue-rotate blue</button>
-								<button class="filter_button" id="hue-rotate3">hue-rotate pink</button>
-								<button class="filter_button" id="invert">invert</button>
-								<button class="filter_button" id="no_filter">no filter</button>
-							</section>
+						<section id="filter">
+							<button class="filter_button" >Grayscale</button>
+							<input id="grayscale" class="range" type="range" oninput="set('grayscale', this.valueAsNumber);" value="0" step="0.1" min="0" max="1">
+							<button class="filter_button" >Sepia</button>
+							<input id="sepia" class="range" type="range" oninput="set('sepia', this.valueAsNumber);" value="0" step="0.1" min="0" max="1">
+							<button class="filter_button" >Blur</button>
+							<input id="blur" class="range" type="range" oninput="set('blur', this.value + 'px');" value="0" step="1" min="0" max="10">
+							<button class="filter_button" >Saturate</button>
+							<input id="saturate" class="range" type="range" oninput="set('saturate', this.valueAsNumber);" value="0" step="0.1" min="0" max="10">
+							<button class="filter_button" >Contrast</button>
+							<input id="contrast" class="range" type="range" oninput="set('contrast', this.valueAsNumber);" value="0" step="0.1" min="0" max="10">
+							<button class="filter_button" >brightness</button>
+							<input id="brightness" class="range" type="range" oninput="set('brightness', this.valueAsNumber);" value="0" step="0.1" min="0" max="10">
+							<button class="filter_button" >hue-rotate</button>
+							<input id="hue_rotate" class="range" type="range" oninput="set('hue-rotate', this.value + 'deg');" value="0" step="30" min="0" max="360">
+							<button class="filter_button" id="invert">invert</button>
+							<button class="filter_button" id="no_filter">no filter</button>
+					</section>
 						</div>
 					<div id="view_pictures">
 						<?php
@@ -172,7 +179,7 @@ if ($_SESSION['login'] === NULL)
 		</footer>
 	</body>
 	<script type="text/javascript" src="camera.js"></script>
-	<script type="text/javascript" src="filter.js"></script>
+	<script type="text/javascript" src="filter2.js"></script>
 	<script type="text/javascript" src="filter_image.js"></script>
 	<script type="text/javascript" src="upload_filter.js"></script>
 	<script type="text/javascript" src="save_and_cancel.js"></script>

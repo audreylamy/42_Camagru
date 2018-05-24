@@ -1,5 +1,4 @@
 <?php
-
 header('Content-Type: image/png');
 
 $img = $_POST['img1'];

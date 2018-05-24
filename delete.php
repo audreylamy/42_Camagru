@@ -2,6 +2,11 @@
 <?php
 session_start();
 
+if ($_SESSION['login'] === NULL)
+{
+	header('Location: index.php');
+}
+
 require('new_users.class.php');
 require('image.class.php');
 include('config/database.php');

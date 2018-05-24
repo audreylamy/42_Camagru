@@ -4,6 +4,7 @@ include('config/database.php');
 require('like.class.php');
 require('comment.class.php');
 
+
 $like = new Like($conn);
 $nb_like_total = $like->countNbLikeTotal();
 
@@ -142,7 +143,10 @@ if (isset($_SESSION['id_user']))
 						$limite = 12;
 						$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
 						(int)$debut = ($page - 1) * $limite;
-						$requete = $conn->prepare("SELECT `id_photo`, `image_path` FROM `photos` LIMIT :limite OFFSET :debut");
+						$requete = $conn->prepare("SELECT `id_photo`, `image_path` 
+						FROM `photos`
+						ORDER BY creation_date ASC 
+						LIMIT :limite OFFSET :debut");
 						$requete->bindValue('limite', $limite, PDO::PARAM_INT);
 						$requete->bindValue('debut', $debut, PDO::PARAM_INT);
 						$requete->execute();
