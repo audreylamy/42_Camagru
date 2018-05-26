@@ -7,38 +7,7 @@ function takepicture()
 		canvas.width = img.naturalWidth;
 		canvas.height = img.naturalHeight;
 		var ctx = canvas.getContext("2d");
-		if (el.style.WebkitFilter == "grayscale(1)")
-		{
-			ctx.filter = 'grayscale(1)';
-		}
-		else if (el.style.WebkitFilter == "sepia(1)")
-		{
-			ctx.filter = 'sepia(1)';
-		}
-		else if (el.style.WebkitFilter == "saturate(8)")
-		{
-			ctx.filter = 'saturate(8)';
-		}
-		else if (el.style.WebkitFilter == "contrast(4)")
-		{
-			ctx.filter = 'contrast(4)';
-		}
-		else if (el.style.WebkitFilter == "hue-rotate(90deg)")
-		{
-			ctx.filter = 'hue-rotate(90deg)';
-		}
-		else if (el.style.WebkitFilter == "hue-rotate(230deg)")
-		{
-			ctx.filter = 'hue-rotate(230deg)';
-		}
-		else if (el.style.WebkitFilter == "hue-rotate(300deg)")
-		{
-			ctx.filter = 'hue-rotate(300deg)';
-		}
-		else if (el.style.WebkitFilter == "invert(100%)")
-		{
-			ctx.filter = 'invert(100%)';
-		}
+		ctx.filter = el.style.filter;
 		ctx.drawImage(img, 0, 0);
 		var dataURL = canvas.toDataURL("image/png");
 		return dataURL;

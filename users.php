@@ -124,17 +124,35 @@ if ($_SESSION['login'] === NULL)
 							<button class="filter_button" >hue-rotate</button>
 							<input id="hue_rotate" class="range" type="range" oninput="set('hue-rotate', this.value + 'deg');" value="0" step="30" min="0" max="360">
 							<button class="filter_button" id="invert">invert</button>
-							<button class="filter_button" id="no_filter">no filter</button>
 					</section>
 						</div>
 					<div id="view_pictures">
 						<?php
-						$conn->query('USE db_camagru');
 						$id_user = $_SESSION['id_user'];
 						$limite = 3;
 						$page = (!empty($_GET['page']) ? $_GET['page'] : 1);
 						(int)$debut = ($page - 1) * $limite;
-						$requete = $conn->prepare("SELECT `id_photo`, `image_path` FROM `photos` WHERE id_user = '$id_user' LIMIT :limite OFFSET :debut");
+
+						$conn->query('USE db_camagru');
+						$requete_nb_page = $conn->prepare("SELECT count(`id_photo`) from `photos` WHERE `id_user` = :id_user");
+						$requete_nb_page->bindParam(':id_user', $id_user);
+						$requete_nb_page->execute();
+						$totalPictures = $requete_nb_page->fetchColumn();
+
+						$nombreDePages  = ceil($totalPictures / $limite);
+
+						if ($page == $nombreDePages)
+						{
+							echo "<style> #button_next { visibility: hidden; }</style>";
+						}
+						if ($totalPictures === '0')
+						{
+							echo "<style> #button_previous { visibility: hidden; }</style>";
+							echo "<style> #button_next { visibility: hidden; }</style>";
+						}
+
+						$requete = $conn->prepare("SELECT `id_photo`, `image_path` FROM `photos` WHERE id_user = :id_user LIMIT :limite OFFSET :debut");
+						$requete->bindParam(':id_user', $id_user);
 						$requete->bindValue('limite', $limite, PDO::PARAM_INT);
 						$requete->bindValue('debut', $debut, PDO::PARAM_INT);
 						$requete->execute();

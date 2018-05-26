@@ -11,7 +11,10 @@ var element_start = document.getElementById('activation');
 		img_camera.style.visibility = "hidden";
 
 		// supprime div 'upload'
-		element_upload.remove();
+		if (element_upload)
+		{
+			element_upload.remove();
+		}
 
 	(function() {
 
@@ -71,38 +74,7 @@ var element_start = document.getElementById('activation');
     	canvas.width = width_picture;
     	canvas.height = height_picture;
 		ctx = canvas.getContext('2d');
-		if (el_video.style.WebkitFilter == "grayscale(1)")
-		{
-			ctx.filter = 'grayscale(1)';
-		}
-		else if (el_video.style.WebkitFilter == "sepia(1)")
-		{
-			ctx.filter = 'sepia(1)';
-		}
-		else if (el_video.style.WebkitFilter == "saturate(8)")
-		{
-			ctx.filter = 'saturate(8)';
-		}
-		else if (el_video.style.WebkitFilter == "contrast(4)")
-		{
-			ctx.filter = 'contrast(4)';
-		}
-		else if (el_video.style.WebkitFilter == "hue-rotate(90deg)")
-		{
-			ctx.filter = 'hue-rotate(90deg)';
-		}
-		else if (el_video.style.WebkitFilter == "hue-rotate(230deg)")
-		{
-			ctx.filter = 'hue-rotate(230deg)';
-		}
-		else if (el_video.style.WebkitFilter == "hue-rotate(300deg)")
-		{
-			ctx.filter = 'hue-rotate(300deg)';
-		}
-		else if (el_video.style.WebkitFilter == "invert(100%)")
-		{
-			ctx.filter = 'invert(100%)';
-		}
+		ctx.filter = el_video.style.filter;
 		ctx.drawImage(video, 0, 0, width_picture, height_picture);
     	var data = canvas.toDataURL('image/png', true);
 		var img_camera = document.getElementById('filter_image_video');

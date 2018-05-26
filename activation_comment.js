@@ -1,6 +1,5 @@
 function notification_activate(id_user)
 {
-	console.log(id_user);
 	var formData = new FormData();
 	formData.append('id_user', id_user);
 

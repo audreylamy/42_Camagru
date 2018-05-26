@@ -20,11 +20,11 @@ if ($activation_comment == '1')
 	echo json_encode("here");
 	$to = $email;
 	$subject = 'New comment Camagru';
-	$message = 'Bonjour '.$login_user_picture.',
+	$message = 'Hello '.$login_user_picture.',
 
-	Vous avez un nouveau commentaire : '.$comment.'
+	You have a new comment : '.$comment.'
 
-	Pour voir votre nouveau commentaire : http://localhost:8080/index.php';
+	To see your new comment, please click here : http://localhost:8080/index.php';
 
 	$headers  = 'MIME-Version: 1.0' . "\r\n";
 	$headers .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n";

@@ -468,6 +468,7 @@ a{
 	width: 10%;
 	border: solid 1px white;
 	background: rgba(255, 255, 255, 0.253);
+	visibility: visible;
 }
 
 #button_next
@@ -476,6 +477,7 @@ a{
 	width: 10%;
 	border: solid 1px white;
 	background: rgba(255, 255, 255, 0.253);
+	visibility: visible;
 }
 
 #button_previous:hover
@@ -533,6 +535,24 @@ h3
 }
 
 .bloc_message
+{
+	width: 100%;
+	height: auto;
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
+	visibility: hidden;
+}
+
+.bloc_message1
+{
+	width: 100%;
+	height: auto;
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
+	visibility: hidden;
+}
+
+.bloc_message2
 {
 	width: 100%;
 	height: auto;

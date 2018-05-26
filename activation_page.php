@@ -19,14 +19,14 @@ session_start();
 			<div id="part1">
 			<?php
 			if ($_SESSION['activate_already'] == TRUE)
-				echo "<p>Votre compte est déjà actif !</p>";
+				echo "<p>Your account is already active !</p>";
 			else if ($_SESSION['activate_account'] == TRUE)
 			{
-				echo "<p>Votre compte a bien été activé !</p>";
-				echo "<p>If you want to log in at Camagru.... <a href='http://localhost:8080/index.php'>click here</a></p>";
+				echo "<p>Your account has been activated !</p>";
+				echo "<p>If you want to log in on Camagru.... <a href='http://localhost:8080/index.php'>click here</a></p>";
 			}
 			else if ($_SESSION['activate_account'] == FALSE)
-				echo "<p>Erreur ! Votre compte ne peut être activé...</p>";
+				echo "<p>Error ! Your account can not be activated </p>";
 			?>
 			</div>
 		</body>

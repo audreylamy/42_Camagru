@@ -16,7 +16,7 @@ $requete->execute();
 $data = $requete->fetch(PDO::FETCH_ASSOC);
 
 /* minimum 1 lettre minuscule, minimum 1 lettre majuscule, minimum un chiffre, minimum 6 caracteres */
-if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['password']))
+if (preg_match("#(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$#", $_POST['password']))
 {
 	$current_password = hash('whirlpool',htmlspecialchars($_POST['password']));
 }
@@ -26,7 +26,7 @@ else
 	header('Location: profile.php');
 }
 
-if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['new_password']))
+if (preg_match("#(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$#", $_POST['new_password']))
 {
 	$new_password = hash('whirlpool',htmlspecialchars($_POST['new_password']));
 }
@@ -36,7 +36,7 @@ else
 	header('Location: profile.php');
 }
 
-if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['confirm_new_password']))
+if (preg_match("#(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$#", $_POST['confirm_new_password']))
 {
 	$confirm_new_password = hash('whirlpool',htmlspecialchars($_POST['confirm_new_password']));
 }

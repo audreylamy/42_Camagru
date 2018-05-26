@@ -27,28 +27,6 @@ function render()
 var invert = document.getElementById('invert');
 invert.addEventListener('click', function()
 {
-  el.style.WebkitFilter = "invert(100%)";
-  el_video.style.WebkitFilter = "invert(100%)";
-});
-
-var no_filter = document.getElementById('no_filter');
-no_filter.addEventListener('click', function()
-{
-  var grayscale = document.getElementById('grayscale');
-  grayscale.value = 0;
-  var sepia = document.getElementById('sepia');
-  sepia.value = 0;
-  var blur = document.getElementById('blur');
-  blur.value = 0;
-  var saturate = document.getElementById('saturate');
-  saturate.value = 0;
-  var contrast = document.getElementById('contrast');
-  contrast.value = 0;
-  var brightness = document.getElementById('brightness');
-  brightness.value = 0;
-  var hue_rotate = document.getElementById('hue_rotate');
-  hue_rotate.value = 0;
-  el.style.WebkitFilter = "none";
-  el_video.style.WebkitFilter = "none";
-  location.reload();
+  el.style.filter = "invert(100%)";
+  el_video.style.filter = "invert(100%)";
 });

@@ -7,26 +7,35 @@ $_POST = json_decode(file_get_contents('php://input'), true);
 $first_name = $_POST['first_name'];
 $last_name = $_POST['last_name'];
 $login = $_POST['login'];
-$email = $_POST['email'];
+
+if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+{
+	$email = $_POST['email'];
+}
+else
+{
+	$_SESSION['regex_email'] = FALSE;
+	header('Location: index.php');
+}
 
 /* minimum 1 lettre minuscule, minimum 1 lettre majuscule, minimum un chiffre, minimum 6 caracteres */
-if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['password']))
+if (preg_match("#(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$#", $_POST['password']))
 {
 	$password = htmlspecialchars($_POST['password']);
 }
 else
 {
-	$_SESSION['regex'] = FALSE;
+	$_SESSION['regex_password'] = FALSE;
 	header('Location: index.php');
 }
 
-if (preg_match("#(?=^.{6,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*#", $_POST['confirm_password']))
+if (preg_match("#(?=^.{6,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$#", $_POST['confirm_password']))
 {
 	$confirm_password = htmlspecialchars($_POST['confirm_password']);
 }
 else
 {
-	$_SESSION['regex'] = FALSE;
+	$_SESSION['regex_password'] = FALSE;
 	header('Location: index.php');
 }
 
@@ -59,14 +68,14 @@ if($first_name != NULL && $last_name != NULL && $email != NULL && $login != NULL
 
 			$to = $email;
 			$subject = 'Confirmer votre inscription';
-			$message = 'Bienvenue sur Camagru,
+			$message = 'Welcome to Camagru,
 			
-			Bonjour '.$first_name.',
-		  	Pour activer votre compte, veuillez cliquer sur le lien ci dessous.
+			Hello '.$first_name.',
+		  	To activate your account, please click on the link below.
 			
 		  	http://localhost:8080/activation.php?login='.urlencode($login).'&token='.urlencode($token).'
 		   	---------------
-		   	Ceci est un mail automatique, Merci de ne pas y répondre.';
+		   	This is an automatic mail, Please do not reply.';
 
 		   	$headers  = 'MIME-Version: 1.0' . "\r\n";
 		   	$headers .= 'Content-Type: text/plain; charset="iso-8859-1"'."\n";

@@ -1,8 +1,4 @@
-
-
-var sign_up = document.getElementById("sign_up");
-
-sign_up.addEventListener('click', function()
+function signUp()
 {
 	var first_name = document.getElementById("first_name").value;
 	var last_name = document.getElementById("last_name").value;
@@ -11,7 +7,7 @@ sign_up.addEventListener('click', function()
 	var password = document.getElementById("password1").value;
 	var confirm_password = document.getElementById("confirm_password").value;
 	create_profile(first_name, last_name, login, email, password, confirm_password)
-});
+};
 
 function create_profile(first_name, last_name, login, email, password, confirm_password) 
 {

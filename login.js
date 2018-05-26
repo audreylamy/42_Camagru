@@ -1,11 +1,9 @@
-var log_in = document.getElementById("log_in");
-
-log_in.addEventListener('click', function()
+function logIn()
 {
 	var login = document.getElementById("login1").value;
 	var password = document.getElementById("password").value;
 	logIn_user(login, password)
-});
+};
 
 function logIn_user(login, password) 
 {
