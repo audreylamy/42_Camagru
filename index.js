@@ -39,13 +39,6 @@ element_cross.addEventListener('click', function()
 	location.reload();
 });
 
-// var button_connect = document.getElementById('open_connect');
-// button_connect.addEventListener('click', function()
-// {
-// 	element_pop_up.style.visibility = "hidden";
-// 	bloc_connexion.style.visibility = "visible";
-// });
-
 function open_connect()
 {
 	var element_pop_up = document.getElementById('pop_up');

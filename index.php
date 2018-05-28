@@ -62,7 +62,9 @@ if (isset($_SESSION['id_user']))
 						<?php
 							if (isset($_SESSION['login']))
 							{
-								echo '<div id="image_clic" ondblclick="like()">';
+								echo '<div id="image_clic" ondblclick="like(';
+								echo $_SESSION['id_user'];
+								echo ')">';
 								echo '<img id="image_final" alt="image_final">';
 								echo '<img id="image_coeur" alt="coeur" src="img/coeur.png">';
 								echo '</div>';
@@ -160,6 +162,15 @@ if (isset($_SESSION['id_user']))
 							echo "<style> #button_next { visibility: hidden; }</style>";
 						}
 
+						if($totalPictures <= $limite)
+						{
+							echo "<style> #button_previous { visibility: hidden; }</style>";
+						}
+						else
+						{
+							echo "<style> #button_previous { visibility: visible; }</style>";
+						}
+
 						$conn->query('USE db_camagru');
 						$requete = $conn->prepare("SELECT `id_photo`, `image_path` 
 						FROM `photos`
@@ -176,14 +187,26 @@ if (isset($_SESSION['id_user']))
 							</div>
 							
 						<?php endwhile; ?>
+
 						<div id="previous_next">
-							<a id="button_previous" href="?page=<?php echo $page - 1; ?>">Previous</a>
-							<a id="button_next" href="?page=<?php echo $page + 1; ?>">Next</a>
+							<a id="button_previous" href="?page=<?php echo $page - 1;?>">Previous</a>
+							<a id="button_next" href="?page=<?php 
+							if ($page < 100)
+							{
+								echo $page + 1;
+							}
+							else
+							{
+								echo 1;
+								header('Location: index.php?page=1');
+							}
+							?>">Next</a>
 					</div>
 				</div>
 				<div id="se_connecter">
 					<div id="bloc_connexion">
 						<div id="nouveau">
+							<div id="join_us">
 							<h3>Join us</h3>
 								<form>
 									<div class="row">
@@ -193,6 +216,7 @@ if (isset($_SESSION['id_user']))
 										<div class="col-75">
 										<input id="first_name" class="input" type="text" value="<?php htmlspecialchars($_POST['first_name']); ?>" required/>
 										</div> 
+										<p class="bloc_message" id="error_first_name"></p>
 									</div>
 									<div class="row">
 										<div class="col-25">
@@ -201,6 +225,7 @@ if (isset($_SESSION['id_user']))
 										<div class="col-75">
 										<input id="last_name" class="input" type="text" value="<?php htmlspecialchars($_POST['last_name']); ?>" required/>	
 										</div>
+										<p class="bloc_message" id="error_last_name"></p>
 									</div>
 									<div class="row">
 										<div class="col-25">
@@ -209,6 +234,7 @@ if (isset($_SESSION['id_user']))
 										<div class="col-75">
 										<input id="email" class="input" type="email" value="<?php htmlspecialchars($_POST['email']); ?>" required/>
 										</div>
+										<p class="bloc_message" id="error_email"></p>
 									</div>
 									<div class="row">
 										<div class="col-25">
@@ -217,8 +243,9 @@ if (isset($_SESSION['id_user']))
 										<div class="col-75">
 										<input id="login" class="input" type="text" value="<?php htmlspecialchars($_POST['login']); ?>" required/>
 										</div> 
+										<p class="bloc_message" id="error_login"></p>
 									</div>
-									<p id="message_password" class='bloc_message2'>At list one lowercase one number<p>
+									<p id="message_password" class='bloc_message3'>At list one lowercase one number<p>
 									<div class="row">
 										<div class="col-25">
 										<label class="label">Password :</label>
@@ -239,47 +266,16 @@ if (isset($_SESSION['id_user']))
 										<div class="col-25">
 										</div>
 										<div class="col-75">
-										<input onclick=signUp() id="sign_up" class="valider" type="submit" name="submit" value="Sign up"/>
+										<input onclick=signUp() id="sign_up" class="valider" type="button" name="submit" value="Sign up"/>
 										</div> 
 									</div>
 								</form>
-								<?php
-								if ($_SESSION['regex_email'] === FALSE)
-								{
-									echo "<div class='bloc_message'>Your email is incorrect</div>";
-									echo "<style> #se_connecter { visibility: visible; }</style>";
-									echo "<style> .bloc_message { visibility: visible; }</style>";
-									echo "<style> .bloc_message1 { visibility: hidden; }</style>";
-								}
-								if ($_SESSION['regex_password'] === FALSE)
-								{
-									echo "<div class='bloc_message'>Your password is not secure</div>";
-									echo "<style> #se_connecter { visibility: visible; }</style>";
-									echo "<style> .bloc_message { visibility: visible; }</style>";
-									echo "<style> .bloc_message1 { visibility: hidden; }</style>";
-								}
-								if ($_SESSION['connect'] === FALSE)
-								{
-									echo "<div class='bloc_message'>login or email already exists</div>";
-									echo "<style> #se_connecter { visibility: visible; }</style>";
-									echo "<style> .bloc_message { visibility: visible; }</style>";
-									echo "<style> .bloc_message1 { visibility: hidden; }</style>";
-								}
-								else if ($_SESSION['verif_password'] === FALSE)
-								{
-									echo "<div class='bloc_message'>Password is not correct</div>";
-									echo "<style> #se_connecter { visibility: visible; }</style>";
-									echo "<style> .bloc_message { visibility: visible; }</style>";
-									echo "<style> .bloc_message1 { visibility: hidden; }</style>";
-								}
-								else if ($_SESSION['connect'] === TRUE && $_SESSION['verif_password'] === TRUE)
-								{
-									echo "<div class='bloc_message1'>Confirm your email</div>";
-									echo "<style> #se_connecter { visibility: visible; }</style>";
-									echo "<style> .bloc_message { visibility: hidden; }</style>";
-									echo "<style> .bloc_message1 { visibility: visible; }</style>";
-								}
-								?>
+									<p class="bloc_message" id="error_password"></p>
+									<p class="bloc_message" id="error_confirm_password"></p>
+									<p class="bloc_message" id="true_connect"></p>
+									<p class="bloc_message" id="error_verif_password"></p>
+									<p class="bloc_message" id="error_connect"></p>
+								</div>
 							</div>
 						<div id="ancien">
 								<h3>Log in</h3>
@@ -304,26 +300,16 @@ if (isset($_SESSION['id_user']))
 											<div class="col-25">
 											</div>
 											<div class="col-75">
-											<input onclick=logIn() id="log_in" class="valider" type="submit" name="submit" value="Log in"/>
+											<input onclick=logIn() id="log_in" class="valider" type="button" name="submit" value="Log in"/>
 											</div> 
 										</div>
 									</form>
+									<p class="bloc_message" id="status"><p>
+									<p class="bloc_message" id="auth"><p>
 										<?php
 										if ($_SESSION['auth'] === TRUE)
 										{
 											echo "<style> #se_connecter {display:none; }</style>";
-										}
-										if ($_SESSION['auth'] === FALSE)
-										{
-											echo "<div class='bloc_message'>Wrong login or password</div>";
-											echo "<style> #se_connecter { visibility: visible; }</style>";
-											echo "<style> .bloc_message { visibility: visible; }</style>";
-										}
-										if ($_SESSION['status'] === FALSE)
-										{
-											echo "<div class='bloc_message'>Please activate your email</div>";
-											echo "<style> #se_connecter { visibility: visible; }</style>";
-											echo "<style> .bloc_message { visibility: visible; }</style>";
 										}
 										?>
 										<button id="forgot_password">Forgot password ?</button>
@@ -345,31 +331,21 @@ if (isset($_SESSION['id_user']))
 											<?php
 											if ($_SESSION['email_bdd'] === FALSE)
 											{
-												echo "<div class='bloc_message'>Email doesn't exist</div>";
+												echo "<div class='bloc_message2'>Email doesn't exist</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 												echo "<style> #forgot { visibility: visible; }</style>";
-												echo "<style> .bloc_message { visibility: visible; }</style>";
 											}
 											if ($_SESSION['status_forgot'] === FALSE)
 											{
-												echo "<div class='bloc_message'>Please activate your email</div>";
+												echo "<div class='bloc_message2'>Please activate your email</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 												echo "<style> #forgot { visibility: visible; }</style>";
-												echo "<style> .bloc_message { visibility: visible; }</style>";
 											}
-											if ($_SESSION['mdp_reset'] === TRUE)
-											{
-												echo "<div class='bloc_message1'>Password updated</div>";
-												echo "<style> #se_connecter { visibility: visible; }</style>";
-												echo "<style> #forgot { visibility: visible; }</style>";
-												echo "<style> .bloc_message { visibility: visible; }</style>";
-											}
-											else if ($_SESSION['transfert_email'] === TRUE)
+											if ($_SESSION['transfert_email'] === TRUE)
 											{
 												echo "<div class='bloc_message1'>Check your email</div>";
 												echo "<style> #se_connecter { visibility: visible; }</style>";
 												echo "<style> #forgot { visibility: visible; }</style>";
-												echo "<style> .bloc_message { visibility: hidden; }</style>";
 											}
 											?>
 											</div>

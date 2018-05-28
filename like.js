@@ -1,4 +1,4 @@
-function like() 
+function like(id_user) 
 {
 	var image_coeur = document.getElementById("image_coeur");
 	image_coeur.style.visibility = "visible";
@@ -7,6 +7,7 @@ function like()
 
 	var formData = new FormData();
 	formData.append('image_path', image_path);
+	formData.append('id_user', id_user);
 
 	var object = {};
 	formData.forEach(function(value, key)
@@ -22,6 +23,7 @@ function like()
 		{
 			if (httpRequest.status === 200) 
 			{
+				// console.log(httpRequest.responseText);
 				var nb_like = JSON.parse(httpRequest.responseText);
 				add_nbLike_DOM(nb_like);
 				var image_coeur = document.getElementById("image_coeur");

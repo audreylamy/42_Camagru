@@ -2,8 +2,15 @@ function logIn()
 {
 	var login = document.getElementById("login1").value;
 	var password = document.getElementById("password").value;
-	logIn_user(login, password)
+	logIn_user(login, password);
+	suppr_value_login();
 };
+
+function suppr_value_login()
+{
+	document.getElementById("login1").value = "";
+	document.getElementById("password").value = "";
+}
 
 function logIn_user(login, password) 
 {
@@ -25,8 +32,32 @@ function logIn_user(login, password)
 		{
 			if (httpRequest.status === 200 || httpRequest.status === 0) 
 			{
-				// alert(httpRequest.responseText);
-				location.reload();
+				// console.log(JSON.parse(httpRequest.responseText));
+				var array = JSON.parse(httpRequest.responseText);
+				var status = array['status'];
+				var auth = array['auth'];
+				var auth_true = array['auth_true'];
+
+				if (status != null)
+				{
+					document.getElementById("status").innerHTML = status;
+				}
+				else 
+				{
+					document.getElementById("status").innerHTML = "";
+				}
+				if (auth != null)
+				{
+					document.getElementById("auth").innerHTML = auth;
+				}
+				else 
+				{
+					document.getElementById("auth").innerHTML = "";
+				}
+				if (auth_true == "true")
+				{
+					location.reload();
+				}
 			} 
 			else 
 			{

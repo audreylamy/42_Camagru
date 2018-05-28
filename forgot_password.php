@@ -45,7 +45,6 @@ if($_POST['email_reset'] != NULL )
 			mail($to, $subject, $message, $headers);
 			header('Location: index.php');
 			$_SESSION['transfert_email'] = TRUE;
-			echo "email envoyé";
 		}
 		else
 		{

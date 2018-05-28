@@ -5,7 +5,7 @@ include('config/database.php');
 
 if ($_SESSION['login'] === NULL)
 {
-	header('Location: index.php');
+	header('Location: users.php');
 }
 
 $id_user = $_SESSION['id_user'];
@@ -19,10 +19,14 @@ else
 {
 	echo "existe";
 }
+
+echo $_FILES["avatar"]["name"];
+
+
 $target_file = $target_dir . basename($_FILES["avatar"]["name"]);
 $uploadOk = 1;
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-echo $imageFileType;
+
 // Check if image file is a actual image or fake image
 if (isset($_POST["submit_picture"])) 
 {
@@ -34,10 +38,19 @@ if (isset($_POST["submit_picture"]))
 	} 
 	else 
 	{
-        echo "File is not an image.";
+		echo "File is not an image.";
+		header('Location: users.php');
         $uploadOk = 0;
     }
 }
+
+// Check file size
+if ($_FILES["avatar"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    header('Location: users.php');
+    $uploadOk = 0;
+}
+
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) 

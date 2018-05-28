@@ -90,11 +90,45 @@ class Membre
 		}
 		return FALSE;
 	}
+
+	public function verif_bdd_login2()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete_login = $this->db->prepare("SELECT `username` FROM `users`
+		WHERE id_user != :id_user"); 
+		$requete_login->bindparam(':id_user', $this->id_user);
+		$requete_login->execute();
+		while ($data = $requete_login->fetch(PDO::FETCH_ASSOC))
+		{
+			if ($data['username'] === $this->login)
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
 	
 	public function verif_bdd_email()
 	{
 		$this->db->query( 'USE db_camagru' );
 		$requete_email = $this->db->prepare("SELECT `email` FROM `users`");
+		$requete_email->execute();
+		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
+		{
+			if ($data['email'] === $this->email)
+			{
+				return TRUE;
+			}
+		}
+		return FALSE;
+	}
+
+	public function verif_bdd_email2()
+	{
+		$this->db->query( 'USE db_camagru' );
+		$requete_email = $this->db->prepare("SELECT `email` FROM `users`
+		WHERE id_user != :id_user");
+		$requete_email->bindparam(':id_user', $this->id_user);
 		$requete_email->execute();
 		while ($data = $requete_email->fetch(PDO::FETCH_ASSOC))
 		{

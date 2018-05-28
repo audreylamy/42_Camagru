@@ -125,9 +125,9 @@ body
 
  #image_final
 {
+	position: absolute;  
 	max-height: 100%;  
     max-width: 100%;
-	position: absolute;  
     top: 0;  
     bottom: 0;  
     left: 0;  
@@ -494,9 +494,9 @@ a{
 
 #se_connecter
 {
-	width: 20%;
-	height: 70%;
-	margin-right: 2.4%;
+	width: 18%;
+	height: 80%;
+	margin-right: 3.5%;
 	visibility: hidden;
 }
 
@@ -511,14 +511,19 @@ a{
 
 #nouveau
 {
-	margin-right: 5%;
+	margin-left: 40px;
+	width: 50%;
+	height: 100%;
 	background-color: #bbc4ef;
 }
 
 #ancien
 {
-	margin-left: 5%;
+	width: 50%;
+	height: 100%;
 	background-color: #bbc4ef;
+	margin:0;
+	padding:0;
 }
 
 h3
@@ -534,13 +539,20 @@ h3
 	margin-top: 3px;
 }
 
+#join_us
+{
+	width: 100%;
+	height: 60%;
+}
+
 .bloc_message
 {
 	width: 100%;
 	height: auto;
+	margin-top: -2px;
 	font-family: 'Abel', sans-serif;
-	font-size: 0.5vw;
-	visibility: hidden;
+	font-size: 0.4vw;
+	color: white;
 }
 
 .bloc_message1
@@ -549,10 +561,19 @@ h3
 	height: auto;
 	font-family: 'Abel', sans-serif;
 	font-size: 0.5vw;
-	visibility: hidden;
+	visibility: visible;
 }
 
 .bloc_message2
+{
+	width: 100%;
+	height: auto;
+	font-family: 'Abel', sans-serif;
+	font-size: 0.5vw;
+	visibility: visible;
+}
+
+.bloc_message3
 {
 	width: 100%;
 	height: auto;

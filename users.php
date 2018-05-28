@@ -141,6 +141,10 @@ if ($_SESSION['login'] === NULL)
 
 						$nombreDePages  = ceil($totalPictures / $limite);
 
+						if ($page >= 100)
+						{
+							header('Location: users.php?page=1');
+						}
 						if ($page == $nombreDePages)
 						{
 							echo "<style> #button_next { visibility: hidden; }</style>";
@@ -149,6 +153,15 @@ if ($_SESSION['login'] === NULL)
 						{
 							echo "<style> #button_previous { visibility: hidden; }</style>";
 							echo "<style> #button_next { visibility: hidden; }</style>";
+						}
+
+						if($totalPictures <= $limite)
+						{
+							echo "<style> #button_previous { visibility: hidden; }</style>";
+						}
+						else
+						{
+							echo "<style> #button_previous { visibility: visible; }</style>";
 						}
 
 						$requete = $conn->prepare("SELECT `id_photo`, `image_path` FROM `photos` WHERE id_user = :id_user LIMIT :limite OFFSET :debut");
@@ -169,8 +182,17 @@ if ($_SESSION['login'] === NULL)
 							
 						<?php endwhile; ?>
 						<div id="previous_next">
-							<a id="button_previous" href="?page=<?php echo $page - 1; ?>">Previous</a>
-							<a id="button_next" href="?page=<?php echo $page + 1; ?>">Next</a>
+							<a id="button_previous" href="?page=<?php echo $page - 1;?>">Previous</a>
+							<a id="button_next" href="?page=<?php 
+							if ($page < 100)
+							{
+								echo $page + 1;
+							}
+							else
+							{
+								echo 1;
+							}
+							?>">Next</a>
 						</div>
 					</div>
 

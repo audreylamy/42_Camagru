@@ -3,16 +3,9 @@ session_start();
 require('new_users.class.php');
 include('config/database.php');
 
-if ($_POST['login'] === NULL)
-{
-	header('Location: index.php');
-}
-
 $_POST = json_decode(file_get_contents('php://input'), true);
 $login = $_POST['login'];
 $password = $_POST['password'];
-
-// echo json_encode($password);
 
 if ($login != NULL && $password != NULL)
 {
@@ -33,23 +26,22 @@ if ($login != NULL && $password != NULL)
 			$data = $requete->fetch(PDO::FETCH_ASSOC);
 		
 			$_SESSION['id_user'] = $data['id_user'];
-			echo json_encode("Vous etes connectes");
-			// header('Location: index.php');
 			$_SESSION['login'] = $login;
 			$_SESSION['auth'] = TRUE;
+			$auth_true = "true";
 		}
 		else
 		{
-			// echo "Votre mail n'est pas actif";
-			// header('Location: index.php');
-			$_SESSION['status'] = FALSE;
+			$status = "Please activate your email";
 		}
 	}
 	else
 	{
-		// echo "Vous avez entre un mauvais login ou mdp";
-		// header('Location: index.php');
-		$_SESSION['auth'] = FALSE;
+		$auth = "Wrong login or password";
 	}
 }
+
+
+$array = array('status' => $status, 'auth' => $auth, 'auth_true' => $auth_true);
+echo json_encode($array);
 ?>

@@ -87,7 +87,7 @@ var element_start = document.getElementById('activation');
 		{
   			if (get.readyState != 4 || get.status != 200)
 			{
-				console.log(get.responseText);
+				// console.log(get.responseText);
 				readURL(get.responseText);
 			}
 		};

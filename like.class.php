@@ -15,6 +15,12 @@ class Like
 		return $this->id_like;
 	}
 
+	public function getIdUser($id_user)
+	{
+		$this->id_user = $id_user;
+		return $this->id_user;
+	}
+
 	public function getIdPhoto($id_photo)
 	{
 		$this->id_photo = $id_photo;
@@ -26,8 +32,9 @@ class Like
 		if(!empty($this->id_photo))
 		{     
 			$this->db->query( 'USE db_camagru' );
-			$requete = $this->db->prepare("INSERT INTO `likes` (`id_photo`) 
-			VALUES(:id_photo)");
+			$requete = $this->db->prepare("INSERT INTO `likes` (`id_user`, `id_photo`) 
+			VALUES(:id_user, :id_photo)");
+			$requete->bindparam(':id_user', $this->id_user);
 			$requete->bindparam(':id_photo', $this->id_photo);
 			$requete->execute();
 		}

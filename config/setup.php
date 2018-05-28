@@ -115,6 +115,7 @@ try
 
     $sql_likes = "CREATE TABLE IF NOT EXISTS likes(
     id_like INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	id_user INT NOT NULL,
 	id_photo INT NOT NULL
 	) ";
 

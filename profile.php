@@ -7,7 +7,16 @@ if ($_SESSION['login'] === NULL)
 	header('Location: index.php');
 }
 
-// code ci-dessous regles les problemes de warning avec display_errors
+if (isset($_SESSION['login_email_exist'])) 
+{
+   $login_email_exist = $_SESSION['login_email_exist'];
+}
+
+if (isset($_SESSION['incorrect_info'])) 
+{
+   $incorrect_info = $_SESSION['incorrect_info'];
+}
+
 if (isset($_SESSION['modification'])) 
 {
    $modification = $_SESSION['modification'];
@@ -197,25 +206,32 @@ if (isset($_SESSION['id_user']))
 						{
 							if ($modification === TRUE)
 							{
-								echo "Modifications have been made";
+								echo "<div class='bloc_message'>Modifications have been made</div>";
 							}
 							else if ($modification === FALSE)
 							{
-								echo "Password error";
+								echo "<div class='bloc_message'>Password error</div>";
 							}
 						}
-						if (isset($wrong_confirm))
+						if (isset($wrong_password) || isset($wrong_confirm))
 						{
-							if ($wrong_confirm === TRUE)
+							if ($wrong_password === TRUE || $wrong_confirm === TRUE)
 							{
-								echo "wrong confirmation";
+								echo "<div class='bloc_message'>Password not match</div>";
 							}
 						}
-						if (isset($wrong_password))
+						if (isset($incorrect_info))
 						{
-							if ($wrong_password === TRUE)
+							if ($incorrect_info === FALSE)
 							{
-								echo "wrong password";
+								echo "<div class='bloc_message'>Incorrect informations</div>";
+							}
+						}
+						if (isset($login_email_exist))
+						{
+							if ($login_email_exist === FALSE)
+							{
+								echo "<div class='bloc_message'>login or email already exists</div>";
 							}
 						}
 						?>
