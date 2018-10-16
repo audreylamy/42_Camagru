@@ -30,7 +30,7 @@ No libraries were allowed for this project (both front and back), everything was
   - [x] Live preview
 
 # Possible improvements
-
++ Best practices
 - [ ] MVC pattern  
 - [ ] Folder structure
   
