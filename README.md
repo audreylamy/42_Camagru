@@ -20,7 +20,7 @@ No libraries were allowed for this project (both front and back), everything was
 	
     → Display of users' images
     → Comments & Likes
-    → Email's notifications
+    → Email notifications
     → Pagination
    
   • Bonus
