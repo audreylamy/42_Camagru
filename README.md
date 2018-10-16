@@ -31,6 +31,6 @@ No libraries were allowed for this project (both front and back), everything was
 
 # Possible improvements
 
-+ MVC pattern  
-+ Folder structure
+- [ ] MVC pattern  
+- [ ] Folder structure
   
