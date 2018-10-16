@@ -4,37 +4,33 @@ No libraries were allowed for this project (both front and back), everything was
 
 # Technology stack
 
-  • Front: HTML5, CSS3, Javascript, Ajax  
-  • Back: PHP, MySQL
++ Front: HTML5, CSS3, Javascript, Ajax  
++ Back: PHP, MySQL
 
 # Features
-  • User features
-	
-    → Sign up / Sign in
-    → Reset password
++ User features
+  - [x] Sign up / Sign in
+  - [x] Reset password
 		
-  • Main features
-	
-    → Preview of the user's webcam
-    → Photo capture with webcam
-    → Upload pictures
-    → Superposable images
-    → Thumbnails of all previous pictures taken
++ Main features
+  - [x] Preview of the user's webcam
+  - [x] Photo capture with webcam
+  - [x] Upload pictures
+  - [x] Superposable images
+  - [x] Thumbnails of all previous pictures taken
     
-  • Gallery features
-	
-    → Display of users' images
-    → Comments & Likes
-    → Email notifications
-    → Pagination
++ Gallery features
+  - [x] Display of users' images
+  - [x] Comments & Likes
+  - [x] Email notifications
+  - [x] Pagination
    
-  • Bonus
-	
-    → Ajax exchanges with the server
-    → Live preview
++ Bonus
+  - [x] Ajax exchanges with the server
+  - [x] Live preview
 
 # Possible improvements
 
-  • MVC pattern  
-  • Folder structure
++ MVC pattern  
++ Folder structure
   
