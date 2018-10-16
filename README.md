@@ -1,5 +1,5 @@
 # Camagru
-📸 Instagram-like web app using HTML + CSS + PHP + MYSQL. This project is part 42 school's web branch. 
+📸 Instagram-like web app using HTML + CSS + PHP + MYSQL. This is the first project of 42 school's web branch. 
 No libraries were allowed for this project (both front and back), everything is handcrafted.
 
 # Features
@@ -27,3 +27,9 @@ No libraries were allowed for this project (both front and back), everything is 
 	
     → Ajax exchanges with the server
     → Live preview
+
+# Possible improvements
+  • MVC pattern
+  
+  • Folder structure
+  
